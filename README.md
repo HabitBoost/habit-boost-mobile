@@ -1,1 +1,3 @@
-# habit-boost-mobile
+# habit_boost
+
+A new Flutter project.
