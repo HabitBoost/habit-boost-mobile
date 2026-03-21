@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
+import 'package:habit_boost/core/utils/app_logger.dart';
 import 'package:habit_boost/features/habits/data/datasources/habits_table.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path/path.dart' as p;
@@ -23,6 +24,7 @@ LazyDatabase _openConnection() {
   return LazyDatabase(() async {
     final dbFolder = await getApplicationDocumentsDirectory();
     final file = File(p.join(dbFolder.path, 'habit_boost.sqlite'));
+    log.i('Database path: ${file.path}');
     return NativeDatabase.createInBackground(file);
   });
 }

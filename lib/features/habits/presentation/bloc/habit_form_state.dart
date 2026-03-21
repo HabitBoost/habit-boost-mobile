@@ -1,6 +1,6 @@
 part of 'habit_form_bloc.dart';
 
-enum HabitFormStatus { initial, submitting, success }
+enum HabitFormStatus { initial, submitting, saved, deleted }
 
 class HabitFormState extends Equatable {
   const HabitFormState({

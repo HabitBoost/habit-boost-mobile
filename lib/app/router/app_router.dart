@@ -10,6 +10,11 @@ import 'package:habit_boost/features/auth/presentation/screens/forgot_password_s
 import 'package:habit_boost/features/auth/presentation/screens/login_screen.dart';
 import 'package:habit_boost/features/auth/presentation/screens/register_screen.dart';
 import 'package:habit_boost/features/auth/presentation/screens/splash_screen.dart';
+import 'package:habit_boost/features/habits/domain/entities/habit.dart';
+import 'package:habit_boost/features/habits/presentation/bloc/habits_bloc.dart';
+import 'package:habit_boost/features/habits/presentation/screens/add_edit_habit_screen.dart';
+import 'package:habit_boost/features/habits/presentation/screens/habit_detail_screen.dart';
+import 'package:habit_boost/features/habits/presentation/screens/home_screen.dart';
 import 'package:habit_boost/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:habit_boost/features/onboarding/presentation/screens/onboarding_screen.dart';
 
@@ -50,8 +55,11 @@ GoRouter createRouter() {
           GoRoute(
             path: Routes.home,
             pageBuilder: (context, state) =>
-                const NoTransitionPage(
-              child: _PlaceholderScreen(title: AppStrings.home),
+                NoTransitionPage(
+              child: BlocProvider(
+                create: (_) => sl<HabitsBloc>(),
+                child: const HomeScreen(),
+              ),
             ),
           ),
           GoRoute(
@@ -84,7 +92,23 @@ GoRouter createRouter() {
         path: Routes.addHabit,
         parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) =>
-            const _PlaceholderScreen(title: 'Add Habit'),
+            const AddEditHabitScreen(),
+      ),
+      GoRoute(
+        path: Routes.editHabit,
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) {
+          final habit = state.extra! as Habit;
+          return AddEditHabitScreen(habit: habit);
+        },
+      ),
+      GoRoute(
+        path: Routes.habitDetail,
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) {
+          final habit = state.extra! as Habit;
+          return HabitDetailScreen(habit: habit);
+        },
       ),
       GoRoute(
         path: Routes.sos,

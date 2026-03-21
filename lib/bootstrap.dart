@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:habit_boost/app/di/injection_container.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 Future<void> bootstrap() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await initializeDateFormatting('ru');
 
-  // TODO(dev): Initialize Firebase after running `flutterfire configure`
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
-  // FlutterError.onError =
-  //     FirebaseCrashlytics.instance.recordFlutterFatalError;
-
+  // Local auth mode — no backend required.
+  // When adding Supabase/Firebase, use DI environments to switch:
+  //   await configureDependencies(environment: Environment.prod);
   await configureDependencies();
 }

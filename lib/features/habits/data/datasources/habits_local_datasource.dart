@@ -1,6 +1,7 @@
 import 'package:drift/drift.dart';
 import 'package:habit_boost/core/database/app_database.dart';
 import 'package:habit_boost/core/error/exceptions.dart';
+import 'package:habit_boost/core/utils/app_logger.dart';
 import 'package:habit_boost/features/habits/domain/entities/habit.dart';
 import 'package:habit_boost/features/habits/domain/entities/habit_completion.dart';
 import 'package:injectable/injectable.dart';
@@ -18,6 +19,7 @@ class HabitsLocalDataSource {
           .get();
       return rows.map(_habitFromRow).toList();
     } catch (e) {
+      log.e('Failed to get habits', error: e);
       throw CacheException('Failed to get habits: $e');
     }
   }
@@ -35,6 +37,7 @@ class HabitsLocalDataSource {
           .where((h) => h.scheduleDays.contains(weekday))
           .toList();
     } catch (e) {
+      log.e('Failed to get today habits', error: e);
       throw CacheException('Failed to get today habits: $e');
     }
   }
@@ -46,11 +49,14 @@ class HabitsLocalDataSource {
           .getSingle();
       return _habitFromRow(row);
     } catch (e) {
+      log.e('Habit not found', error: e);
       throw CacheException('Habit not found: $e');
     }
   }
 
   Future<void> insertHabit(Habit habit) async {
+    log.d('insertHabit: ${habit.title}, '
+        'days=${habit.scheduleDays}, id=${habit.id}');
     await _db.into(_db.habitsTable).insert(
           HabitsTableCompanion.insert(
             id: habit.id,
@@ -159,10 +165,9 @@ class HabitsLocalDataSource {
       icon: row.icon,
       color: row.color,
       category: row.category,
-      scheduleDays: row.scheduleDays
-          .split(',')
-          .map(int.parse)
-          .toList(),
+      scheduleDays: row.scheduleDays.isEmpty
+          ? const []
+          : row.scheduleDays.split(',').map(int.parse).toList(),
       reminderEnabled: row.reminderEnabled,
       reminderHour: row.reminderHour,
       reminderMinute: row.reminderMinute,

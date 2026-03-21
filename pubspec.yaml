@@ -7,15 +7,15 @@ environment:
   sdk: ^3.11.3
 
 dependencies:
-  cloud_firestore: ^5.6.0
+  # cloud_firestore: ^5.6.0   # TODO(sergey): uncomment when backend is ready
   connectivity_plus: ^6.1.2
   dartz: ^0.10.1
   drift: ^2.23.1
   equatable: ^2.0.7
-  firebase_analytics: ^11.5.0
-  firebase_auth: ^5.5.0
-  firebase_core: ^3.12.0
-  firebase_crashlytics: ^4.3.0
+  # firebase_analytics: ^11.5.0  # TODO(sergey): uncomment when backend is ready
+  # firebase_auth: ^5.5.0        # TODO(sergey): uncomment when backend is ready
+  # firebase_core: ^3.12.0       # TODO(sergey): uncomment when backend is ready
+  # firebase_crashlytics: ^4.3.0 # TODO(sergey): uncomment when backend is ready
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.0

@@ -8,6 +8,13 @@ import 'package:habit_boost/features/auth/domain/usecases/login.dart';
 import 'package:habit_boost/features/auth/domain/usecases/logout.dart';
 import 'package:habit_boost/features/auth/domain/usecases/register.dart';
 import 'package:habit_boost/features/auth/domain/usecases/reset_password.dart';
+import 'package:habit_boost/features/habits/domain/repositories/habits_repository.dart';
+import 'package:habit_boost/features/habits/domain/usecases/create_habit.dart';
+import 'package:habit_boost/features/habits/domain/usecases/delete_habit.dart';
+import 'package:habit_boost/features/habits/domain/usecases/get_completions_for_date.dart';
+import 'package:habit_boost/features/habits/domain/usecases/get_today_habits.dart';
+import 'package:habit_boost/features/habits/domain/usecases/toggle_completion.dart';
+import 'package:habit_boost/features/habits/domain/usecases/update_habit.dart';
 import 'package:habit_boost/features/onboarding/domain/repositories/onboarding_repository.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -35,3 +42,18 @@ class MockResetPassword extends Mock implements ResetPassword {}
 
 class MockOnboardingRepository extends Mock
     implements OnboardingRepository {}
+
+class MockHabitsRepository extends Mock implements HabitsRepository {}
+
+class MockGetTodayHabits extends Mock implements GetTodayHabits {}
+
+class MockCreateHabit extends Mock implements CreateHabit {}
+
+class MockUpdateHabit extends Mock implements UpdateHabit {}
+
+class MockDeleteHabit extends Mock implements DeleteHabit {}
+
+class MockToggleCompletion extends Mock implements ToggleCompletion {}
+
+class MockGetCompletionsForDate extends Mock
+    implements GetCompletionsForDate {}

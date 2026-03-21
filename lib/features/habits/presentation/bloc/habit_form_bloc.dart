@@ -142,18 +142,17 @@ class HabitFormBloc extends Bloc<HabitFormEvent, HabitFormState> {
       reminderMinute: state.reminderMinute,
     );
 
-    final result = state.isEditing
-        ? await _updateHabit(habit)
-        : await _createHabit(habit);
-
-    result.fold(
+    (state.isEditing
+            ? await _updateHabit(habit)
+            : await _createHabit(habit))
+        .fold(
       (failure) => emit(
         state.copyWith(
           status: HabitFormStatus.initial,
           errorMessage: failure.message,
         ),
       ),
-      (_) => emit(state.copyWith(status: HabitFormStatus.success)),
+      (_) => emit(state.copyWith(status: HabitFormStatus.saved)),
     );
   }
 
@@ -176,7 +175,7 @@ class HabitFormBloc extends Bloc<HabitFormEvent, HabitFormState> {
           errorMessage: failure.message,
         ),
       ),
-      (_) => emit(state.copyWith(status: HabitFormStatus.success)),
+      (_) => emit(state.copyWith(status: HabitFormStatus.deleted)),
     );
   }
 }
