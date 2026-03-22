@@ -6,6 +6,7 @@ import 'package:habit_boost/app/router/routes.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
 import 'package:habit_boost/core/constants/app_strings.dart';
+import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:habit_boost/features/habits/domain/entities/habit.dart';
 import 'package:habit_boost/features/habits/presentation/bloc/habit_form_bloc.dart';
 import 'package:habit_boost/features/habits/presentation/widgets/habit_icon.dart';
@@ -170,13 +171,21 @@ class _AddEditHabitView extends StatelessWidget {
                       onPressed:
                           state.status == HabitFormStatus.submitting
                               ? null
-                              : () => context
-                                  .read<HabitFormBloc>()
-                                  .add(
-                                    const HabitFormSubmitted(
-                                      userId: 'local_user',
-                                    ),
-                                  ),
+                              : () {
+                                  final authState =
+                                      context.read<AuthBloc>().state;
+                                  final userId =
+                                      authState is Authenticated
+                                          ? authState.user.id
+                                          : '';
+                                  context
+                                      .read<HabitFormBloc>()
+                                      .add(
+                                        HabitFormSubmitted(
+                                          userId: userId,
+                                        ),
+                                      );
+                                },
                       child: state.status == HabitFormStatus.submitting
                           ? const SizedBox(
                               height: 20,

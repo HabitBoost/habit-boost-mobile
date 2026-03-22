@@ -74,6 +74,7 @@ class HabitsLocalDataSource {
             createdAt: habit.createdAt ?? DateTime.now(),
             currentStreak: Value(habit.currentStreak),
             bestStreak: Value(habit.bestStreak),
+            updatedAt: Value(habit.updatedAt ?? DateTime.now()),
           ),
         );
   }
@@ -95,6 +96,7 @@ class HabitsLocalDataSource {
         reminderMinute: Value(habit.reminderMinute),
         currentStreak: Value(habit.currentStreak),
         bestStreak: Value(habit.bestStreak),
+        updatedAt: Value(DateTime.now()),
       ),
     );
   }
@@ -147,6 +149,7 @@ class HabitsLocalDataSource {
             habitId: completion.habitId,
             date: completion.date,
             completed: Value(completion.completed),
+            updatedAt: Value(completion.updatedAt ?? DateTime.now()),
           ),
         );
   }
@@ -174,6 +177,7 @@ class HabitsLocalDataSource {
       createdAt: row.createdAt,
       currentStreak: row.currentStreak,
       bestStreak: row.bestStreak,
+      updatedAt: row.updatedAt,
     );
   }
 
@@ -185,6 +189,7 @@ class HabitsLocalDataSource {
       habitId: row.habitId,
       date: row.date,
       completed: row.completed,
+      updatedAt: row.updatedAt,
     );
   }
 }

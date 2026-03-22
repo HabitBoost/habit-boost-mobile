@@ -22,6 +22,7 @@ class HabitsTable extends Table {
       integer().withDefault(const Constant(0))();
   IntColumn get bestStreak =>
       integer().withDefault(const Constant(0))();
+  DateTimeColumn get updatedAt => dateTime().nullable()();
 
   @override
   Set<Column> get primaryKey => {id};
@@ -34,6 +35,7 @@ class HabitCompletionsTable extends Table {
   DateTimeColumn get date => dateTime()();
   BoolColumn get completed =>
       boolean().withDefault(const Constant(true))();
+  DateTimeColumn get updatedAt => dateTime().nullable()();
 
   @override
   Set<Column> get primaryKey => {id};

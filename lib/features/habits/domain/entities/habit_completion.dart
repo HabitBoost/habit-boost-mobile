@@ -6,13 +6,15 @@ class HabitCompletion extends Equatable {
     required this.habitId,
     required this.date,
     this.completed = true,
+    this.updatedAt,
   });
 
   final String id;
   final String habitId;
   final DateTime date;
   final bool completed;
+  final DateTime? updatedAt;
 
   @override
-  List<Object?> get props => [id, habitId, date, completed];
+  List<Object?> get props => [id, habitId, date, completed, updatedAt];
 }

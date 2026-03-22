@@ -5,6 +5,7 @@ import 'package:habit_boost/app/router/routes.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
 import 'package:habit_boost/core/constants/app_strings.dart';
+import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:habit_boost/features/habits/presentation/bloc/habits_bloc.dart';
 import 'package:habit_boost/features/habits/presentation/widgets/habit_card.dart';
 import 'package:habit_boost/features/habits/presentation/widgets/motivation_card.dart';
@@ -19,13 +20,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String get _userId {
+    final authState = context.read<AuthBloc>().state;
+    return authState is Authenticated ? authState.user.id : '';
+  }
+
   @override
   void initState() {
     super.initState();
-    // TODO(sergey): replace with real userId from AuthBloc.
-    context
-        .read<HabitsBloc>()
-        .add(const HabitsLoadRequested(userId: 'local_user'));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context
+          .read<HabitsBloc>()
+          .add(HabitsLoadRequested(userId: _userId));
+    });
   }
 
   @override
@@ -166,7 +173,7 @@ class _HomeScreenState extends State<HomeScreen> {
           final result = await context.push<bool>(Routes.addHabit);
           if ((result ?? false) && context.mounted) {
             context.read<HabitsBloc>().add(
-                  const HabitsLoadRequested(userId: 'local_user'),
+                  HabitsLoadRequested(userId: _userId),
                 );
           }
         },
@@ -204,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 16),
               TextButton(
                 onPressed: () => context.read<HabitsBloc>().add(
-                      const HabitsLoadRequested(userId: 'local_user'),
+                      HabitsLoadRequested(userId: _userId),
                     ),
                 child: const Text(AppStrings.tryAgain),
               ),
@@ -261,7 +268,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onToggle: () => context.read<HabitsBloc>().add(
                   HabitToggleRequested(
                     habitId: habit.id,
-                    userId: 'local_user',
+                    userId: _userId,
                   ),
                 ),
             onTap: () async {
@@ -271,8 +278,8 @@ class _HomeScreenState extends State<HomeScreen> {
               );
               if (context.mounted) {
                 context.read<HabitsBloc>().add(
-                      const HabitsLoadRequested(
-                        userId: 'local_user',
+                      HabitsLoadRequested(
+                        userId: _userId,
                       ),
                     );
               }

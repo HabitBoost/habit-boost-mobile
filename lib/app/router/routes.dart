@@ -11,6 +11,7 @@ abstract class Routes {
   static const String addHabit = '/add-habit';
   static const String editHabit = '/edit-habit';
   static const String habitDetail = '/habit-detail';
+  static const String journalEntry = '/journal-entry';
   static const String sos = '/sos';
   static const String achievements = '/achievements';
   static const String settings = '/settings';

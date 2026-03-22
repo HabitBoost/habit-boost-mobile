@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:habit_boost/core/error/exceptions.dart';
 import 'package:habit_boost/core/error/failures.dart';
+import 'package:habit_boost/core/sync/sync_service.dart';
 import 'package:habit_boost/features/habits/data/datasources/habits_local_datasource.dart';
 import 'package:habit_boost/features/habits/domain/entities/habit.dart';
 import 'package:habit_boost/features/habits/domain/entities/habit_completion.dart';
@@ -9,9 +10,10 @@ import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: HabitsRepository)
 class HabitsRepositoryImpl implements HabitsRepository {
-  const HabitsRepositoryImpl(this._local);
+  const HabitsRepositoryImpl(this._local, this._syncService);
 
   final HabitsLocalDataSource _local;
+  final SyncService _syncService;
 
   @override
   Future<Either<Failure, List<Habit>>> getTodayHabits(
@@ -45,6 +47,12 @@ class HabitsRepositoryImpl implements HabitsRepository {
         createdAt: now,
       );
       await _local.insertHabit(newHabit);
+      await _syncService.enqueueAndSync(
+        entityType: 'habit',
+        entityId: newHabit.id,
+        userId: newHabit.userId,
+        action: 'upsert',
+      );
       return Right(newHabit);
     } on CacheException catch (e) {
       return Left(CacheFailure(e.message));
@@ -55,6 +63,12 @@ class HabitsRepositoryImpl implements HabitsRepository {
   Future<Either<Failure, Habit>> updateHabit(Habit habit) async {
     try {
       await _local.updateHabit(habit);
+      await _syncService.enqueueAndSync(
+        entityType: 'habit',
+        entityId: habit.id,
+        userId: habit.userId,
+        action: 'upsert',
+      );
       return Right(habit);
     } on CacheException catch (e) {
       return Left(CacheFailure(e.message));
@@ -64,7 +78,14 @@ class HabitsRepositoryImpl implements HabitsRepository {
   @override
   Future<Either<Failure, void>> deleteHabit(String id) async {
     try {
+      final habit = await _local.getHabit(id);
       await _local.deleteHabit(id);
+      await _syncService.enqueueAndSync(
+        entityType: 'habit',
+        entityId: id,
+        userId: habit.userId,
+        action: 'delete',
+      );
       return const Right(null);
     } on CacheException catch (e) {
       return Left(CacheFailure(e.message));
@@ -84,8 +105,16 @@ class HabitsRepositoryImpl implements HabitsRepository {
         dateOnly.add(const Duration(days: 1)),
       );
 
+      final habit = await _local.getHabit(habitId);
       if (completions.isNotEmpty) {
-        await _local.deleteCompletion(completions.first.id);
+        final cId = completions.first.id;
+        await _local.deleteCompletion(cId);
+        await _syncService.enqueueAndSync(
+          entityType: 'completion',
+          entityId: cId,
+          userId: habit.userId,
+          action: 'delete',
+        );
       } else {
         final completion = HabitCompletion(
           id: DateTime.now().microsecondsSinceEpoch.toString(),
@@ -93,6 +122,12 @@ class HabitsRepositoryImpl implements HabitsRepository {
           date: dateOnly,
         );
         await _local.insertCompletion(completion);
+        await _syncService.enqueueAndSync(
+          entityType: 'completion',
+          entityId: completion.id,
+          userId: habit.userId,
+          action: 'upsert',
+        );
       }
       return const Right(null);
     } on CacheException catch (e) {

@@ -15,6 +15,7 @@ class Habit extends Equatable {
     this.createdAt,
     this.currentStreak = 0,
     this.bestStreak = 0,
+    this.updatedAt,
   });
 
   final String id;
@@ -30,6 +31,7 @@ class Habit extends Equatable {
   final DateTime? createdAt;
   final int currentStreak;
   final int bestStreak;
+  final DateTime? updatedAt;
 
   Habit copyWith({
     String? id,
@@ -45,6 +47,7 @@ class Habit extends Equatable {
     DateTime? createdAt,
     int? currentStreak,
     int? bestStreak,
+    DateTime? updatedAt,
   }) {
     return Habit(
       id: id ?? this.id,
@@ -60,6 +63,7 @@ class Habit extends Equatable {
       createdAt: createdAt ?? this.createdAt,
       currentStreak: currentStreak ?? this.currentStreak,
       bestStreak: bestStreak ?? this.bestStreak,
+      updatedAt: updatedAt ?? this.updatedAt,
     );
   }
 
@@ -78,5 +82,6 @@ class Habit extends Equatable {
         createdAt,
         currentStreak,
         bestStreak,
+        updatedAt,
       ];
 }

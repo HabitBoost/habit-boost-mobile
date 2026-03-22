@@ -4,12 +4,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:habit_boost/core/error/exceptions.dart';
 import 'package:habit_boost/features/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:habit_boost/features/auth/data/models/user_model.dart';
-import 'package:injectable/injectable.dart';
-
 /// Local implementation of [AuthRemoteDataSource] that stores users
-/// in [FlutterSecureStorage]. Used for development without a backend.
-/// Can be replaced with Supabase/Firebase by swapping the DI environment.
-@LazySingleton(as: AuthRemoteDataSource)
+/// in [FlutterSecureStorage]. Used for development/testing without a backend.
 class LocalAuthRemoteDataSource implements AuthRemoteDataSource {
   const LocalAuthRemoteDataSource(this._storage);
 

@@ -36,11 +36,10 @@ class StreakBanner extends StatelessWidget {
               color: Colors.white.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Center(
-              child: Text(
-                allDone ? '🎉' : '🔥',
-                style: const TextStyle(fontSize: 24),
-              ),
+            child: Icon(
+              allDone ? Icons.celebration : Icons.local_fire_department,
+              color: Colors.white,
+              size: 24,
             ),
           ),
           const SizedBox(width: AppDimensions.paddingM),

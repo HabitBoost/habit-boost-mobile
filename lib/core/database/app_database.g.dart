@@ -154,6 +154,17 @@ class $HabitsTableTable extends HabitsTable
     requiredDuringInsert: false,
     defaultValue: const Constant(0),
   );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -169,6 +180,7 @@ class $HabitsTableTable extends HabitsTable
     createdAt,
     currentStreak,
     bestStreak,
+    updatedAt,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -280,6 +292,12 @@ class $HabitsTableTable extends HabitsTable
         bestStreak.isAcceptableOrUnknown(data['best_streak']!, _bestStreakMeta),
       );
     }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    }
     return context;
   }
 
@@ -341,6 +359,10 @@ class $HabitsTableTable extends HabitsTable
         DriftSqlType.int,
         data['${effectivePrefix}best_streak'],
       )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      ),
     );
   }
 
@@ -364,6 +386,7 @@ class HabitsTableData extends DataClass implements Insertable<HabitsTableData> {
   final DateTime createdAt;
   final int currentStreak;
   final int bestStreak;
+  final DateTime? updatedAt;
   const HabitsTableData({
     required this.id,
     required this.userId,
@@ -378,6 +401,7 @@ class HabitsTableData extends DataClass implements Insertable<HabitsTableData> {
     required this.createdAt,
     required this.currentStreak,
     required this.bestStreak,
+    this.updatedAt,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -395,6 +419,9 @@ class HabitsTableData extends DataClass implements Insertable<HabitsTableData> {
     map['created_at'] = Variable<DateTime>(createdAt);
     map['current_streak'] = Variable<int>(currentStreak);
     map['best_streak'] = Variable<int>(bestStreak);
+    if (!nullToAbsent || updatedAt != null) {
+      map['updated_at'] = Variable<DateTime>(updatedAt);
+    }
     return map;
   }
 
@@ -413,6 +440,9 @@ class HabitsTableData extends DataClass implements Insertable<HabitsTableData> {
       createdAt: Value(createdAt),
       currentStreak: Value(currentStreak),
       bestStreak: Value(bestStreak),
+      updatedAt: updatedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(updatedAt),
     );
   }
 
@@ -435,6 +465,7 @@ class HabitsTableData extends DataClass implements Insertable<HabitsTableData> {
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
       currentStreak: serializer.fromJson<int>(json['currentStreak']),
       bestStreak: serializer.fromJson<int>(json['bestStreak']),
+      updatedAt: serializer.fromJson<DateTime?>(json['updatedAt']),
     );
   }
   @override
@@ -454,6 +485,7 @@ class HabitsTableData extends DataClass implements Insertable<HabitsTableData> {
       'createdAt': serializer.toJson<DateTime>(createdAt),
       'currentStreak': serializer.toJson<int>(currentStreak),
       'bestStreak': serializer.toJson<int>(bestStreak),
+      'updatedAt': serializer.toJson<DateTime?>(updatedAt),
     };
   }
 
@@ -471,6 +503,7 @@ class HabitsTableData extends DataClass implements Insertable<HabitsTableData> {
     DateTime? createdAt,
     int? currentStreak,
     int? bestStreak,
+    Value<DateTime?> updatedAt = const Value.absent(),
   }) => HabitsTableData(
     id: id ?? this.id,
     userId: userId ?? this.userId,
@@ -485,6 +518,7 @@ class HabitsTableData extends DataClass implements Insertable<HabitsTableData> {
     createdAt: createdAt ?? this.createdAt,
     currentStreak: currentStreak ?? this.currentStreak,
     bestStreak: bestStreak ?? this.bestStreak,
+    updatedAt: updatedAt.present ? updatedAt.value : this.updatedAt,
   );
   HabitsTableData copyWithCompanion(HabitsTableCompanion data) {
     return HabitsTableData(
@@ -513,6 +547,7 @@ class HabitsTableData extends DataClass implements Insertable<HabitsTableData> {
       bestStreak: data.bestStreak.present
           ? data.bestStreak.value
           : this.bestStreak,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
     );
   }
 
@@ -531,7 +566,8 @@ class HabitsTableData extends DataClass implements Insertable<HabitsTableData> {
           ..write('reminderMinute: $reminderMinute, ')
           ..write('createdAt: $createdAt, ')
           ..write('currentStreak: $currentStreak, ')
-          ..write('bestStreak: $bestStreak')
+          ..write('bestStreak: $bestStreak, ')
+          ..write('updatedAt: $updatedAt')
           ..write(')'))
         .toString();
   }
@@ -551,6 +587,7 @@ class HabitsTableData extends DataClass implements Insertable<HabitsTableData> {
     createdAt,
     currentStreak,
     bestStreak,
+    updatedAt,
   );
   @override
   bool operator ==(Object other) =>
@@ -568,7 +605,8 @@ class HabitsTableData extends DataClass implements Insertable<HabitsTableData> {
           other.reminderMinute == this.reminderMinute &&
           other.createdAt == this.createdAt &&
           other.currentStreak == this.currentStreak &&
-          other.bestStreak == this.bestStreak);
+          other.bestStreak == this.bestStreak &&
+          other.updatedAt == this.updatedAt);
 }
 
 class HabitsTableCompanion extends UpdateCompanion<HabitsTableData> {
@@ -585,6 +623,7 @@ class HabitsTableCompanion extends UpdateCompanion<HabitsTableData> {
   final Value<DateTime> createdAt;
   final Value<int> currentStreak;
   final Value<int> bestStreak;
+  final Value<DateTime?> updatedAt;
   final Value<int> rowid;
   const HabitsTableCompanion({
     this.id = const Value.absent(),
@@ -600,6 +639,7 @@ class HabitsTableCompanion extends UpdateCompanion<HabitsTableData> {
     this.createdAt = const Value.absent(),
     this.currentStreak = const Value.absent(),
     this.bestStreak = const Value.absent(),
+    this.updatedAt = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   HabitsTableCompanion.insert({
@@ -616,6 +656,7 @@ class HabitsTableCompanion extends UpdateCompanion<HabitsTableData> {
     required DateTime createdAt,
     this.currentStreak = const Value.absent(),
     this.bestStreak = const Value.absent(),
+    this.updatedAt = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : id = Value(id),
        userId = Value(userId),
@@ -635,6 +676,7 @@ class HabitsTableCompanion extends UpdateCompanion<HabitsTableData> {
     Expression<DateTime>? createdAt,
     Expression<int>? currentStreak,
     Expression<int>? bestStreak,
+    Expression<DateTime>? updatedAt,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -651,6 +693,7 @@ class HabitsTableCompanion extends UpdateCompanion<HabitsTableData> {
       if (createdAt != null) 'created_at': createdAt,
       if (currentStreak != null) 'current_streak': currentStreak,
       if (bestStreak != null) 'best_streak': bestStreak,
+      if (updatedAt != null) 'updated_at': updatedAt,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -669,6 +712,7 @@ class HabitsTableCompanion extends UpdateCompanion<HabitsTableData> {
     Value<DateTime>? createdAt,
     Value<int>? currentStreak,
     Value<int>? bestStreak,
+    Value<DateTime?>? updatedAt,
     Value<int>? rowid,
   }) {
     return HabitsTableCompanion(
@@ -685,6 +729,7 @@ class HabitsTableCompanion extends UpdateCompanion<HabitsTableData> {
       createdAt: createdAt ?? this.createdAt,
       currentStreak: currentStreak ?? this.currentStreak,
       bestStreak: bestStreak ?? this.bestStreak,
+      updatedAt: updatedAt ?? this.updatedAt,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -731,6 +776,9 @@ class HabitsTableCompanion extends UpdateCompanion<HabitsTableData> {
     if (bestStreak.present) {
       map['best_streak'] = Variable<int>(bestStreak.value);
     }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -753,6 +801,7 @@ class HabitsTableCompanion extends UpdateCompanion<HabitsTableData> {
           ..write('createdAt: $createdAt, ')
           ..write('currentStreak: $currentStreak, ')
           ..write('bestStreak: $bestStreak, ')
+          ..write('updatedAt: $updatedAt, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -812,8 +861,25 @@ class $HabitCompletionsTableTable extends HabitCompletionsTable
     ),
     defaultValue: const Constant(true),
   );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
   @override
-  List<GeneratedColumn> get $columns => [id, habitId, date, completed];
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    habitId,
+    date,
+    completed,
+    updatedAt,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -853,6 +919,12 @@ class $HabitCompletionsTableTable extends HabitCompletionsTable
         completed.isAcceptableOrUnknown(data['completed']!, _completedMeta),
       );
     }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    }
     return context;
   }
 
@@ -881,6 +953,10 @@ class $HabitCompletionsTableTable extends HabitCompletionsTable
         DriftSqlType.bool,
         data['${effectivePrefix}completed'],
       )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      ),
     );
   }
 
@@ -896,11 +972,13 @@ class HabitCompletionsTableData extends DataClass
   final String habitId;
   final DateTime date;
   final bool completed;
+  final DateTime? updatedAt;
   const HabitCompletionsTableData({
     required this.id,
     required this.habitId,
     required this.date,
     required this.completed,
+    this.updatedAt,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -909,6 +987,9 @@ class HabitCompletionsTableData extends DataClass
     map['habit_id'] = Variable<String>(habitId);
     map['date'] = Variable<DateTime>(date);
     map['completed'] = Variable<bool>(completed);
+    if (!nullToAbsent || updatedAt != null) {
+      map['updated_at'] = Variable<DateTime>(updatedAt);
+    }
     return map;
   }
 
@@ -918,6 +999,9 @@ class HabitCompletionsTableData extends DataClass
       habitId: Value(habitId),
       date: Value(date),
       completed: Value(completed),
+      updatedAt: updatedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(updatedAt),
     );
   }
 
@@ -931,6 +1015,7 @@ class HabitCompletionsTableData extends DataClass
       habitId: serializer.fromJson<String>(json['habitId']),
       date: serializer.fromJson<DateTime>(json['date']),
       completed: serializer.fromJson<bool>(json['completed']),
+      updatedAt: serializer.fromJson<DateTime?>(json['updatedAt']),
     );
   }
   @override
@@ -941,6 +1026,7 @@ class HabitCompletionsTableData extends DataClass
       'habitId': serializer.toJson<String>(habitId),
       'date': serializer.toJson<DateTime>(date),
       'completed': serializer.toJson<bool>(completed),
+      'updatedAt': serializer.toJson<DateTime?>(updatedAt),
     };
   }
 
@@ -949,11 +1035,13 @@ class HabitCompletionsTableData extends DataClass
     String? habitId,
     DateTime? date,
     bool? completed,
+    Value<DateTime?> updatedAt = const Value.absent(),
   }) => HabitCompletionsTableData(
     id: id ?? this.id,
     habitId: habitId ?? this.habitId,
     date: date ?? this.date,
     completed: completed ?? this.completed,
+    updatedAt: updatedAt.present ? updatedAt.value : this.updatedAt,
   );
   HabitCompletionsTableData copyWithCompanion(
     HabitCompletionsTableCompanion data,
@@ -963,6 +1051,7 @@ class HabitCompletionsTableData extends DataClass
       habitId: data.habitId.present ? data.habitId.value : this.habitId,
       date: data.date.present ? data.date.value : this.date,
       completed: data.completed.present ? data.completed.value : this.completed,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
     );
   }
 
@@ -972,13 +1061,14 @@ class HabitCompletionsTableData extends DataClass
           ..write('id: $id, ')
           ..write('habitId: $habitId, ')
           ..write('date: $date, ')
-          ..write('completed: $completed')
+          ..write('completed: $completed, ')
+          ..write('updatedAt: $updatedAt')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, habitId, date, completed);
+  int get hashCode => Object.hash(id, habitId, date, completed, updatedAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -986,7 +1076,8 @@ class HabitCompletionsTableData extends DataClass
           other.id == this.id &&
           other.habitId == this.habitId &&
           other.date == this.date &&
-          other.completed == this.completed);
+          other.completed == this.completed &&
+          other.updatedAt == this.updatedAt);
 }
 
 class HabitCompletionsTableCompanion
@@ -995,12 +1086,14 @@ class HabitCompletionsTableCompanion
   final Value<String> habitId;
   final Value<DateTime> date;
   final Value<bool> completed;
+  final Value<DateTime?> updatedAt;
   final Value<int> rowid;
   const HabitCompletionsTableCompanion({
     this.id = const Value.absent(),
     this.habitId = const Value.absent(),
     this.date = const Value.absent(),
     this.completed = const Value.absent(),
+    this.updatedAt = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   HabitCompletionsTableCompanion.insert({
@@ -1008,6 +1101,7 @@ class HabitCompletionsTableCompanion
     required String habitId,
     required DateTime date,
     this.completed = const Value.absent(),
+    this.updatedAt = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : id = Value(id),
        habitId = Value(habitId),
@@ -1017,6 +1111,7 @@ class HabitCompletionsTableCompanion
     Expression<String>? habitId,
     Expression<DateTime>? date,
     Expression<bool>? completed,
+    Expression<DateTime>? updatedAt,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -1024,6 +1119,7 @@ class HabitCompletionsTableCompanion
       if (habitId != null) 'habit_id': habitId,
       if (date != null) 'date': date,
       if (completed != null) 'completed': completed,
+      if (updatedAt != null) 'updated_at': updatedAt,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -1033,6 +1129,7 @@ class HabitCompletionsTableCompanion
     Value<String>? habitId,
     Value<DateTime>? date,
     Value<bool>? completed,
+    Value<DateTime?>? updatedAt,
     Value<int>? rowid,
   }) {
     return HabitCompletionsTableCompanion(
@@ -1040,6 +1137,7 @@ class HabitCompletionsTableCompanion
       habitId: habitId ?? this.habitId,
       date: date ?? this.date,
       completed: completed ?? this.completed,
+      updatedAt: updatedAt ?? this.updatedAt,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -1059,6 +1157,9 @@ class HabitCompletionsTableCompanion
     if (completed.present) {
       map['completed'] = Variable<bool>(completed.value);
     }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -1072,7 +1173,904 @@ class HabitCompletionsTableCompanion
           ..write('habitId: $habitId, ')
           ..write('date: $date, ')
           ..write('completed: $completed, ')
+          ..write('updatedAt: $updatedAt, ')
           ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $JournalEntriesTableTable extends JournalEntriesTable
+    with TableInfo<$JournalEntriesTableTable, JournalEntriesTableData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $JournalEntriesTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+    'user_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _dateMeta = const VerificationMeta('date');
+  @override
+  late final GeneratedColumn<DateTime> date = GeneratedColumn<DateTime>(
+    'date',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _contentMeta = const VerificationMeta(
+    'content',
+  );
+  @override
+  late final GeneratedColumn<String> content = GeneratedColumn<String>(
+    'content',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _moodMeta = const VerificationMeta('mood');
+  @override
+  late final GeneratedColumn<String> mood = GeneratedColumn<String>(
+    'mood',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('neutral'),
+  );
+  static const VerificationMeta _tagsMeta = const VerificationMeta('tags');
+  @override
+  late final GeneratedColumn<String> tags = GeneratedColumn<String>(
+    'tags',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(''),
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    userId,
+    date,
+    content,
+    mood,
+    tags,
+    createdAt,
+    updatedAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'journal_entries_table';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<JournalEntriesTableData> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(
+        _userIdMeta,
+        userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('date')) {
+      context.handle(
+        _dateMeta,
+        date.isAcceptableOrUnknown(data['date']!, _dateMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_dateMeta);
+    }
+    if (data.containsKey('content')) {
+      context.handle(
+        _contentMeta,
+        content.isAcceptableOrUnknown(data['content']!, _contentMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_contentMeta);
+    }
+    if (data.containsKey('mood')) {
+      context.handle(
+        _moodMeta,
+        mood.isAcceptableOrUnknown(data['mood']!, _moodMeta),
+      );
+    }
+    if (data.containsKey('tags')) {
+      context.handle(
+        _tagsMeta,
+        tags.isAcceptableOrUnknown(data['tags']!, _tagsMeta),
+      );
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_createdAtMeta);
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_updatedAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  JournalEntriesTableData map(
+    Map<String, dynamic> data, {
+    String? tablePrefix,
+  }) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return JournalEntriesTableData(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      userId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}user_id'],
+      )!,
+      date: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}date'],
+      )!,
+      content: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}content'],
+      )!,
+      mood: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}mood'],
+      )!,
+      tags: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}tags'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+    );
+  }
+
+  @override
+  $JournalEntriesTableTable createAlias(String alias) {
+    return $JournalEntriesTableTable(attachedDatabase, alias);
+  }
+}
+
+class JournalEntriesTableData extends DataClass
+    implements Insertable<JournalEntriesTableData> {
+  final String id;
+  final String userId;
+  final DateTime date;
+  final String content;
+  final String mood;
+  final String tags;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  const JournalEntriesTableData({
+    required this.id,
+    required this.userId,
+    required this.date,
+    required this.content,
+    required this.mood,
+    required this.tags,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['date'] = Variable<DateTime>(date);
+    map['content'] = Variable<String>(content);
+    map['mood'] = Variable<String>(mood);
+    map['tags'] = Variable<String>(tags);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    return map;
+  }
+
+  JournalEntriesTableCompanion toCompanion(bool nullToAbsent) {
+    return JournalEntriesTableCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      date: Value(date),
+      content: Value(content),
+      mood: Value(mood),
+      tags: Value(tags),
+      createdAt: Value(createdAt),
+      updatedAt: Value(updatedAt),
+    );
+  }
+
+  factory JournalEntriesTableData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return JournalEntriesTableData(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      date: serializer.fromJson<DateTime>(json['date']),
+      content: serializer.fromJson<String>(json['content']),
+      mood: serializer.fromJson<String>(json['mood']),
+      tags: serializer.fromJson<String>(json['tags']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'date': serializer.toJson<DateTime>(date),
+      'content': serializer.toJson<String>(content),
+      'mood': serializer.toJson<String>(mood),
+      'tags': serializer.toJson<String>(tags),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+    };
+  }
+
+  JournalEntriesTableData copyWith({
+    String? id,
+    String? userId,
+    DateTime? date,
+    String? content,
+    String? mood,
+    String? tags,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) => JournalEntriesTableData(
+    id: id ?? this.id,
+    userId: userId ?? this.userId,
+    date: date ?? this.date,
+    content: content ?? this.content,
+    mood: mood ?? this.mood,
+    tags: tags ?? this.tags,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+  );
+  JournalEntriesTableData copyWithCompanion(JournalEntriesTableCompanion data) {
+    return JournalEntriesTableData(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      date: data.date.present ? data.date.value : this.date,
+      content: data.content.present ? data.content.value : this.content,
+      mood: data.mood.present ? data.mood.value : this.mood,
+      tags: data.tags.present ? data.tags.value : this.tags,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('JournalEntriesTableData(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('date: $date, ')
+          ..write('content: $content, ')
+          ..write('mood: $mood, ')
+          ..write('tags: $tags, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(id, userId, date, content, mood, tags, createdAt, updatedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is JournalEntriesTableData &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.date == this.date &&
+          other.content == this.content &&
+          other.mood == this.mood &&
+          other.tags == this.tags &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt);
+}
+
+class JournalEntriesTableCompanion
+    extends UpdateCompanion<JournalEntriesTableData> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<DateTime> date;
+  final Value<String> content;
+  final Value<String> mood;
+  final Value<String> tags;
+  final Value<DateTime> createdAt;
+  final Value<DateTime> updatedAt;
+  final Value<int> rowid;
+  const JournalEntriesTableCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.date = const Value.absent(),
+    this.content = const Value.absent(),
+    this.mood = const Value.absent(),
+    this.tags = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  JournalEntriesTableCompanion.insert({
+    required String id,
+    required String userId,
+    required DateTime date,
+    required String content,
+    this.mood = const Value.absent(),
+    this.tags = const Value.absent(),
+    required DateTime createdAt,
+    required DateTime updatedAt,
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       userId = Value(userId),
+       date = Value(date),
+       content = Value(content),
+       createdAt = Value(createdAt),
+       updatedAt = Value(updatedAt);
+  static Insertable<JournalEntriesTableData> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<DateTime>? date,
+    Expression<String>? content,
+    Expression<String>? mood,
+    Expression<String>? tags,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? updatedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (date != null) 'date': date,
+      if (content != null) 'content': content,
+      if (mood != null) 'mood': mood,
+      if (tags != null) 'tags': tags,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  JournalEntriesTableCompanion copyWith({
+    Value<String>? id,
+    Value<String>? userId,
+    Value<DateTime>? date,
+    Value<String>? content,
+    Value<String>? mood,
+    Value<String>? tags,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? updatedAt,
+    Value<int>? rowid,
+  }) {
+    return JournalEntriesTableCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      date: date ?? this.date,
+      content: content ?? this.content,
+      mood: mood ?? this.mood,
+      tags: tags ?? this.tags,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (date.present) {
+      map['date'] = Variable<DateTime>(date.value);
+    }
+    if (content.present) {
+      map['content'] = Variable<String>(content.value);
+    }
+    if (mood.present) {
+      map['mood'] = Variable<String>(mood.value);
+    }
+    if (tags.present) {
+      map['tags'] = Variable<String>(tags.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('JournalEntriesTableCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('date: $date, ')
+          ..write('content: $content, ')
+          ..write('mood: $mood, ')
+          ..write('tags: $tags, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $SyncQueueTableTable extends SyncQueueTable
+    with TableInfo<$SyncQueueTableTable, SyncQueueTableData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $SyncQueueTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _entityTypeMeta = const VerificationMeta(
+    'entityType',
+  );
+  @override
+  late final GeneratedColumn<String> entityType = GeneratedColumn<String>(
+    'entity_type',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _entityIdMeta = const VerificationMeta(
+    'entityId',
+  );
+  @override
+  late final GeneratedColumn<String> entityId = GeneratedColumn<String>(
+    'entity_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+    'user_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _actionMeta = const VerificationMeta('action');
+  @override
+  late final GeneratedColumn<String> action = GeneratedColumn<String>(
+    'action',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    entityType,
+    entityId,
+    userId,
+    action,
+    createdAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'sync_queue_table';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<SyncQueueTableData> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('entity_type')) {
+      context.handle(
+        _entityTypeMeta,
+        entityType.isAcceptableOrUnknown(data['entity_type']!, _entityTypeMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_entityTypeMeta);
+    }
+    if (data.containsKey('entity_id')) {
+      context.handle(
+        _entityIdMeta,
+        entityId.isAcceptableOrUnknown(data['entity_id']!, _entityIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_entityIdMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(
+        _userIdMeta,
+        userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('action')) {
+      context.handle(
+        _actionMeta,
+        action.isAcceptableOrUnknown(data['action']!, _actionMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_actionMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_createdAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  SyncQueueTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return SyncQueueTableData(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      entityType: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}entity_type'],
+      )!,
+      entityId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}entity_id'],
+      )!,
+      userId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}user_id'],
+      )!,
+      action: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}action'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+    );
+  }
+
+  @override
+  $SyncQueueTableTable createAlias(String alias) {
+    return $SyncQueueTableTable(attachedDatabase, alias);
+  }
+}
+
+class SyncQueueTableData extends DataClass
+    implements Insertable<SyncQueueTableData> {
+  final int id;
+  final String entityType;
+  final String entityId;
+  final String userId;
+  final String action;
+  final DateTime createdAt;
+  const SyncQueueTableData({
+    required this.id,
+    required this.entityType,
+    required this.entityId,
+    required this.userId,
+    required this.action,
+    required this.createdAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['entity_type'] = Variable<String>(entityType);
+    map['entity_id'] = Variable<String>(entityId);
+    map['user_id'] = Variable<String>(userId);
+    map['action'] = Variable<String>(action);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  SyncQueueTableCompanion toCompanion(bool nullToAbsent) {
+    return SyncQueueTableCompanion(
+      id: Value(id),
+      entityType: Value(entityType),
+      entityId: Value(entityId),
+      userId: Value(userId),
+      action: Value(action),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory SyncQueueTableData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return SyncQueueTableData(
+      id: serializer.fromJson<int>(json['id']),
+      entityType: serializer.fromJson<String>(json['entityType']),
+      entityId: serializer.fromJson<String>(json['entityId']),
+      userId: serializer.fromJson<String>(json['userId']),
+      action: serializer.fromJson<String>(json['action']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'entityType': serializer.toJson<String>(entityType),
+      'entityId': serializer.toJson<String>(entityId),
+      'userId': serializer.toJson<String>(userId),
+      'action': serializer.toJson<String>(action),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  SyncQueueTableData copyWith({
+    int? id,
+    String? entityType,
+    String? entityId,
+    String? userId,
+    String? action,
+    DateTime? createdAt,
+  }) => SyncQueueTableData(
+    id: id ?? this.id,
+    entityType: entityType ?? this.entityType,
+    entityId: entityId ?? this.entityId,
+    userId: userId ?? this.userId,
+    action: action ?? this.action,
+    createdAt: createdAt ?? this.createdAt,
+  );
+  SyncQueueTableData copyWithCompanion(SyncQueueTableCompanion data) {
+    return SyncQueueTableData(
+      id: data.id.present ? data.id.value : this.id,
+      entityType: data.entityType.present
+          ? data.entityType.value
+          : this.entityType,
+      entityId: data.entityId.present ? data.entityId.value : this.entityId,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      action: data.action.present ? data.action.value : this.action,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('SyncQueueTableData(')
+          ..write('id: $id, ')
+          ..write('entityType: $entityType, ')
+          ..write('entityId: $entityId, ')
+          ..write('userId: $userId, ')
+          ..write('action: $action, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(id, entityType, entityId, userId, action, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is SyncQueueTableData &&
+          other.id == this.id &&
+          other.entityType == this.entityType &&
+          other.entityId == this.entityId &&
+          other.userId == this.userId &&
+          other.action == this.action &&
+          other.createdAt == this.createdAt);
+}
+
+class SyncQueueTableCompanion extends UpdateCompanion<SyncQueueTableData> {
+  final Value<int> id;
+  final Value<String> entityType;
+  final Value<String> entityId;
+  final Value<String> userId;
+  final Value<String> action;
+  final Value<DateTime> createdAt;
+  const SyncQueueTableCompanion({
+    this.id = const Value.absent(),
+    this.entityType = const Value.absent(),
+    this.entityId = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.action = const Value.absent(),
+    this.createdAt = const Value.absent(),
+  });
+  SyncQueueTableCompanion.insert({
+    this.id = const Value.absent(),
+    required String entityType,
+    required String entityId,
+    required String userId,
+    required String action,
+    required DateTime createdAt,
+  }) : entityType = Value(entityType),
+       entityId = Value(entityId),
+       userId = Value(userId),
+       action = Value(action),
+       createdAt = Value(createdAt);
+  static Insertable<SyncQueueTableData> custom({
+    Expression<int>? id,
+    Expression<String>? entityType,
+    Expression<String>? entityId,
+    Expression<String>? userId,
+    Expression<String>? action,
+    Expression<DateTime>? createdAt,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (entityType != null) 'entity_type': entityType,
+      if (entityId != null) 'entity_id': entityId,
+      if (userId != null) 'user_id': userId,
+      if (action != null) 'action': action,
+      if (createdAt != null) 'created_at': createdAt,
+    });
+  }
+
+  SyncQueueTableCompanion copyWith({
+    Value<int>? id,
+    Value<String>? entityType,
+    Value<String>? entityId,
+    Value<String>? userId,
+    Value<String>? action,
+    Value<DateTime>? createdAt,
+  }) {
+    return SyncQueueTableCompanion(
+      id: id ?? this.id,
+      entityType: entityType ?? this.entityType,
+      entityId: entityId ?? this.entityId,
+      userId: userId ?? this.userId,
+      action: action ?? this.action,
+      createdAt: createdAt ?? this.createdAt,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (entityType.present) {
+      map['entity_type'] = Variable<String>(entityType.value);
+    }
+    if (entityId.present) {
+      map['entity_id'] = Variable<String>(entityId.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (action.present) {
+      map['action'] = Variable<String>(action.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('SyncQueueTableCompanion(')
+          ..write('id: $id, ')
+          ..write('entityType: $entityType, ')
+          ..write('entityId: $entityId, ')
+          ..write('userId: $userId, ')
+          ..write('action: $action, ')
+          ..write('createdAt: $createdAt')
           ..write(')'))
         .toString();
   }
@@ -1084,6 +2082,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $HabitsTableTable habitsTable = $HabitsTableTable(this);
   late final $HabitCompletionsTableTable habitCompletionsTable =
       $HabitCompletionsTableTable(this);
+  late final $JournalEntriesTableTable journalEntriesTable =
+      $JournalEntriesTableTable(this);
+  late final $SyncQueueTableTable syncQueueTable = $SyncQueueTableTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -1091,6 +2092,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   List<DatabaseSchemaEntity> get allSchemaEntities => [
     habitsTable,
     habitCompletionsTable,
+    journalEntriesTable,
+    syncQueueTable,
   ];
 }
 
@@ -1109,6 +2112,7 @@ typedef $$HabitsTableTableCreateCompanionBuilder =
       required DateTime createdAt,
       Value<int> currentStreak,
       Value<int> bestStreak,
+      Value<DateTime?> updatedAt,
       Value<int> rowid,
     });
 typedef $$HabitsTableTableUpdateCompanionBuilder =
@@ -1126,6 +2130,7 @@ typedef $$HabitsTableTableUpdateCompanionBuilder =
       Value<DateTime> createdAt,
       Value<int> currentStreak,
       Value<int> bestStreak,
+      Value<DateTime?> updatedAt,
       Value<int> rowid,
     });
 
@@ -1236,6 +2241,11 @@ class $$HabitsTableTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
+  ColumnFilters<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
   Expression<bool> habitCompletionsTableRefs(
     Expression<bool> Function($$HabitCompletionsTableTableFilterComposer f) f,
   ) {
@@ -1336,6 +2346,11 @@ class $$HabitsTableTableOrderingComposer
     column: $table.bestStreak,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$HabitsTableTableAnnotationComposer
@@ -1397,6 +2412,9 @@ class $$HabitsTableTableAnnotationComposer
     column: $table.bestStreak,
     builder: (column) => column,
   );
+
+  GeneratedColumn<DateTime> get updatedAt =>
+      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
 
   Expression<T> habitCompletionsTableRefs<T extends Object>(
     Expression<T> Function($$HabitCompletionsTableTableAnnotationComposer a) f,
@@ -1466,6 +2484,7 @@ class $$HabitsTableTableTableManager
                 Value<DateTime> createdAt = const Value.absent(),
                 Value<int> currentStreak = const Value.absent(),
                 Value<int> bestStreak = const Value.absent(),
+                Value<DateTime?> updatedAt = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => HabitsTableCompanion(
                 id: id,
@@ -1481,6 +2500,7 @@ class $$HabitsTableTableTableManager
                 createdAt: createdAt,
                 currentStreak: currentStreak,
                 bestStreak: bestStreak,
+                updatedAt: updatedAt,
                 rowid: rowid,
               ),
           createCompanionCallback:
@@ -1498,6 +2518,7 @@ class $$HabitsTableTableTableManager
                 required DateTime createdAt,
                 Value<int> currentStreak = const Value.absent(),
                 Value<int> bestStreak = const Value.absent(),
+                Value<DateTime?> updatedAt = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => HabitsTableCompanion.insert(
                 id: id,
@@ -1513,6 +2534,7 @@ class $$HabitsTableTableTableManager
                 createdAt: createdAt,
                 currentStreak: currentStreak,
                 bestStreak: bestStreak,
+                updatedAt: updatedAt,
                 rowid: rowid,
               ),
           withReferenceMapper: (p0) => p0
@@ -1579,6 +2601,7 @@ typedef $$HabitCompletionsTableTableCreateCompanionBuilder =
       required String habitId,
       required DateTime date,
       Value<bool> completed,
+      Value<DateTime?> updatedAt,
       Value<int> rowid,
     });
 typedef $$HabitCompletionsTableTableUpdateCompanionBuilder =
@@ -1587,6 +2610,7 @@ typedef $$HabitCompletionsTableTableUpdateCompanionBuilder =
       Value<String> habitId,
       Value<DateTime> date,
       Value<bool> completed,
+      Value<DateTime?> updatedAt,
       Value<int> rowid,
     });
 
@@ -1650,6 +2674,11 @@ class $$HabitCompletionsTableTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
+  ColumnFilters<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
   $$HabitsTableTableFilterComposer get habitId {
     final $$HabitsTableTableFilterComposer composer = $composerBuilder(
       composer: this,
@@ -1698,6 +2727,11 @@ class $$HabitCompletionsTableTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   $$HabitsTableTableOrderingComposer get habitId {
     final $$HabitsTableTableOrderingComposer composer = $composerBuilder(
       composer: this,
@@ -1739,6 +2773,9 @@ class $$HabitCompletionsTableTableAnnotationComposer
 
   GeneratedColumn<bool> get completed =>
       $composableBuilder(column: $table.completed, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get updatedAt =>
+      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
 
   $$HabitsTableTableAnnotationComposer get habitId {
     final $$HabitsTableTableAnnotationComposer composer = $composerBuilder(
@@ -1807,12 +2844,14 @@ class $$HabitCompletionsTableTableTableManager
                 Value<String> habitId = const Value.absent(),
                 Value<DateTime> date = const Value.absent(),
                 Value<bool> completed = const Value.absent(),
+                Value<DateTime?> updatedAt = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => HabitCompletionsTableCompanion(
                 id: id,
                 habitId: habitId,
                 date: date,
                 completed: completed,
+                updatedAt: updatedAt,
                 rowid: rowid,
               ),
           createCompanionCallback:
@@ -1821,12 +2860,14 @@ class $$HabitCompletionsTableTableTableManager
                 required String habitId,
                 required DateTime date,
                 Value<bool> completed = const Value.absent(),
+                Value<DateTime?> updatedAt = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => HabitCompletionsTableCompanion.insert(
                 id: id,
                 habitId: habitId,
                 date: date,
                 completed: completed,
+                updatedAt: updatedAt,
                 rowid: rowid,
               ),
           withReferenceMapper: (p0) => p0
@@ -1898,6 +2939,500 @@ typedef $$HabitCompletionsTableTableProcessedTableManager =
       HabitCompletionsTableData,
       PrefetchHooks Function({bool habitId})
     >;
+typedef $$JournalEntriesTableTableCreateCompanionBuilder =
+    JournalEntriesTableCompanion Function({
+      required String id,
+      required String userId,
+      required DateTime date,
+      required String content,
+      Value<String> mood,
+      Value<String> tags,
+      required DateTime createdAt,
+      required DateTime updatedAt,
+      Value<int> rowid,
+    });
+typedef $$JournalEntriesTableTableUpdateCompanionBuilder =
+    JournalEntriesTableCompanion Function({
+      Value<String> id,
+      Value<String> userId,
+      Value<DateTime> date,
+      Value<String> content,
+      Value<String> mood,
+      Value<String> tags,
+      Value<DateTime> createdAt,
+      Value<DateTime> updatedAt,
+      Value<int> rowid,
+    });
+
+class $$JournalEntriesTableTableFilterComposer
+    extends Composer<_$AppDatabase, $JournalEntriesTableTable> {
+  $$JournalEntriesTableTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get userId => $composableBuilder(
+    column: $table.userId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get content => $composableBuilder(
+    column: $table.content,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get mood => $composableBuilder(
+    column: $table.mood,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get tags => $composableBuilder(
+    column: $table.tags,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$JournalEntriesTableTableOrderingComposer
+    extends Composer<_$AppDatabase, $JournalEntriesTableTable> {
+  $$JournalEntriesTableTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+    column: $table.userId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get content => $composableBuilder(
+    column: $table.content,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get mood => $composableBuilder(
+    column: $table.mood,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get tags => $composableBuilder(
+    column: $table.tags,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$JournalEntriesTableTableAnnotationComposer
+    extends Composer<_$AppDatabase, $JournalEntriesTableTable> {
+  $$JournalEntriesTableTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get date =>
+      $composableBuilder(column: $table.date, builder: (column) => column);
+
+  GeneratedColumn<String> get content =>
+      $composableBuilder(column: $table.content, builder: (column) => column);
+
+  GeneratedColumn<String> get mood =>
+      $composableBuilder(column: $table.mood, builder: (column) => column);
+
+  GeneratedColumn<String> get tags =>
+      $composableBuilder(column: $table.tags, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get updatedAt =>
+      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+}
+
+class $$JournalEntriesTableTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $JournalEntriesTableTable,
+          JournalEntriesTableData,
+          $$JournalEntriesTableTableFilterComposer,
+          $$JournalEntriesTableTableOrderingComposer,
+          $$JournalEntriesTableTableAnnotationComposer,
+          $$JournalEntriesTableTableCreateCompanionBuilder,
+          $$JournalEntriesTableTableUpdateCompanionBuilder,
+          (
+            JournalEntriesTableData,
+            BaseReferences<
+              _$AppDatabase,
+              $JournalEntriesTableTable,
+              JournalEntriesTableData
+            >,
+          ),
+          JournalEntriesTableData,
+          PrefetchHooks Function()
+        > {
+  $$JournalEntriesTableTableTableManager(
+    _$AppDatabase db,
+    $JournalEntriesTableTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$JournalEntriesTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$JournalEntriesTableTableOrderingComposer(
+                $db: db,
+                $table: table,
+              ),
+          createComputedFieldComposer: () =>
+              $$JournalEntriesTableTableAnnotationComposer(
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> userId = const Value.absent(),
+                Value<DateTime> date = const Value.absent(),
+                Value<String> content = const Value.absent(),
+                Value<String> mood = const Value.absent(),
+                Value<String> tags = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+                Value<DateTime> updatedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => JournalEntriesTableCompanion(
+                id: id,
+                userId: userId,
+                date: date,
+                content: content,
+                mood: mood,
+                tags: tags,
+                createdAt: createdAt,
+                updatedAt: updatedAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String userId,
+                required DateTime date,
+                required String content,
+                Value<String> mood = const Value.absent(),
+                Value<String> tags = const Value.absent(),
+                required DateTime createdAt,
+                required DateTime updatedAt,
+                Value<int> rowid = const Value.absent(),
+              }) => JournalEntriesTableCompanion.insert(
+                id: id,
+                userId: userId,
+                date: date,
+                content: content,
+                mood: mood,
+                tags: tags,
+                createdAt: createdAt,
+                updatedAt: updatedAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$JournalEntriesTableTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $JournalEntriesTableTable,
+      JournalEntriesTableData,
+      $$JournalEntriesTableTableFilterComposer,
+      $$JournalEntriesTableTableOrderingComposer,
+      $$JournalEntriesTableTableAnnotationComposer,
+      $$JournalEntriesTableTableCreateCompanionBuilder,
+      $$JournalEntriesTableTableUpdateCompanionBuilder,
+      (
+        JournalEntriesTableData,
+        BaseReferences<
+          _$AppDatabase,
+          $JournalEntriesTableTable,
+          JournalEntriesTableData
+        >,
+      ),
+      JournalEntriesTableData,
+      PrefetchHooks Function()
+    >;
+typedef $$SyncQueueTableTableCreateCompanionBuilder =
+    SyncQueueTableCompanion Function({
+      Value<int> id,
+      required String entityType,
+      required String entityId,
+      required String userId,
+      required String action,
+      required DateTime createdAt,
+    });
+typedef $$SyncQueueTableTableUpdateCompanionBuilder =
+    SyncQueueTableCompanion Function({
+      Value<int> id,
+      Value<String> entityType,
+      Value<String> entityId,
+      Value<String> userId,
+      Value<String> action,
+      Value<DateTime> createdAt,
+    });
+
+class $$SyncQueueTableTableFilterComposer
+    extends Composer<_$AppDatabase, $SyncQueueTableTable> {
+  $$SyncQueueTableTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get entityType => $composableBuilder(
+    column: $table.entityType,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get entityId => $composableBuilder(
+    column: $table.entityId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get userId => $composableBuilder(
+    column: $table.userId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get action => $composableBuilder(
+    column: $table.action,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$SyncQueueTableTableOrderingComposer
+    extends Composer<_$AppDatabase, $SyncQueueTableTable> {
+  $$SyncQueueTableTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get entityType => $composableBuilder(
+    column: $table.entityType,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get entityId => $composableBuilder(
+    column: $table.entityId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+    column: $table.userId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get action => $composableBuilder(
+    column: $table.action,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$SyncQueueTableTableAnnotationComposer
+    extends Composer<_$AppDatabase, $SyncQueueTableTable> {
+  $$SyncQueueTableTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get entityType => $composableBuilder(
+    column: $table.entityType,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get entityId =>
+      $composableBuilder(column: $table.entityId, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get action =>
+      $composableBuilder(column: $table.action, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$SyncQueueTableTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $SyncQueueTableTable,
+          SyncQueueTableData,
+          $$SyncQueueTableTableFilterComposer,
+          $$SyncQueueTableTableOrderingComposer,
+          $$SyncQueueTableTableAnnotationComposer,
+          $$SyncQueueTableTableCreateCompanionBuilder,
+          $$SyncQueueTableTableUpdateCompanionBuilder,
+          (
+            SyncQueueTableData,
+            BaseReferences<
+              _$AppDatabase,
+              $SyncQueueTableTable,
+              SyncQueueTableData
+            >,
+          ),
+          SyncQueueTableData,
+          PrefetchHooks Function()
+        > {
+  $$SyncQueueTableTableTableManager(
+    _$AppDatabase db,
+    $SyncQueueTableTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$SyncQueueTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$SyncQueueTableTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$SyncQueueTableTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String> entityType = const Value.absent(),
+                Value<String> entityId = const Value.absent(),
+                Value<String> userId = const Value.absent(),
+                Value<String> action = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+              }) => SyncQueueTableCompanion(
+                id: id,
+                entityType: entityType,
+                entityId: entityId,
+                userId: userId,
+                action: action,
+                createdAt: createdAt,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required String entityType,
+                required String entityId,
+                required String userId,
+                required String action,
+                required DateTime createdAt,
+              }) => SyncQueueTableCompanion.insert(
+                id: id,
+                entityType: entityType,
+                entityId: entityId,
+                userId: userId,
+                action: action,
+                createdAt: createdAt,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$SyncQueueTableTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $SyncQueueTableTable,
+      SyncQueueTableData,
+      $$SyncQueueTableTableFilterComposer,
+      $$SyncQueueTableTableOrderingComposer,
+      $$SyncQueueTableTableAnnotationComposer,
+      $$SyncQueueTableTableCreateCompanionBuilder,
+      $$SyncQueueTableTableUpdateCompanionBuilder,
+      (
+        SyncQueueTableData,
+        BaseReferences<_$AppDatabase, $SyncQueueTableTable, SyncQueueTableData>,
+      ),
+      SyncQueueTableData,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -1906,4 +3441,8 @@ class $AppDatabaseManager {
       $$HabitsTableTableTableManager(_db, _db.habitsTable);
   $$HabitCompletionsTableTableTableManager get habitCompletionsTable =>
       $$HabitCompletionsTableTableTableManager(_db, _db.habitCompletionsTable);
+  $$JournalEntriesTableTableTableManager get journalEntriesTable =>
+      $$JournalEntriesTableTableTableManager(_db, _db.journalEntriesTable);
+  $$SyncQueueTableTableTableManager get syncQueueTable =>
+      $$SyncQueueTableTableTableManager(_db, _db.syncQueueTable);
 }

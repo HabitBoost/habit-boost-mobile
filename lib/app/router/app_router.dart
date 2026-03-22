@@ -15,8 +15,15 @@ import 'package:habit_boost/features/habits/presentation/bloc/habits_bloc.dart';
 import 'package:habit_boost/features/habits/presentation/screens/add_edit_habit_screen.dart';
 import 'package:habit_boost/features/habits/presentation/screens/habit_detail_screen.dart';
 import 'package:habit_boost/features/habits/presentation/screens/home_screen.dart';
+import 'package:habit_boost/features/journal/domain/entities/journal_entry.dart';
+import 'package:habit_boost/features/journal/presentation/bloc/journal_bloc.dart';
+import 'package:habit_boost/features/journal/presentation/screens/journal_entry_screen.dart';
+import 'package:habit_boost/features/journal/presentation/screens/journal_screen.dart';
 import 'package:habit_boost/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:habit_boost/features/onboarding/presentation/screens/onboarding_screen.dart';
+import 'package:habit_boost/features/profile/presentation/screens/profile_screen.dart';
+import 'package:habit_boost/features/progress/presentation/bloc/progress_bloc.dart';
+import 'package:habit_boost/features/progress/presentation/screens/progress_screen.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
@@ -65,25 +72,28 @@ GoRouter createRouter() {
           GoRoute(
             path: Routes.progress,
             pageBuilder: (context, state) =>
-                const NoTransitionPage(
-              child:
-                  _PlaceholderScreen(title: AppStrings.progress),
+                NoTransitionPage(
+              child: BlocProvider(
+                create: (_) => sl<ProgressBloc>(),
+                child: const ProgressScreen(),
+              ),
             ),
           ),
           GoRoute(
             path: Routes.journal,
             pageBuilder: (context, state) =>
-                const NoTransitionPage(
-              child:
-                  _PlaceholderScreen(title: AppStrings.journal),
+                NoTransitionPage(
+              child: BlocProvider(
+                create: (_) => sl<JournalBloc>(),
+                child: const JournalScreen(),
+              ),
             ),
           ),
           GoRoute(
             path: Routes.profile,
             pageBuilder: (context, state) =>
                 const NoTransitionPage(
-              child:
-                  _PlaceholderScreen(title: AppStrings.profile),
+              child: ProfileScreen(),
             ),
           ),
         ],
@@ -108,6 +118,17 @@ GoRouter createRouter() {
         builder: (context, state) {
           final habit = state.extra! as Habit;
           return HabitDetailScreen(habit: habit);
+        },
+      ),
+      GoRoute(
+        path: Routes.journalEntry,
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) {
+          final entry = state.extra as JournalEntry?;
+          return BlocProvider.value(
+            value: sl<JournalBloc>(),
+            child: JournalEntryScreen(entry: entry),
+          );
         },
       ),
       GoRoute(

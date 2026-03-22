@@ -1,13 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:habit_boost/app/di/injection_container.dart';
+import 'package:habit_boost/core/sync/connectivity_listener.dart';
+import 'package:habit_boost/firebase_options.dart';
+import 'package:injectable/injectable.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 Future<void> bootstrap() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await initializeDateFormatting('ru');
-
-  // Local auth mode — no backend required.
-  // When adding Supabase/Firebase, use DI environments to switch:
-  //   await configureDependencies(environment: Environment.prod);
-  await configureDependencies();
+  await configureDependencies(environment: Environment.prod);
+  sl<ConnectivityListener>().start();
 }

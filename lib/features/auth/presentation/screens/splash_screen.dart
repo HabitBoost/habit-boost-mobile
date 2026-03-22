@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:habit_boost/app/di/injection_container.dart';
 import 'package:habit_boost/app/router/routes.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
+import 'package:habit_boost/core/sync/sync_service.dart';
 import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:habit_boost/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 
@@ -60,6 +62,8 @@ class _SplashScreenState extends State<SplashScreen> {
     if (authState is Unauthenticated || authState is AuthError) {
       context.go(Routes.login);
     } else if (authState is Authenticated) {
+      // Fire-and-forget initial sync
+      sl<SyncService>().pullAndMerge(authState.user.id);
       if (!onboardingState.isCompleted) {
         context.go(Routes.onboarding);
       } else {
