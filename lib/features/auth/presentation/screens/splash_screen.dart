@@ -53,7 +53,10 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  void _handleNavigation(BuildContext context, dynamic state) {
+  Future<void> _handleNavigation(
+    BuildContext context,
+    dynamic state,
+  ) async {
     final authState = context.read<AuthBloc>().state;
     final onboardingState = context.read<OnboardingBloc>().state;
 
@@ -62,8 +65,9 @@ class _SplashScreenState extends State<SplashScreen> {
     if (authState is Unauthenticated || authState is AuthError) {
       context.go(Routes.login);
     } else if (authState is Authenticated) {
-      // Fire-and-forget initial sync
-      sl<SyncService>().pullAndMerge(authState.user.id);
+      // Wait for initial sync before navigating
+      await sl<SyncService>().pullAndMerge(authState.user.id);
+      if (!context.mounted) return;
       if (!onboardingState.isCompleted) {
         context.go(Routes.onboarding);
       } else {

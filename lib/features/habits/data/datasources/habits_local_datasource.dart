@@ -76,6 +76,7 @@ class HabitsLocalDataSource {
             bestStreak: Value(habit.bestStreak),
             updatedAt: Value(habit.updatedAt ?? DateTime.now()),
           ),
+          mode: InsertMode.insertOrReplace,
         );
   }
 
@@ -151,6 +152,7 @@ class HabitsLocalDataSource {
             completed: Value(completion.completed),
             updatedAt: Value(completion.updatedAt ?? DateTime.now()),
           ),
+          mode: InsertMode.insertOrReplace,
         );
   }
 

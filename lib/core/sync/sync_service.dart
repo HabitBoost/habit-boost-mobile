@@ -132,13 +132,25 @@ class SyncService {
 
     try {
       await _pullHabits(userId);
-      await _pullCompletions(userId);
-      await _pullJournal(userId);
-      await flushQueue();
-      log.i('Pull & merge completed for $userId');
     } on Exception catch (e) {
-      log.w('Pull & merge failed', error: e);
+      log.w('Pull habits failed', error: e);
     }
+    try {
+      await _pullCompletions(userId);
+    } on Exception catch (e) {
+      log.w('Pull completions failed', error: e);
+    }
+    try {
+      await _pullJournal(userId);
+    } on Exception catch (e) {
+      log.w('Pull journal failed', error: e);
+    }
+    try {
+      await flushQueue();
+    } on Exception catch (e) {
+      log.w('Flush queue failed', error: e);
+    }
+    log.i('Pull & merge completed for $userId');
   }
 
   Future<void> _processQueueEntry(SyncQueueTableData row) async {
@@ -173,9 +185,15 @@ class SyncService {
   }
 
   Future<void> _pullHabits(String userId) async {
-    final remoteHabits = await _habitsRemote.getHabits(userId);
-    final localHabits = await _habitsLocal.getHabits(userId);
-    final localMap = {for (final h in localHabits) h.id: h};
+    final remoteHabits =
+        await _habitsRemote.getHabits(userId);
+    log.d('Pull habits: ${remoteHabits.length} remote');
+    final localHabits =
+        await _habitsLocal.getHabits(userId);
+    log.d('Pull habits: ${localHabits.length} local');
+    final localMap = {
+      for (final h in localHabits) h.id: h,
+    };
 
     for (final remote in remoteHabits) {
       final local = localMap[remote.id];
@@ -218,17 +236,26 @@ class SyncService {
   }
 
   Future<void> _pullJournal(String userId) async {
-    final remoteEntries = await _journalRemote.getEntries(userId);
-    final localEntries = await _journalLocal.getEntries(userId);
-    final localMap = {for (final e in localEntries) e.id: e};
+    final remoteEntries =
+        await _journalRemote.getEntries(userId);
+    log.d('Pull journal: ${remoteEntries.length} remote');
+    final localEntries =
+        await _journalLocal.getEntries(userId);
+    log.d('Pull journal: ${localEntries.length} local');
+    final localMap = {
+      for (final e in localEntries) e.id: e,
+    };
 
     for (final remote in remoteEntries) {
       final local = localMap[remote.id];
       if (local == null) {
+        log.d('Inserting remote journal: ${remote.id}');
         await _journalLocal.insertEntry(remote);
       } else {
-        final remoteTime = remote.updatedAt ?? DateTime(2020);
-        final localTime = local.updatedAt ?? DateTime(2020);
+        final remoteTime =
+            remote.updatedAt ?? DateTime(2020);
+        final localTime =
+            local.updatedAt ?? DateTime(2020);
         if (remoteTime.isAfter(localTime)) {
           await _journalLocal.updateEntry(remote);
         }

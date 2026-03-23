@@ -42,6 +42,7 @@ class JournalLocalDataSource {
             createdAt: entry.createdAt ?? DateTime.now(),
             updatedAt: entry.updatedAt ?? DateTime.now(),
           ),
+          mode: InsertMode.insertOrReplace,
         );
   }
 
