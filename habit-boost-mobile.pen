@@ -64,7 +64,8 @@
               "fill": "$--text-secondary",
               "content": "Маленькие шаги к большим переменам",
               "fontFamily": "DM Sans",
-              "fontSize": 14
+              "fontSize": 14,
+              "fontWeight": "normal"
             }
           ]
         },
@@ -187,7 +188,8 @@
               "content": "HabitBoost поможет вам выработать полезные привычки шаг за шагом. Отслеживайте прогресс, получайте напоминания и достигайте целей каждый день.",
               "lineHeight": 1.5,
               "fontFamily": "DM Sans",
-              "fontSize": 15
+              "fontSize": 15,
+              "fontWeight": "normal"
             },
             {
               "type": "frame",
@@ -317,7 +319,8 @@
               "width": "fill_container",
               "content": "Выберите области, на которых хотите сфокусироваться",
               "fontFamily": "DM Sans",
-              "fontSize": 15
+              "fontSize": 15,
+              "fontWeight": "normal"
             },
             {
               "type": "frame",
@@ -736,7 +739,8 @@
               "lineHeight": 1.5,
               "textAlign": "center",
               "fontFamily": "DM Sans",
-              "fontSize": 15
+              "fontSize": 15,
+              "fontWeight": "normal"
             }
           ]
         },
@@ -973,7 +977,8 @@
                           "fill": "$--text-tertiary",
                           "content": "example@email.com",
                           "fontFamily": "DM Sans",
-                          "fontSize": 15
+                          "fontSize": 15,
+                          "fontWeight": "normal"
                         }
                       ]
                     }
@@ -1019,7 +1024,8 @@
                           "fill": "$--text-tertiary",
                           "content": "••••••••",
                           "fontFamily": "DM Sans",
-                          "fontSize": 15
+                          "fontSize": 15,
+                          "fontWeight": "normal"
                         },
                         {
                           "type": "icon_font",
@@ -1439,7 +1445,8 @@
                   "width": "fill_container",
                   "content": "Согласен с условиями использования",
                   "fontFamily": "DM Sans",
-                  "fontSize": 13
+                  "fontSize": 13,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -1480,7 +1487,8 @@
                   "fill": "$--text-secondary",
                   "content": "Уже есть аккаунт?",
                   "fontFamily": "DM Sans",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -1572,7 +1580,8 @@
               "content": "Введите email, привязанный к вашему аккаунту. Мы отправим ссылку для сброса пароля.",
               "lineHeight": 1.5,
               "fontFamily": "DM Sans",
-              "fontSize": 15
+              "fontSize": 15,
+              "fontWeight": "normal"
             },
             {
               "type": "frame",
@@ -1858,7 +1867,8 @@
                   "content": "Маленькие шаги каждый день ведут к большим переменам",
                   "lineHeight": 1.5,
                   "fontFamily": "DM Sans",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -4105,7 +4115,8 @@
                       "content": "Отличный день! Удалось выполнить все привычки и провести продуктивное утро. Зарядка дала заряд энергии на весь день.",
                       "lineHeight": 1.5,
                       "fontFamily": "DM Sans",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "frame",
@@ -4190,7 +4201,8 @@
                       "content": "Сложный день. Не удалось медитировать утром, но вечером нашёл время на чтение. Завтра попробую встать раньше.",
                       "lineHeight": 1.5,
                       "fontFamily": "DM Sans",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "frame",
@@ -4275,7 +4287,8 @@
                       "content": "Потрясающий день! Пробежал 5 км впервые за месяц. Чувствую прилив сил и мотивации.",
                       "lineHeight": 1.5,
                       "fontFamily": "DM Sans",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "frame",
@@ -4383,7 +4396,8 @@
                       "content": "Задумался о новых привычках. Хочу добавить вечернюю прогулку и ограничить время в соцсетях.",
                       "lineHeight": 1.5,
                       "fontFamily": "DM Sans",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 }
@@ -5526,7 +5540,8 @@
                       "fill": "$--text-tertiary",
                       "content": "Например: Утренняя пробежка",
                       "fontFamily": "DM Sans",
-                      "fontSize": 15
+                      "fontSize": 15,
+                      "fontWeight": "normal"
                     }
                   ]
                 }
@@ -7171,7 +7186,8 @@
                               "fill": "$--text-tertiary",
                               "content": "22",
                               "fontFamily": "DM Sans",
-                              "fontSize": 13
+                              "fontSize": 13,
+                              "fontWeight": "normal"
                             }
                           ]
                         },
@@ -7191,7 +7207,8 @@
                               "fill": "$--text-tertiary",
                               "content": "23",
                               "fontFamily": "DM Sans",
-                              "fontSize": 13
+                              "fontSize": 13,
+                              "fontWeight": "normal"
                             }
                           ]
                         },
@@ -7211,7 +7228,8 @@
                               "fill": "$--text-tertiary",
                               "content": "24",
                               "fontFamily": "DM Sans",
-                              "fontSize": 13
+                              "fontSize": 13,
+                              "fontWeight": "normal"
                             }
                           ]
                         },
@@ -7231,7 +7249,8 @@
                               "fill": "$--text-tertiary",
                               "content": "25",
                               "fontFamily": "DM Sans",
-                              "fontSize": 13
+                              "fontSize": 13,
+                              "fontWeight": "normal"
                             }
                           ]
                         },
@@ -7251,7 +7270,8 @@
                               "fill": "$--text-tertiary",
                               "content": "26",
                               "fontFamily": "DM Sans",
-                              "fontSize": 13
+                              "fontSize": 13,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -7509,7 +7529,8 @@
               "lineHeight": 1.5,
               "textAlign": "center",
               "fontFamily": "DM Sans",
-              "fontSize": 14
+              "fontSize": 14,
+              "fontWeight": "normal"
             },
             {
               "type": "frame",
@@ -7582,7 +7603,8 @@
                           "fill": "$--text-secondary",
                           "content": "Сделай глубокий вдох",
                           "fontFamily": "DM Sans",
-                          "fontSize": 13
+                          "fontSize": 13,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -7661,7 +7683,8 @@
                           "fill": "$--text-secondary",
                           "content": "Открыть дневник",
                           "fontFamily": "DM Sans",
-                          "fontSize": 13
+                          "fontSize": 13,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -7740,7 +7763,8 @@
                           "fill": "$--text-secondary",
                           "content": "Вспомни свои достижения",
                           "fontFamily": "DM Sans",
-                          "fontSize": 13
+                          "fontSize": 13,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -7819,7 +7843,8 @@
                           "fill": "$--text-secondary",
                           "content": "Поговори с кем-нибудь",
                           "fontFamily": "DM Sans",
-                          "fontSize": 13
+                          "fontSize": 13,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -8555,6 +8580,4190 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "W5FMz",
+      "x": 0,
+      "y": 1898,
+      "name": "Landing Page — Desktop",
+      "width": 1440,
+      "fill": "#FFFFFF",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "8KxJO",
+          "name": "Header",
+          "width": "fill_container",
+          "height": 80,
+          "padding": [
+            0,
+            80
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "1FfFg",
+              "name": "logoGroup",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "sLJOm",
+                  "name": "leafIcon",
+                  "width": 24,
+                  "height": 24,
+                  "iconFontName": "leaf",
+                  "iconFontFamily": "lucide",
+                  "fill": "$--accent-green"
+                },
+                {
+                  "type": "text",
+                  "id": "BVd8g",
+                  "name": "logoText",
+                  "fill": "$--text-primary",
+                  "content": "HabitBoost",
+                  "fontFamily": "Bricolage Grotesque",
+                  "fontSize": 22,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "vidBc",
+              "name": "navGroup",
+              "gap": 32,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "XjXE7",
+                  "name": "nav1",
+                  "fill": "$--text-secondary",
+                  "content": "Возможности",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 15,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "p33Nk",
+                  "name": "nav2",
+                  "fill": "$--text-secondary",
+                  "content": "Как это работает",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 15,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "ReY6w",
+                  "name": "nav3",
+                  "fill": "$--text-secondary",
+                  "content": "Отзывы",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 15,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "RTpOe",
+                  "name": "nav4",
+                  "fill": "$--text-secondary",
+                  "content": "Цены",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 15,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "GAaV3",
+              "name": "ctaBtn",
+              "fill": "$--accent-coral",
+              "cornerRadius": 26,
+              "gap": 8,
+              "padding": [
+                12,
+                24
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "1Vi15",
+                  "name": "ctaText",
+                  "fill": "#FFFFFF",
+                  "content": "Скачать приложение",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 15,
+                  "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Euxzg",
+          "name": "Hero Section",
+          "width": "fill_container",
+          "fill": "#FFFFFF",
+          "gap": 64,
+          "padding": 80,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "7nMYJ",
+              "name": "leftCol",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 32,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "0AZK1",
+                  "name": "headline",
+                  "fill": "$--text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Создавай привычки, которые меняют жизнь",
+                  "lineHeight": 1.15,
+                  "fontFamily": "Bricolage Grotesque",
+                  "fontSize": 48,
+                  "fontWeight": "800"
+                },
+                {
+                  "type": "text",
+                  "id": "44KC3",
+                  "name": "subtext",
+                  "fill": "$--text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "HabitBoost — ваш персональный помощник для формирования полезных привычек. Отслеживайте прогресс, получайте мотивацию и достигайте целей каждый день.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "DM Sans",
+                  "fontSize": 18
+                },
+                {
+                  "type": "frame",
+                  "id": "fdC3a",
+                  "name": "btnRow",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "NnS1q",
+                      "name": "appStoreBtn",
+                      "fill": "$--text-primary",
+                      "cornerRadius": 30,
+                      "gap": 10,
+                      "padding": [
+                        14,
+                        28
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "LLYSt",
+                          "name": "appleIcon",
+                          "width": 20,
+                          "height": 20,
+                          "iconFontName": "apple",
+                          "iconFontFamily": "lucide",
+                          "fill": "#FFFFFF"
+                        },
+                        {
+                          "type": "text",
+                          "id": "umYSL",
+                          "name": "appStoreText",
+                          "fill": "#FFFFFF",
+                          "content": "App Store",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 15,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "p7UYT",
+                      "name": "googleBtn",
+                      "fill": "$--text-primary",
+                      "cornerRadius": 30,
+                      "gap": 10,
+                      "padding": [
+                        14,
+                        28
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "Y6xde",
+                          "name": "playIcon",
+                          "width": 20,
+                          "height": 20,
+                          "iconFontName": "play",
+                          "iconFontFamily": "lucide",
+                          "fill": "#FFFFFF"
+                        },
+                        {
+                          "type": "text",
+                          "id": "iX5ko",
+                          "name": "googleText",
+                          "fill": "#FFFFFF",
+                          "content": "Google Play",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 15,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "o5Ebf",
+                  "name": "trustLine",
+                  "fill": "$--text-tertiary",
+                  "content": "50,000+ пользователей уже с нами",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "jvyFf",
+              "name": "phoneFrame",
+              "width": 380,
+              "height": 780,
+              "fill": "$--bg-card",
+              "cornerRadius": 44,
+              "stroke": {
+                "align": "outside",
+                "thickness": 2,
+                "fill": "#E5E7EB"
+              },
+              "layout": "vertical",
+              "padding": 20,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "V9opK",
+                  "name": "phoneScreen",
+                  "clip": true,
+                  "width": 340,
+                  "height": 720,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "./images/REkoD.png",
+                    "mode": "fill"
+                  },
+                  "cornerRadius": 28
+                },
+                {
+                  "type": "frame",
+                  "id": "grqNu",
+                  "layoutPosition": "absolute",
+                  "x": 130,
+                  "y": 28,
+                  "name": "Dynamic Island",
+                  "width": 120,
+                  "height": 32,
+                  "fill": "#1A1A1A",
+                  "cornerRadius": 16
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "aQ7DW",
+          "name": "Features Section",
+          "width": "fill_container",
+          "fill": "$--bg-card",
+          "layout": "vertical",
+          "gap": 64,
+          "padding": 80,
+          "children": [
+            {
+              "type": "frame",
+              "id": "6XC9K",
+              "name": "titleGroup",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "eeVJk",
+                  "name": "secTitle",
+                  "fill": "$--text-primary",
+                  "content": "Всё для ваших привычек",
+                  "fontFamily": "Bricolage Grotesque",
+                  "fontSize": 36,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "DwSfT",
+                  "name": "secSub",
+                  "fill": "$--text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": 600,
+                  "content": "Инструменты, которые помогут вам стать лучшей версией себя",
+                  "textAlign": "center",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 18
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "X4qtw",
+              "name": "row1",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "zVWmc",
+                  "name": "card1",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "0z1WR",
+                      "name": "icon1bg",
+                      "fill": "$--accent-coral",
+                      "width": 56,
+                      "height": 56
+                    },
+                    {
+                      "type": "text",
+                      "id": "5ZTqa",
+                      "name": "title1",
+                      "fill": "$--text-primary",
+                      "content": "Трекер привычек",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 18,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "L2a5b",
+                      "name": "desc1",
+                      "fill": "$--text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Отслеживайте ежедневные привычки и отмечайте выполненные задачи одним нажатием",
+                      "lineHeight": 1.5,
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "L4emq",
+                  "name": "card2",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "RBZtf",
+                      "name": "icon2bg",
+                      "fill": "$--accent-indigo",
+                      "width": 56,
+                      "height": 56
+                    },
+                    {
+                      "type": "text",
+                      "id": "iiiWd",
+                      "name": "title2",
+                      "fill": "$--text-primary",
+                      "content": "Аналитика прогресса",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 18,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Hhoxv",
+                      "name": "desc2",
+                      "fill": "$--text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Наглядные графики и статистика покажут ваш путь к успеху",
+                      "lineHeight": 1.5,
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Jj3Ww",
+                  "name": "card3",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "tr5qd",
+                      "name": "icon3bg",
+                      "fill": "$--accent-green",
+                      "width": 56,
+                      "height": 56
+                    },
+                    {
+                      "type": "text",
+                      "id": "LGAAU",
+                      "name": "title3",
+                      "fill": "$--text-primary",
+                      "content": "Умные напоминания",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 18,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "euZ24",
+                      "name": "desc3",
+                      "fill": "$--text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Настройте персональные уведомления, чтобы не пропустить ни одной привычки",
+                      "lineHeight": 1.5,
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "zkAL0",
+              "name": "row2",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "o1oEX",
+                  "name": "card4",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "vroqb",
+                      "name": "icon4bg",
+                      "fill": "$--accent-yellow",
+                      "width": 56,
+                      "height": 56
+                    },
+                    {
+                      "type": "text",
+                      "id": "B3sPO",
+                      "name": "title4",
+                      "fill": "$--text-primary",
+                      "content": "Дневник рефлексии",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 18,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "qVuf8",
+                      "name": "desc4",
+                      "fill": "$--text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Записывайте мысли и отслеживайте своё эмоциональное состояние каждый день",
+                      "lineHeight": 1.5,
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "XFnn9",
+                  "name": "card5",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "1OsCB",
+                      "name": "icon5bg",
+                      "fill": "$--accent-coral",
+                      "width": 56,
+                      "height": 56
+                    },
+                    {
+                      "type": "text",
+                      "id": "63oJ5",
+                      "name": "title5",
+                      "fill": "$--text-primary",
+                      "content": "SOS поддержка",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 18,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "icv3f",
+                      "name": "desc5",
+                      "fill": "$--text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Дыхательные упражнения и мотивационные цитаты в трудные моменты",
+                      "lineHeight": 1.5,
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "pTe6z",
+                  "name": "card6",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "v9UbJ",
+                      "name": "icon6bg",
+                      "fill": "$--accent-indigo",
+                      "width": 56,
+                      "height": 56
+                    },
+                    {
+                      "type": "text",
+                      "id": "uACp0",
+                      "name": "title6",
+                      "fill": "$--text-primary",
+                      "content": "Достижения и бейджи",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 18,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "bixNB",
+                      "name": "desc6",
+                      "fill": "$--text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Система геймификации с наградами за регулярность и достижение целей",
+                      "lineHeight": 1.5,
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "iOnDC",
+          "name": "How It Works",
+          "width": "fill_container",
+          "fill": "#FFFFFF",
+          "layout": "vertical",
+          "gap": 64,
+          "padding": 80,
+          "children": [
+            {
+              "type": "frame",
+              "id": "HLNHC",
+              "name": "hiwTitle",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "G7nVv",
+                  "name": "hiwH",
+                  "fill": "$--text-primary",
+                  "content": "Как это работает",
+                  "fontFamily": "Bricolage Grotesque",
+                  "fontSize": 36,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "ZBHJd",
+                  "name": "hiwSub",
+                  "fill": "$--text-secondary",
+                  "content": "Три простых шага к лучшей жизни",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 18
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "f4qow",
+              "name": "stepsRow",
+              "width": "fill_container",
+              "gap": 32,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "hubmu",
+                  "name": "step1",
+                  "width": "fill_container",
+                  "fill": "$--bg-card",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 40,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ME5tv",
+                      "name": "num1",
+                      "opacity": 0.2,
+                      "fill": "$--accent-coral",
+                      "content": "01",
+                      "fontFamily": "Bricolage Grotesque",
+                      "fontSize": 64,
+                      "fontWeight": "800"
+                    },
+                    {
+                      "type": "text",
+                      "id": "VauNv",
+                      "name": "st1title",
+                      "fill": "$--text-primary",
+                      "content": "Выберите привычки",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 20,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "dVYEO",
+                      "name": "st1desc",
+                      "fill": "$--text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Выберите из каталога готовых привычек или создайте свои собственные по категориям",
+                      "lineHeight": 1.5,
+                      "textAlign": "center",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    },
+                    {
+                      "type": "frame",
+                      "id": "am4fq",
+                      "name": "st1img",
+                      "width": "fill_container",
+                      "height": 160,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "./images/sqeZQ.png",
+                        "mode": "fill"
+                      },
+                      "cornerRadius": 16
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "rAlci",
+                  "name": "stp2",
+                  "width": "fill_container",
+                  "fill": "$--bg-card",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 40,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "e9Iom",
+                      "name": "nm2",
+                      "opacity": 0.2,
+                      "fill": "$--accent-green",
+                      "content": "02",
+                      "fontFamily": "Bricolage Grotesque",
+                      "fontSize": 64,
+                      "fontWeight": "800"
+                    },
+                    {
+                      "type": "text",
+                      "id": "jVbNE",
+                      "name": "t2",
+                      "fill": "$--text-primary",
+                      "content": "Отмечайте прогресс",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 20,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "AGiOr",
+                      "name": "d2",
+                      "fill": "$--text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Ежедневно отмечайте выполненные привычки и наблюдайте за своей серией",
+                      "lineHeight": 1.5,
+                      "textAlign": "center",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    },
+                    {
+                      "type": "frame",
+                      "id": "SahDG",
+                      "name": "img2",
+                      "width": "fill_container",
+                      "height": 160,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "./images/EegEJ.png",
+                        "mode": "fill"
+                      },
+                      "cornerRadius": 16
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "RKUFU",
+                  "name": "stp3",
+                  "width": "fill_container",
+                  "fill": "$--bg-card",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 40,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "gZiNM",
+                      "name": "nm3",
+                      "opacity": 0.2,
+                      "fill": "$--accent-indigo",
+                      "content": "03",
+                      "fontFamily": "Bricolage Grotesque",
+                      "fontSize": 64,
+                      "fontWeight": "800"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ozYw6",
+                      "name": "t3",
+                      "fill": "$--text-primary",
+                      "content": "Достигайте целей",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 20,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Sj6Jl",
+                      "name": "d3",
+                      "fill": "$--text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Анализируйте статистику, получайте награды и становитесь лучше каждый день",
+                      "lineHeight": 1.5,
+                      "textAlign": "center",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Jx2iI",
+                      "name": "img3",
+                      "width": "fill_container",
+                      "height": 160,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "./images/EFnvg.png",
+                        "mode": "fill"
+                      },
+                      "cornerRadius": 16
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "he7I3",
+          "name": "Stats Section",
+          "width": "fill_container",
+          "fill": {
+            "type": "gradient",
+            "gradientType": "linear",
+            "enabled": true,
+            "rotation": 180,
+            "size": {
+              "height": 1
+            },
+            "colors": [
+              {
+                "color": "#FFF5F5",
+                "position": 0
+              },
+              {
+                "color": "#FFFFFF",
+                "position": 1
+              }
+            ]
+          },
+          "layout": "vertical",
+          "gap": 48,
+          "padding": 80,
+          "children": [
+            {
+              "type": "frame",
+              "id": "RjjAk",
+              "name": "statsHeader",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "zrzMU",
+                  "name": "statsTag",
+                  "fill": "#FEF2F2",
+                  "cornerRadius": 20,
+                  "padding": [
+                    6,
+                    16
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "MNaFc",
+                      "name": "statsTagText",
+                      "fill": "$--accent-coral",
+                      "content": "НАШИ РЕЗУЛЬТАТЫ",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 13,
+                      "fontWeight": "600",
+                      "letterSpacing": 1
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "fXMpj",
+                  "name": "statsTitle",
+                  "fill": "$--text-primary",
+                  "content": "Цифры говорят сами за себя",
+                  "textAlign": "center",
+                  "fontFamily": "Bricolage Grotesque",
+                  "fontSize": 44,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "EMtPH",
+                  "name": "statsSub",
+                  "fill": "$--text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": 600,
+                  "content": "Присоединяйтесь к сообществу людей, которые меняют свою жизнь каждый день",
+                  "lineHeight": 1.5,
+                  "textAlign": "center",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 18
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "NhbQ2",
+              "name": "statsRow",
+              "width": "fill_container",
+              "gap": 32,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "yNRuS",
+                  "name": "stat1",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 24,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$--border-subtle"
+                  },
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": 40,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "3mEJM",
+                      "name": "stat1Val",
+                      "fill": "$--accent-coral",
+                      "content": "50,000+",
+                      "fontFamily": "Bricolage Grotesque",
+                      "fontSize": 48,
+                      "fontWeight": "800"
+                    },
+                    {
+                      "type": "text",
+                      "id": "OBs6m",
+                      "name": "stat1Label",
+                      "fill": "$--text-secondary",
+                      "content": "Активных пользователей",
+                      "textAlign": "center",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 16,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "2swvM",
+                  "name": "stat2",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 24,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$--border-subtle"
+                  },
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": 40,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "fAEdY",
+                      "name": "stat2Val",
+                      "fill": "$--accent-green",
+                      "content": "2.5M+",
+                      "fontFamily": "Bricolage Grotesque",
+                      "fontSize": 48,
+                      "fontWeight": "800"
+                    },
+                    {
+                      "type": "text",
+                      "id": "T9Lcr",
+                      "name": "stat2Label",
+                      "fill": "$--text-secondary",
+                      "content": "Привычек выполнено",
+                      "textAlign": "center",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 16,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Cmc5y",
+                  "name": "stat3",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 24,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$--border-subtle"
+                  },
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": 40,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "sTi66",
+                      "name": "stat3Val",
+                      "fill": "$--accent-indigo",
+                      "content": "92%",
+                      "fontFamily": "Bricolage Grotesque",
+                      "fontSize": 48,
+                      "fontWeight": "800"
+                    },
+                    {
+                      "type": "text",
+                      "id": "otfeO",
+                      "name": "stat3Label",
+                      "fill": "$--text-secondary",
+                      "content": "Пользователей остаются после 30 дней",
+                      "textAlign": "center",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 16,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "z9rgW",
+                  "name": "stat4",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 24,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$--border-subtle"
+                  },
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": 40,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "agbz7",
+                      "name": "stat4Val",
+                      "fill": "$--accent-orange",
+                      "content": "4.8★",
+                      "fontFamily": "Bricolage Grotesque",
+                      "fontSize": 48,
+                      "fontWeight": "800"
+                    },
+                    {
+                      "type": "text",
+                      "id": "kl1lJ",
+                      "name": "stat4Label",
+                      "fill": "$--text-secondary",
+                      "content": "Средняя оценка в App Store",
+                      "textAlign": "center",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 16,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "fLDwO",
+          "name": "Testimonials",
+          "width": "fill_container",
+          "fill": "$--bg-card",
+          "layout": "vertical",
+          "gap": 48,
+          "padding": 80,
+          "children": [
+            {
+              "type": "frame",
+              "id": "soJfI",
+              "name": "testHeader",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "MNixw",
+                  "name": "testTag",
+                  "fill": "#F0FDF4",
+                  "cornerRadius": 20,
+                  "padding": [
+                    6,
+                    16
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "XO5up",
+                      "name": "testTagText",
+                      "fill": "$--accent-green",
+                      "content": "ОТЗЫВЫ",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 13,
+                      "fontWeight": "600",
+                      "letterSpacing": 1
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "Urk9h",
+                  "name": "testTitle",
+                  "fill": "$--text-primary",
+                  "content": "Что говорят наши пользователи",
+                  "textAlign": "center",
+                  "fontFamily": "Bricolage Grotesque",
+                  "fontSize": 44,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "uDCaN",
+                  "name": "testSub",
+                  "fill": "$--text-secondary",
+                  "content": "Реальные истории людей, которые изменили свои привычки",
+                  "textAlign": "center",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 18
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "D9N3c",
+              "name": "testGrid",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "C5xkN",
+                  "name": "t1",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 24,
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "jiRfa",
+                      "name": "t1Stars",
+                      "fill": "$--accent-yellow",
+                      "content": "★★★★★",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 20,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "E5Jgv",
+                      "name": "t1Quote",
+                      "fill": "$--text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "HabitBoost полностью изменил мой подход к утренней рутине. За 3 месяца я выработал 5 новых привычек, которые теперь выполняю автоматически. Трекер стриков невероятно мотивирует!",
+                      "lineHeight": 1.6,
+                      "fontFamily": "DM Sans",
+                      "fontSize": 16
+                    },
+                    {
+                      "type": "frame",
+                      "id": "llvXD",
+                      "name": "t1Author",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "YRFqh",
+                          "name": "t1Avatar",
+                          "width": 48,
+                          "height": 48,
+                          "fill": {
+                            "type": "image",
+                            "enabled": true,
+                            "url": "./images/generated-1774262765377.png",
+                            "mode": "fill"
+                          },
+                          "cornerRadius": 24
+                        },
+                        {
+                          "type": "frame",
+                          "id": "2ajsc",
+                          "name": "t1Info",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "NHNyy",
+                              "name": "t1Name",
+                              "fill": "$--text-primary",
+                              "content": "Дмитрий Козлов",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 15,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "type": "text",
+                              "id": "qYZfx",
+                              "name": "t1Role",
+                              "fill": "$--text-secondary",
+                              "content": "Предприниматель",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 13
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Q7PWi",
+                  "name": "t2",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 24,
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "kmSMs",
+                      "name": "t2Stars",
+                      "fill": "$--accent-yellow",
+                      "content": "★★★★★",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 20,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "lcypm",
+                      "name": "t2Quote",
+                      "fill": "$--text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Функция SOS — это находка! В моменты стресса дыхательные упражнения реально помогают. А дневник рефлексии помог мне лучше понять свои паттерны поведения. Рекомендую всем!",
+                      "lineHeight": 1.6,
+                      "fontFamily": "DM Sans",
+                      "fontSize": 16
+                    },
+                    {
+                      "type": "frame",
+                      "id": "vubOz",
+                      "name": "t2Author",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "wRQFV",
+                          "name": "t2Avatar",
+                          "width": 48,
+                          "height": 48,
+                          "fill": {
+                            "type": "image",
+                            "enabled": true,
+                            "url": "./images/generated-1774262787426.png",
+                            "mode": "fill"
+                          },
+                          "cornerRadius": 24
+                        },
+                        {
+                          "type": "frame",
+                          "id": "9f1F5",
+                          "name": "t2Info",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "qMdBY",
+                              "name": "t2Name",
+                              "fill": "$--text-primary",
+                              "content": "Анна Петрова",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 15,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "type": "text",
+                              "id": "bRO2h",
+                              "name": "t2Role",
+                              "fill": "$--text-secondary",
+                              "content": "Дизайнер",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 13
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "r94tf",
+                  "name": "t3",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 24,
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "GHqiO",
+                      "name": "t3Stars",
+                      "fill": "$--accent-yellow",
+                      "content": "★★★★★",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 20,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "2gQpf",
+                      "name": "t3Quote",
+                      "fill": "$--text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Пользуюсь уже полгода. Система достижений и бейджей делает процесс формирования привычек настоящей игрой. Мой лучший стрик — 89 дней! Приложение стало частью моей жизни.",
+                      "lineHeight": 1.6,
+                      "fontFamily": "DM Sans",
+                      "fontSize": 16
+                    },
+                    {
+                      "type": "frame",
+                      "id": "kV5Bj",
+                      "name": "t3Author",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Krbak",
+                          "name": "t3Avatar",
+                          "width": 48,
+                          "height": 48,
+                          "fill": {
+                            "type": "image",
+                            "enabled": true,
+                            "url": "./images/generated-1774262805369.png",
+                            "mode": "fill"
+                          },
+                          "cornerRadius": 24
+                        },
+                        {
+                          "type": "frame",
+                          "id": "9A5fW",
+                          "name": "t3Info",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "P1t4t",
+                              "name": "t3Name",
+                              "fill": "$--text-primary",
+                              "content": "Максим Волков",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 15,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "type": "text",
+                              "id": "NeVZ9",
+                              "name": "t3Role",
+                              "fill": "$--text-secondary",
+                              "content": "Спортсмен",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 13
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "eWdKR",
+          "name": "CTA Section",
+          "width": "fill_container",
+          "fill": "$--accent-coral",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": 80,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "r7Faz",
+              "name": "ctaContent",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 24,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "R3f5I",
+                  "name": "ctaEmoji",
+                  "fill": "#FFFFFF",
+                  "content": "🚀",
+                  "fontFamily": "Inter",
+                  "fontSize": 48,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "WzFHi",
+                  "name": "ctaTitle",
+                  "fill": "#FFFFFF",
+                  "textGrowth": "fixed-width",
+                  "width": 800,
+                  "content": "Начните менять свою жизнь сегодня",
+                  "textAlign": "center",
+                  "fontFamily": "Bricolage Grotesque",
+                  "fontSize": 48,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "T7Rc1",
+                  "name": "ctaSub",
+                  "fill": "#FFFFFFDD",
+                  "textGrowth": "fixed-width",
+                  "width": 650,
+                  "content": "Скачайте HabitBoost бесплатно и присоединяйтесь к 50,000+ пользователей, которые уже формируют полезные привычки",
+                  "lineHeight": 1.5,
+                  "textAlign": "center",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 18
+                },
+                {
+                  "type": "frame",
+                  "id": "LLxZy",
+                  "name": "ctaButtons",
+                  "gap": 16,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "ivo1g",
+                      "name": "ctaAppStore",
+                      "fill": "#FFFFFF",
+                      "cornerRadius": 16,
+                      "gap": 10,
+                      "padding": [
+                        14,
+                        28
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "sAV75",
+                          "name": "ctaAppleIcon",
+                          "width": 22,
+                          "height": 22,
+                          "iconFontName": "apple",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--text-primary"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "F6zIs",
+                          "name": "ctaAppleText",
+                          "layout": "vertical",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "BS5x0",
+                              "name": "ctaAppleSub",
+                              "fill": "$--text-secondary",
+                              "content": "Загрузите в",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 11
+                            },
+                            {
+                              "type": "text",
+                              "id": "8KrIF",
+                              "name": "ctaAppleMain",
+                              "fill": "$--text-primary",
+                              "content": "App Store",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 17,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "eYOox",
+                      "name": "ctaGoogle",
+                      "fill": "#FFFFFF",
+                      "cornerRadius": 16,
+                      "gap": 10,
+                      "padding": [
+                        14,
+                        28
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "HEjQ0",
+                          "name": "ctaGoogleIcon",
+                          "width": 22,
+                          "height": 22,
+                          "iconFontName": "play",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--text-primary"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "hhw1P",
+                          "name": "ctaGoogleText",
+                          "layout": "vertical",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "iKsbO",
+                              "name": "ctaGoogleSub",
+                              "fill": "$--text-secondary",
+                              "content": "Доступно в",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 11
+                            },
+                            {
+                              "type": "text",
+                              "id": "GuyBR",
+                              "name": "ctaGoogleMain",
+                              "fill": "$--text-primary",
+                              "content": "Google Play",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 17,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "MC8H1",
+                  "name": "ctaTrust",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "Jt2yx",
+                      "name": "ctaTrustIcon",
+                      "width": 16,
+                      "height": 16,
+                      "iconFontName": "shield-check",
+                      "iconFontFamily": "lucide",
+                      "fill": "#FFFFFFAA"
+                    },
+                    {
+                      "type": "text",
+                      "id": "25XLi",
+                      "name": "ctaTrustText",
+                      "fill": "#FFFFFFAA",
+                      "content": "Бесплатно · Без рекламы · Ваши данные в безопасности",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "K2rLy",
+          "name": "Footer",
+          "width": "fill_container",
+          "fill": "#1A1A1A",
+          "layout": "vertical",
+          "gap": 48,
+          "padding": [
+            48,
+            80
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "8A89W",
+              "name": "footerTop",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "8ZiaL",
+                  "name": "footerBrand",
+                  "width": 300,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "uWnOK",
+                      "name": "footerLogo",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "UkNBV",
+                          "name": "footerLeaf",
+                          "width": 24,
+                          "height": 24,
+                          "iconFontName": "leaf",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--accent-green"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Sj8bI",
+                          "name": "footerLogoText",
+                          "fill": "#FFFFFF",
+                          "content": "HabitBoost",
+                          "fontFamily": "Bricolage Grotesque",
+                          "fontSize": 22,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "w5mVW",
+                      "name": "footerTagline",
+                      "fill": "#FFFFFF99",
+                      "textGrowth": "fixed-width",
+                      "width": 280,
+                      "content": "Создавай привычки, которые меняют жизнь. Трекер привычек с дневником, аналитикой и системой достижений.",
+                      "lineHeight": 1.6,
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    },
+                    {
+                      "type": "frame",
+                      "id": "4fqJh",
+                      "name": "footerSocials",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "6fpQO",
+                          "name": "fSoc1",
+                          "width": 36,
+                          "height": 36,
+                          "fill": "#FFFFFF15",
+                          "cornerRadius": 18,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon_font",
+                              "id": "yHWU2",
+                              "name": "fSoc1i",
+                              "width": 18,
+                              "height": 18,
+                              "iconFontName": "instagram",
+                              "iconFontFamily": "lucide",
+                              "fill": "#FFFFFF99"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "NIMBW",
+                          "name": "fSoc2",
+                          "width": 36,
+                          "height": 36,
+                          "fill": "#FFFFFF15",
+                          "cornerRadius": 18,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon_font",
+                              "id": "06aPX",
+                              "name": "fSoc2i",
+                              "width": 18,
+                              "height": 18,
+                              "iconFontName": "twitter",
+                              "iconFontFamily": "lucide",
+                              "fill": "#FFFFFF99"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "3Pwv9",
+                          "name": "fSoc3",
+                          "width": 36,
+                          "height": 36,
+                          "fill": "#FFFFFF15",
+                          "cornerRadius": 18,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon_font",
+                              "id": "o6GtW",
+                              "name": "fSoc3i",
+                              "width": 18,
+                              "height": 18,
+                              "iconFontName": "youtube",
+                              "iconFontFamily": "lucide",
+                              "fill": "#FFFFFF99"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "WAdAC",
+                  "name": "footerCol1",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "tlyDl",
+                      "name": "footerCol1Title",
+                      "fill": "#FFFFFF",
+                      "content": "Продукт",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "DR7Zr",
+                      "name": "fLink1",
+                      "fill": "#FFFFFF80",
+                      "content": "Возможности",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "3c61F",
+                      "name": "fLink2",
+                      "fill": "#FFFFFF80",
+                      "content": "Цены",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "A0iTs",
+                      "name": "fLink3",
+                      "fill": "#FFFFFF80",
+                      "content": "Обновления",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "tcP1e",
+                      "name": "fLink4",
+                      "fill": "#FFFFFF80",
+                      "content": "Бета-тест",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "dtobH",
+                  "name": "footerCol2",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "VFdNO",
+                      "name": "fCol2Title",
+                      "fill": "#FFFFFF",
+                      "content": "Компания",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Gol7F",
+                      "name": "fCol2Link1",
+                      "fill": "#FFFFFF80",
+                      "content": "О нас",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "j5mLF",
+                      "name": "fCol2Link2",
+                      "fill": "#FFFFFF80",
+                      "content": "Блог",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "opi1s",
+                      "name": "fCol2Link3",
+                      "fill": "#FFFFFF80",
+                      "content": "Карьера",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "GlExQ",
+                      "name": "fCol2Link4",
+                      "fill": "#FFFFFF80",
+                      "content": "Контакты",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "1KR9r",
+                  "name": "footerCol3",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "c8QjQ",
+                      "name": "fCol3Title",
+                      "fill": "#FFFFFF",
+                      "content": "Поддержка",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "OEIQZ",
+                      "name": "fCol3Link1",
+                      "fill": "#FFFFFF80",
+                      "content": "Помощь",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "YUV7b",
+                      "name": "fCol3Link2",
+                      "fill": "#FFFFFF80",
+                      "content": "FAQ",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "KvqH2",
+                      "name": "fCol3Link3",
+                      "fill": "#FFFFFF80",
+                      "content": "Обратная связь",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "ymll9",
+                      "name": "fCol3Link4",
+                      "fill": "#FFFFFF80",
+                      "content": "Сообщество",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Pwl1M",
+                  "name": "footerCol4",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "mEUM2",
+                      "name": "fCol4Title",
+                      "fill": "#FFFFFF",
+                      "content": "Юридическая информация",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "hd1oo",
+                      "name": "fCol4Link1",
+                      "fill": "#FFFFFF80",
+                      "content": "Политика конфиденциальности",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "kuQBH",
+                      "name": "fCol4Link2",
+                      "fill": "#FFFFFF80",
+                      "content": "Условия использования",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "Lr5QL",
+                      "name": "fCol4Link3",
+                      "fill": "#FFFFFF80",
+                      "content": "Cookie",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "nMTvZ",
+              "name": "footerDivider",
+              "width": "fill_container",
+              "height": 1,
+              "fill": "#FFFFFF15"
+            },
+            {
+              "type": "frame",
+              "id": "11RmC",
+              "name": "footerBottom",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "Ft5Pk",
+                  "name": "footerCopy",
+                  "fill": "#FFFFFF60",
+                  "content": "© 2026 HabitBoost. Все права защищены.",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 13
+                },
+                {
+                  "type": "frame",
+                  "id": "9RhRf",
+                  "name": "footerLang",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "zSOBH",
+                      "name": "footerLangIcon",
+                      "width": 14,
+                      "height": 14,
+                      "iconFontName": "globe",
+                      "iconFontFamily": "lucide",
+                      "fill": "#FFFFFF60"
+                    },
+                    {
+                      "type": "text",
+                      "id": "YnDgQ",
+                      "name": "footerLangText",
+                      "fill": "#FFFFFF60",
+                      "content": "Русский",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 13
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "TezSN",
+      "x": 1540,
+      "y": 1898,
+      "name": "Landing Page — Mobile",
+      "width": 375,
+      "fill": "#FFFFFF",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "pTz11",
+          "name": "Mobile Header",
+          "width": "fill_container",
+          "height": 64,
+          "padding": [
+            0,
+            20
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "TFwYG",
+              "name": "logoGroup",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "GqRXL",
+                  "name": "leafIcon",
+                  "width": 24,
+                  "height": 24,
+                  "iconFontName": "leaf",
+                  "iconFontFamily": "lucide",
+                  "fill": "#FF6B6B"
+                },
+                {
+                  "type": "text",
+                  "id": "M9Ik3",
+                  "name": "logoText",
+                  "fill": "$--text-primary",
+                  "content": "HabitBoost",
+                  "fontFamily": "Bricolage Grotesque",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "icon_font",
+              "id": "QDh7V",
+              "name": "menuIcon",
+              "width": 24,
+              "height": 24,
+              "iconFontName": "menu",
+              "iconFontFamily": "lucide",
+              "fill": "$--text-primary"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "LZqTi",
+          "name": "Mobile Hero",
+          "width": "fill_container",
+          "fill": "#FFFFFF",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            40,
+            20
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "wMdl2",
+              "name": "headline",
+              "fill": "$--text-primary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Создавай привычки, которые меняют жизнь",
+              "textAlign": "center",
+              "fontFamily": "Bricolage Grotesque",
+              "fontSize": 32,
+              "fontWeight": "800"
+            },
+            {
+              "type": "text",
+              "id": "TBUI4",
+              "name": "subtitle",
+              "fill": "$--text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Простое и красивое приложение для формирования полезных привычек. Отслеживайте прогресс, получайте напоминания и достигайте целей каждый день.",
+              "lineHeight": 1.5,
+              "textAlign": "center",
+              "fontFamily": "DM Sans",
+              "fontSize": 16,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "QfjYq",
+              "name": "btnGroup",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "cowwa",
+                  "name": "appStoreBtn",
+                  "width": "fill_container",
+                  "fill": "#1A1A1A",
+                  "cornerRadius": 30,
+                  "gap": 10,
+                  "padding": [
+                    14,
+                    28
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "wzXY2",
+                      "name": "appleIcon",
+                      "width": 20,
+                      "height": 20,
+                      "iconFontName": "apple",
+                      "iconFontFamily": "lucide",
+                      "fill": "#FFFFFF"
+                    },
+                    {
+                      "type": "text",
+                      "id": "nGpJU",
+                      "name": "appStoreText",
+                      "fill": "#FFFFFF",
+                      "content": "App Store",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 16,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "jYRq3",
+                  "name": "googleBtn",
+                  "width": "fill_container",
+                  "fill": "#1A1A1A",
+                  "cornerRadius": 30,
+                  "gap": 10,
+                  "padding": [
+                    14,
+                    28
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "XOGqj",
+                      "name": "playIcon",
+                      "width": 20,
+                      "height": 20,
+                      "iconFontName": "play",
+                      "iconFontFamily": "lucide",
+                      "fill": "#FFFFFF"
+                    },
+                    {
+                      "type": "text",
+                      "id": "6Ga9M",
+                      "name": "googleText",
+                      "fill": "#FFFFFF",
+                      "content": "Google Play",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 16,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "p2Fhu",
+              "name": "trustLine",
+              "fill": "$--text-tertiary",
+              "content": "50,000+ пользователей уже с нами",
+              "textAlign": "center",
+              "fontFamily": "DM Sans",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "5kPBa",
+              "name": "phoneMockup",
+              "width": 280,
+              "height": 560,
+              "fill": "$--bg-card",
+              "cornerRadius": 36,
+              "stroke": {
+                "align": "outside",
+                "thickness": 2,
+                "fill": "$--border-empty"
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "6MXps",
+                  "x": 15,
+                  "y": 20,
+                  "name": "phoneScreen",
+                  "width": 250,
+                  "height": 530,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "./images/REkoD.png",
+                    "mode": "fill"
+                  },
+                  "cornerRadius": 22
+                },
+                {
+                  "type": "rectangle",
+                  "cornerRadius": 13,
+                  "id": "AN0C0",
+                  "layoutPosition": "absolute",
+                  "x": 95,
+                  "y": 22,
+                  "name": "dynamicIsland",
+                  "fill": "$--text-primary",
+                  "width": 90,
+                  "height": 26
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "xOZHA",
+          "name": "Mobile Features",
+          "width": "fill_container",
+          "fill": "#F6F7F8",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            48,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "YNwst",
+              "name": "titleGroup",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "4Cjlg",
+                  "name": "featTitle",
+                  "fill": "$--text-primary",
+                  "content": "Всё для ваших привычек",
+                  "textAlign": "center",
+                  "fontFamily": "Bricolage Grotesque",
+                  "fontSize": 28,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "bbhBE",
+                  "name": "featSubtitle",
+                  "fill": "$--text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Инструменты, которые помогут вам стать лучшей версией себя",
+                  "lineHeight": 1.5,
+                  "textAlign": "center",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "WFiHx",
+              "name": "card1",
+              "width": "fill_container",
+              "fill": "$--bg-page",
+              "cornerRadius": 16,
+              "layout": "vertical",
+              "gap": 12,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "D20XW",
+                  "name": "circle1",
+                  "fill": "$--accent-coral",
+                  "width": 40,
+                  "height": 40
+                },
+                {
+                  "type": "text",
+                  "id": "lxJEO",
+                  "name": "title1",
+                  "fill": "$--text-primary",
+                  "content": "Трекер привычек",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 16,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "uDOZQ",
+                  "name": "desc1",
+                  "fill": "$--text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Отслеживайте ежедневные привычки и отмечайте выполненные задачи одним нажатием",
+                  "lineHeight": 1.5,
+                  "fontFamily": "DM Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "gI9lW",
+              "name": "card2",
+              "width": "fill_container",
+              "fill": "$--bg-page",
+              "cornerRadius": 16,
+              "layout": "vertical",
+              "gap": 12,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "Y2uga",
+                  "name": "circle2",
+                  "fill": "$--accent-indigo",
+                  "width": 40,
+                  "height": 40
+                },
+                {
+                  "type": "text",
+                  "id": "nOWOO",
+                  "name": "title2",
+                  "fill": "$--text-primary",
+                  "content": "Аналитика прогресса",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 16,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "a0ONG",
+                  "name": "desc2",
+                  "fill": "$--text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Наглядные графики и статистика покажут ваш путь к успеху",
+                  "lineHeight": 1.5,
+                  "fontFamily": "DM Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "1n6BS",
+              "name": "card3",
+              "width": "fill_container",
+              "fill": "$--bg-page",
+              "cornerRadius": 16,
+              "layout": "vertical",
+              "gap": 12,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "junbQ",
+                  "name": "circle3",
+                  "fill": "$--accent-green",
+                  "width": 40,
+                  "height": 40
+                },
+                {
+                  "type": "text",
+                  "id": "kuU4N",
+                  "name": "title3",
+                  "fill": "$--text-primary",
+                  "content": "Умные напоминания",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 16,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "lYGH2",
+                  "name": "desc3",
+                  "fill": "$--text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Настройте персональные уведомления, чтобы не пропустить ни одной привычки",
+                  "lineHeight": 1.5,
+                  "fontFamily": "DM Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "utYLO",
+              "name": "card4",
+              "width": "fill_container",
+              "fill": "$--bg-page",
+              "cornerRadius": 16,
+              "layout": "vertical",
+              "gap": 12,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "tFRIM",
+                  "name": "circle4",
+                  "fill": "$--accent-yellow",
+                  "width": 40,
+                  "height": 40
+                },
+                {
+                  "type": "text",
+                  "id": "wBD2h",
+                  "name": "title4",
+                  "fill": "$--text-primary",
+                  "content": "Дневник рефлексии",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 16,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "zzn3I",
+                  "name": "desc4",
+                  "fill": "$--text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Записывайте мысли и отслеживайте своё эмоциональное состояние каждый день",
+                  "lineHeight": 1.5,
+                  "fontFamily": "DM Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "EtyIl",
+              "name": "card5",
+              "width": "fill_container",
+              "fill": "$--bg-page",
+              "cornerRadius": 16,
+              "layout": "vertical",
+              "gap": 12,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "Au1za",
+                  "name": "circle5",
+                  "fill": "$--accent-coral",
+                  "width": 40,
+                  "height": 40
+                },
+                {
+                  "type": "text",
+                  "id": "2DCwY",
+                  "name": "title5",
+                  "fill": "$--text-primary",
+                  "content": "SOS поддержка",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 16,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "lKtl3",
+                  "name": "desc5",
+                  "fill": "$--text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Дыхательные упражнения и мотивационные цитаты в трудные моменты",
+                  "lineHeight": 1.5,
+                  "fontFamily": "DM Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "AVal8",
+              "name": "card6",
+              "width": "fill_container",
+              "fill": "$--bg-page",
+              "cornerRadius": 16,
+              "layout": "vertical",
+              "gap": 12,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "QnrOA",
+                  "name": "circle6",
+                  "fill": "$--accent-indigo",
+                  "width": 40,
+                  "height": 40
+                },
+                {
+                  "type": "text",
+                  "id": "a2nSY",
+                  "name": "title6",
+                  "fill": "$--text-primary",
+                  "content": "Достижения и бейджи",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 16,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "bRizx",
+                  "name": "desc6",
+                  "fill": "$--text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Система геймификации с наградами за регулярность и достижение целей",
+                  "lineHeight": 1.5,
+                  "fontFamily": "DM Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "xuzLt",
+          "name": "Mobile How It Works",
+          "width": "fill_container",
+          "fill": "#FFFFFF",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            48,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "rtKIA",
+              "name": "hiwTitleGroup",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "9GoDh",
+                  "name": "hiwTitle",
+                  "fill": "$--text-primary",
+                  "content": "Как это работает",
+                  "textAlign": "center",
+                  "fontFamily": "Bricolage Grotesque",
+                  "fontSize": 28,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "RFTKl",
+                  "name": "hiwSubtitle",
+                  "fill": "$--text-secondary",
+                  "content": "Три простых шага к лучшей жизни",
+                  "textAlign": "center",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "CxawE",
+              "name": "step1",
+              "width": "fill_container",
+              "fill": "$--bg-card",
+              "cornerRadius": 16,
+              "layout": "vertical",
+              "gap": 16,
+              "padding": 28,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "mO42G",
+                  "name": "num1",
+                  "opacity": 0.2,
+                  "fill": "$--accent-coral",
+                  "content": "01",
+                  "fontFamily": "Bricolage Grotesque",
+                  "fontSize": 48,
+                  "fontWeight": "800"
+                },
+                {
+                  "type": "text",
+                  "id": "3pLvb",
+                  "name": "stepTitle1",
+                  "fill": "$--text-primary",
+                  "content": "Выберите привычки",
+                  "textAlign": "center",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "EEKqw",
+                  "name": "stepDesc1",
+                  "fill": "$--text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Выберите из каталога готовых привычек или создайте свои собственные по категориям",
+                  "lineHeight": 1.5,
+                  "textAlign": "center",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "uMyGW",
+                  "name": "stepImg1",
+                  "width": "fill_container",
+                  "height": 140,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "./images/sqeZQ.png",
+                    "mode": "fill"
+                  },
+                  "cornerRadius": 12
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "4UxeN",
+              "name": "step2",
+              "width": "fill_container",
+              "fill": "$--bg-card",
+              "cornerRadius": 16,
+              "layout": "vertical",
+              "gap": 16,
+              "padding": 28,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "CdmkS",
+                  "name": "num2",
+                  "opacity": 0.2,
+                  "fill": "$--accent-green",
+                  "content": "02",
+                  "fontFamily": "Bricolage Grotesque",
+                  "fontSize": 48,
+                  "fontWeight": "800"
+                },
+                {
+                  "type": "text",
+                  "id": "o51ht",
+                  "name": "stepTitle2",
+                  "fill": "$--text-primary",
+                  "content": "Отмечайте прогресс",
+                  "textAlign": "center",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "gDpGx",
+                  "name": "stepDesc2",
+                  "fill": "$--text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Ежедневно отмечайте выполненные привычки и наблюдайте за своей серией",
+                  "lineHeight": 1.5,
+                  "textAlign": "center",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "47cIp",
+                  "name": "stepImg2",
+                  "width": "fill_container",
+                  "height": 140,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "./images/EegEJ.png",
+                    "mode": "fill"
+                  },
+                  "cornerRadius": 12
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "efJzW",
+              "name": "step3",
+              "width": "fill_container",
+              "fill": "$--bg-card",
+              "cornerRadius": 16,
+              "layout": "vertical",
+              "gap": 16,
+              "padding": 28,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "APi82",
+                  "name": "num3",
+                  "opacity": 0.2,
+                  "fill": "$--accent-indigo",
+                  "content": "03",
+                  "fontFamily": "Bricolage Grotesque",
+                  "fontSize": 48,
+                  "fontWeight": "800"
+                },
+                {
+                  "type": "text",
+                  "id": "L2FT1",
+                  "name": "stepTitle3",
+                  "fill": "$--text-primary",
+                  "content": "Достигайте целей",
+                  "textAlign": "center",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "R4M1a",
+                  "name": "stepDesc3",
+                  "fill": "$--text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Анализируйте статистику, получайте награды и становитесь лучше каждый день",
+                  "lineHeight": 1.5,
+                  "textAlign": "center",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "OUyNx",
+                  "name": "stepImg3",
+                  "width": "fill_container",
+                  "height": 140,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "./images/EFnvg.png",
+                    "mode": "fill"
+                  },
+                  "cornerRadius": 12
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "vJ8Dv",
+          "name": "Mobile Stats",
+          "width": "fill_container",
+          "fill": {
+            "type": "gradient",
+            "gradientType": "linear",
+            "enabled": true,
+            "rotation": 180,
+            "size": {
+              "height": 1
+            },
+            "colors": [
+              {
+                "color": "#FFF5F5",
+                "position": 0
+              },
+              {
+                "color": "#FFFFFF",
+                "position": 1
+              }
+            ]
+          },
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            48,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "Jldam",
+              "name": "statsHeaderM",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ASorn",
+                  "name": "statsTagM",
+                  "fill": "#FEF2F2",
+                  "cornerRadius": 20,
+                  "padding": [
+                    6,
+                    16
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ai5w1",
+                      "name": "statsTagTxt",
+                      "fill": "#FF6B6B",
+                      "content": "НАШИ РЕЗУЛЬТАТЫ",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 12,
+                      "fontWeight": "600",
+                      "letterSpacing": 1
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "H1rTA",
+                  "name": "statsTitleM",
+                  "fill": "#1A1A1A",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Цифры говорят сами за себя",
+                  "textAlign": "center",
+                  "fontFamily": "Bricolage Grotesque",
+                  "fontSize": 28,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "XRifm",
+                  "name": "statsSubM",
+                  "fill": "#6B7280",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Присоединяйтесь к сообществу людей, которые меняют свою жизнь каждый день",
+                  "lineHeight": 1.5,
+                  "textAlign": "center",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "tPxUV",
+              "name": "statsGridM",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "6l75k",
+                  "name": "statsRow1M",
+                  "width": "fill_container",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "SS9Bg",
+                      "name": "stat1M",
+                      "width": "fill_container",
+                      "fill": "#FFFFFF",
+                      "cornerRadius": 20,
+                      "stroke": {
+                        "thickness": 1,
+                        "fill": "#F3F4F6"
+                      },
+                      "layout": "vertical",
+                      "gap": 4,
+                      "padding": 24,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "ik8kT",
+                          "name": "st1ValM",
+                          "fill": "#FF6B6B",
+                          "content": "50,000+",
+                          "fontFamily": "Bricolage Grotesque",
+                          "fontSize": 32,
+                          "fontWeight": "800"
+                        },
+                        {
+                          "type": "text",
+                          "id": "SPD2q",
+                          "name": "st1LblM",
+                          "fill": "#6B7280",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Активных пользователей",
+                          "textAlign": "center",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "AoXtP",
+                      "name": "stat2M",
+                      "width": "fill_container",
+                      "fill": "#FFFFFF",
+                      "cornerRadius": 20,
+                      "stroke": {
+                        "thickness": 1,
+                        "fill": "#F3F4F6"
+                      },
+                      "layout": "vertical",
+                      "gap": 4,
+                      "padding": 24,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "u7Pmj",
+                          "name": "st2ValM",
+                          "fill": "#22C55E",
+                          "content": "2.5M+",
+                          "fontFamily": "Bricolage Grotesque",
+                          "fontSize": 32,
+                          "fontWeight": "800"
+                        },
+                        {
+                          "type": "text",
+                          "id": "gL0R3",
+                          "name": "st2LblM",
+                          "fill": "#6B7280",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Привычек выполнено",
+                          "textAlign": "center",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "iw5tX",
+                  "name": "statsRow2M",
+                  "width": "fill_container",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "u87Sm",
+                      "name": "stat3M",
+                      "width": "fill_container",
+                      "fill": "#FFFFFF",
+                      "cornerRadius": 20,
+                      "stroke": {
+                        "thickness": 1,
+                        "fill": "#F3F4F6"
+                      },
+                      "layout": "vertical",
+                      "gap": 4,
+                      "padding": 24,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "KCwxy",
+                          "name": "st3ValM",
+                          "fill": "#6366F1",
+                          "content": "92%",
+                          "fontFamily": "Bricolage Grotesque",
+                          "fontSize": 32,
+                          "fontWeight": "800"
+                        },
+                        {
+                          "type": "text",
+                          "id": "tRmDS",
+                          "name": "st3LblM",
+                          "fill": "#6B7280",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Остаются после 30 дней",
+                          "textAlign": "center",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "P8VLm",
+                      "name": "stat4M",
+                      "width": "fill_container",
+                      "fill": "#FFFFFF",
+                      "cornerRadius": 20,
+                      "stroke": {
+                        "thickness": 1,
+                        "fill": "#F3F4F6"
+                      },
+                      "layout": "vertical",
+                      "gap": 4,
+                      "padding": 24,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "jfxAt",
+                          "name": "st4ValM",
+                          "fill": "#D97706",
+                          "content": "4.8★",
+                          "fontFamily": "Bricolage Grotesque",
+                          "fontSize": 32,
+                          "fontWeight": "800"
+                        },
+                        {
+                          "type": "text",
+                          "id": "sXPeX",
+                          "name": "st4LblM",
+                          "fill": "#6B7280",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Средняя оценка в App Store",
+                          "textAlign": "center",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "1tbfy",
+          "name": "Mobile Testimonials",
+          "width": "fill_container",
+          "fill": "#F6F7F8",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            48,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "tBWhQ",
+              "name": "testHeaderM",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "8T7Ul",
+                  "name": "testTagM",
+                  "fill": "#F0FDF4",
+                  "cornerRadius": 20,
+                  "padding": [
+                    6,
+                    16
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "7ebDj",
+                      "name": "testTagTxtM",
+                      "fill": "#22C55E",
+                      "content": "ОТЗЫВЫ",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 12,
+                      "fontWeight": "600",
+                      "letterSpacing": 1
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "lCw3N",
+                  "name": "testTitleM",
+                  "fill": "#1A1A1A",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Что говорят наши пользователи",
+                  "textAlign": "center",
+                  "fontFamily": "Bricolage Grotesque",
+                  "fontSize": 28,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "QIORf",
+                  "name": "testSubM",
+                  "fill": "#6B7280",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Реальные истории людей, которые изменили свои привычки",
+                  "textAlign": "center",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "RRFLF",
+              "name": "testCardsM",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "LvLWY",
+                  "name": "t1M",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "xJGbR",
+                      "name": "t1StarsM",
+                      "fill": "#FCD34D",
+                      "content": "★★★★★",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 18,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "qG2GT",
+                      "name": "t1QuoteM",
+                      "fill": "#1A1A1A",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "HabitBoost полностью изменил мой подход к утренней рутине. За 3 месяца я выработал 5 новых привычек, которые теперь выполняю автоматически.",
+                      "lineHeight": 1.6,
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "YMafW",
+                      "name": "t1AuthorM",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "ZuQFr",
+                          "name": "t1AvatarM",
+                          "width": 40,
+                          "height": 40,
+                          "fill": {
+                            "type": "image",
+                            "enabled": true,
+                            "url": "./images/generated-1774262765377.png",
+                            "mode": "fill"
+                          },
+                          "cornerRadius": 20
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Pgz26",
+                          "name": "t1InfoM",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "oSqcR",
+                              "name": "t1NameM",
+                              "fill": "#1A1A1A",
+                              "content": "Алексей К.",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 14,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "type": "text",
+                              "id": "GzH5o",
+                              "name": "t1RoleM",
+                              "fill": "#9CA3AF",
+                              "content": "Использует 3 месяца",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "kex5W",
+                  "name": "t2M",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "NEIMk",
+                      "name": "t2StarsM",
+                      "fill": "#FCD34D",
+                      "content": "★★★★★",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 18,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "hRwSo",
+                      "name": "t2QuoteM",
+                      "fill": "#1A1A1A",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Функция SOS — это находка! В моменты стресса дыхательные упражнения реально помогают. А дневник рефлексии помог мне лучше понять свои паттерны поведения.",
+                      "lineHeight": 1.6,
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Tl0dK",
+                      "name": "t2AuthorM",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "druMJ",
+                          "name": "t2AvatarM",
+                          "width": 40,
+                          "height": 40,
+                          "fill": {
+                            "type": "image",
+                            "enabled": true,
+                            "url": "./images/generated-1774262787426.png",
+                            "mode": "fill"
+                          },
+                          "cornerRadius": 20
+                        },
+                        {
+                          "type": "frame",
+                          "id": "CyV17",
+                          "name": "t2InfoM",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "knskV",
+                              "name": "t2NameM",
+                              "fill": "#1A1A1A",
+                              "content": "Мария С.",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 14,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "type": "text",
+                              "id": "RqWb0",
+                              "name": "t2RoleM",
+                              "fill": "#9CA3AF",
+                              "content": "Использует 6 месяцев",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "EvSpc",
+                  "name": "t3M",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "K2Vaf",
+                      "name": "t3StarsM",
+                      "fill": "#FCD34D",
+                      "content": "★★★★★",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 18,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "AL0nV",
+                      "name": "t3QuoteM",
+                      "fill": "#1A1A1A",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Пользуюсь уже полгода. Система достижений и бейджей делает процесс формирования привычек настоящей игрой. Мой лучший стрик — 89 дней!",
+                      "lineHeight": 1.6,
+                      "fontFamily": "DM Sans",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "OE5UW",
+                      "name": "t3AuthorM",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "okfbe",
+                          "name": "t3AvatarM",
+                          "width": 40,
+                          "height": 40,
+                          "fill": {
+                            "type": "image",
+                            "enabled": true,
+                            "url": "./images/generated-1774262805369.png",
+                            "mode": "fill"
+                          },
+                          "cornerRadius": 20
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Xs6Mv",
+                          "name": "t3InfoM",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "oAL7E",
+                              "name": "t3NameM",
+                              "fill": "#1A1A1A",
+                              "content": "Дмитрий В.",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 14,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "type": "text",
+                              "id": "1peha",
+                              "name": "t3RoleM",
+                              "fill": "#9CA3AF",
+                              "content": "Использует 6 месяцев",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "tQRU7",
+          "name": "Mobile CTA",
+          "width": "fill_container",
+          "fill": "#FF6B6B",
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            48,
+            20
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "SIQfB",
+              "name": "ctaEmojiM",
+              "fill": "#FFFFFF",
+              "content": "🚀",
+              "fontFamily": "Inter",
+              "fontSize": 36,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "0pgla",
+              "name": "ctaTitleM",
+              "fill": "#FFFFFF",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Начните менять свою жизнь сегодня",
+              "textAlign": "center",
+              "fontFamily": "Bricolage Grotesque",
+              "fontSize": 28,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "xkfdq",
+              "name": "ctaSubM",
+              "fill": "#FFFFFFDD",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Скачайте HabitBoost бесплатно и присоединяйтесь к 50,000+ пользователей",
+              "lineHeight": 1.5,
+              "textAlign": "center",
+              "fontFamily": "DM Sans",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "bHcye",
+              "name": "ctaBtnsM",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ywe9h",
+                  "name": "ctaAppM",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 14,
+                  "gap": 10,
+                  "padding": [
+                    14,
+                    24
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "JDcQj",
+                      "name": "ctaAppIconM",
+                      "width": 20,
+                      "height": 20,
+                      "iconFontName": "apple",
+                      "iconFontFamily": "lucide",
+                      "fill": "#1A1A1A"
+                    },
+                    {
+                      "type": "text",
+                      "id": "I1sjX",
+                      "name": "ctaAppTxtM",
+                      "fill": "#1A1A1A",
+                      "content": "App Store",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 15,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "PjMI1",
+                  "name": "ctaGglM",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 14,
+                  "gap": 10,
+                  "padding": [
+                    14,
+                    24
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "jzbNT",
+                      "name": "ctaGglIconM",
+                      "width": 20,
+                      "height": 20,
+                      "iconFontName": "play",
+                      "iconFontFamily": "lucide",
+                      "fill": "#1A1A1A"
+                    },
+                    {
+                      "type": "text",
+                      "id": "egBl9",
+                      "name": "ctaGglTxtM",
+                      "fill": "#1A1A1A",
+                      "content": "Google Play",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 15,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "hbqJ0",
+              "name": "ctaTrustM",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "rRk7N",
+                  "name": "ctaTrustIconM",
+                  "width": 14,
+                  "height": 14,
+                  "iconFontName": "shield-check",
+                  "iconFontFamily": "lucide",
+                  "fill": "#FFFFFFAA"
+                },
+                {
+                  "type": "text",
+                  "id": "yPcLT",
+                  "name": "ctaTrustTxtM",
+                  "fill": "#FFFFFFAA",
+                  "content": "Бесплатно · Без рекламы · Безопасно",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "2UzmV",
+          "name": "Mobile Footer",
+          "width": "fill_container",
+          "fill": "#1A1A1A",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            40,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "7V3rA",
+              "name": "fBrandM",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "4kdAa",
+                  "name": "fLogoM",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "bymOs",
+                      "name": "fLeafM",
+                      "width": 22,
+                      "height": 22,
+                      "iconFontName": "leaf",
+                      "iconFontFamily": "lucide",
+                      "fill": "#22C55E"
+                    },
+                    {
+                      "type": "text",
+                      "id": "uoYWP",
+                      "name": "fLogoTxtM",
+                      "fill": "#FFFFFF",
+                      "content": "HabitBoost",
+                      "fontFamily": "Bricolage Grotesque",
+                      "fontSize": 20,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "tc8ww",
+                  "name": "fTaglineM",
+                  "fill": "#FFFFFF99",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Создавай привычки, которые меняют жизнь. Трекер привычек с дневником, аналитикой и системой достижений.",
+                  "lineHeight": 1.6,
+                  "fontFamily": "DM Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "mDqt5",
+                  "name": "fSocialsM",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "sw7yV",
+                      "name": "fSoc1M",
+                      "width": 36,
+                      "height": 36,
+                      "fill": "#FFFFFF15",
+                      "cornerRadius": 18,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "sDxOD",
+                          "name": "fSoc1IconM",
+                          "width": 16,
+                          "height": 16,
+                          "iconFontName": "instagram",
+                          "iconFontFamily": "lucide",
+                          "fill": "#FFFFFF80"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "AOB6U",
+                      "name": "fSoc2M",
+                      "width": 36,
+                      "height": 36,
+                      "fill": "#FFFFFF15",
+                      "cornerRadius": 18,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "a7AeA",
+                          "name": "fSoc2IconM",
+                          "width": 16,
+                          "height": 16,
+                          "iconFontName": "twitter",
+                          "iconFontFamily": "lucide",
+                          "fill": "#FFFFFF80"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "q8LzE",
+                      "name": "fSoc3M",
+                      "width": 36,
+                      "height": 36,
+                      "fill": "#FFFFFF15",
+                      "cornerRadius": 18,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "JGyT2",
+                          "name": "fSoc3IconM",
+                          "width": 16,
+                          "height": 16,
+                          "iconFontName": "send",
+                          "iconFontFamily": "lucide",
+                          "fill": "#FFFFFF80"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "U9MwI",
+              "name": "fLinksM",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "D33Y1",
+                  "name": "fLinksRow1",
+                  "width": "fill_container",
+                  "gap": 20,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "FCWCP",
+                      "name": "fCol1M",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "DRioN",
+                          "name": "fCol1TitleM",
+                          "fill": "#FFFFFF",
+                          "content": "Продукт",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "sWh5Z",
+                          "name": "fCol1L1M",
+                          "fill": "#FFFFFF80",
+                          "content": "Возможности",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "SwmrM",
+                          "name": "fCol1L2M",
+                          "fill": "#FFFFFF80",
+                          "content": "Цены",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "ZyPlF",
+                          "name": "fCol1L3M",
+                          "fill": "#FFFFFF80",
+                          "content": "Обновления",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "2S93A",
+                      "name": "fCol2M",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "boiJS",
+                          "name": "fCol2TitleM",
+                          "fill": "#FFFFFF",
+                          "content": "Компания",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "NPcR1",
+                          "name": "fCol2L1M",
+                          "fill": "#FFFFFF80",
+                          "content": "О нас",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "GHCxb",
+                          "name": "fCol2L2M",
+                          "fill": "#FFFFFF80",
+                          "content": "Блог",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Euwyo",
+                          "name": "fCol2L3M",
+                          "fill": "#FFFFFF80",
+                          "content": "Контакты",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "R53I6",
+                  "name": "fLinksRow2",
+                  "width": "fill_container",
+                  "gap": 20,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "biQIQ",
+                      "name": "fCol3M",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "3oNsH",
+                          "name": "fCol3TitleM",
+                          "fill": "#FFFFFF",
+                          "content": "Поддержка",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "0FqRM",
+                          "name": "fCol3L1M",
+                          "fill": "#FFFFFF80",
+                          "content": "Помощь",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "U9kmr",
+                          "name": "fCol3L2M",
+                          "fill": "#FFFFFF80",
+                          "content": "FAQ",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "jM3QU",
+                          "name": "fCol3L3M",
+                          "fill": "#FFFFFF80",
+                          "content": "Обратная связь",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "GHP9r",
+                      "name": "fCol4M",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "FthiI",
+                          "name": "fCol4TitleM",
+                          "fill": "#FFFFFF",
+                          "content": "Юридическое",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Yxsew",
+                          "name": "fCol4L1M",
+                          "fill": "#FFFFFF80",
+                          "content": "Конфиденциальность",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "w97IK",
+                          "name": "fCol4L2M",
+                          "fill": "#FFFFFF80",
+                          "content": "Условия",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Sf48H",
+                          "name": "fCol4L3M",
+                          "fill": "#FFFFFF80",
+                          "content": "Cookie",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "oaDnG",
+              "name": "fDividerM",
+              "width": "fill_container",
+              "height": 1,
+              "fill": "#FFFFFF15"
+            },
+            {
+              "type": "frame",
+              "id": "23V6b",
+              "name": "fBottomM",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "JcRjk",
+                  "name": "fCopyM",
+                  "fill": "#FFFFFF60",
+                  "content": "© 2026 HabitBoost. Все права защищены.",
+                  "textAlign": "center",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "wJEb6",
+                  "name": "fLangM",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "Ri6SP",
+                      "name": "fLangIconM",
+                      "width": 13,
+                      "height": 13,
+                      "iconFontName": "globe",
+                      "iconFontFamily": "lucide",
+                      "fill": "#FFFFFF60"
+                    },
+                    {
+                      "type": "text",
+                      "id": "naACD",
+                      "name": "fLangTxtM",
+                      "fill": "#FFFFFF60",
+                      "content": "Русский",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "TmO2I",
+      "x": -267,
+      "y": 357,
+      "name": "leafIcon",
+      "width": 80,
+      "height": 80,
+      "fill": "$--habit-green",
+      "cornerRadius": 40,
+      "layout": "vertical",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "icon_font",
+          "id": "uNNSd",
+          "name": "leafInner",
+          "width": 40,
+          "height": 40,
+          "iconFontName": "leaf",
+          "iconFontFamily": "lucide",
+          "fill": "#FFFFFF"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "mF0es",
+      "x": -267,
+      "y": 357,
+      "name": "leafIcon",
+      "width": 80,
+      "height": 80,
+      "fill": "$--habit-green",
+      "cornerRadius": 40,
+      "layout": "vertical",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "icon_font",
+          "id": "ZaXYd",
+          "name": "leafInner",
+          "width": 40,
+          "height": 40,
+          "iconFontName": "leaf",
+          "iconFontFamily": "lucide",
+          "fill": "#FFFFFF"
+        }
+      ]
+    },
+    {
+      "type": "icon_font",
+      "id": "Qeaag",
+      "x": -267,
+      "y": 476,
+      "name": "leafIcon",
+      "width": 80,
+      "height": 80,
+      "iconFontName": "leaf",
+      "iconFontFamily": "lucide",
+      "fill": "$--accent-green"
     }
   ],
   "variables": {
