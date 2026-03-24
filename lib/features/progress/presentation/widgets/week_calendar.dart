@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/progress/domain/entities/progress_stats.dart';
 
 class WeekCalendar extends StatelessWidget {
@@ -23,6 +24,7 @@ class WeekCalendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     final monday =
@@ -31,7 +33,7 @@ class WeekCalendar extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: AppColors.bgCard,
+        color: colors.bgCard,
         borderRadius:
             BorderRadius.circular(AppDimensions.radiusCard),
       ),
@@ -63,23 +65,23 @@ class WeekCalendar extends StatelessWidget {
           } else if (partial) {
             circleColor =
                 AppColors.accentGreen.withValues(alpha: 0.3);
-            textColor = AppColors.textPrimary;
+            textColor = colors.textPrimary;
           } else if (isToday) {
             circleColor = AppColors.accentCoral;
             textColor = Colors.white;
           } else {
             circleColor = Colors.transparent;
-            textColor = AppColors.textPrimary;
+            textColor = colors.textPrimary;
           }
 
           return Column(
             children: [
               Text(
                 _dayLabels[i],
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.textTertiary,
+                  color: colors.textTertiary,
                 ),
               ),
               const SizedBox(height: 8),

@@ -13,6 +13,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     on<OnboardingCheckRequested>(_onCheck);
     on<OnboardingPageChanged>(_onPageChanged);
     on<OnboardingGoalToggled>(_onGoalToggled);
+    on<OnboardingGoalsUpdated>(_onGoalsUpdated);
     on<OnboardingCompleted>(_onCompleted);
   }
 
@@ -22,7 +23,8 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     OnboardingCheckRequested event,
     Emitter<OnboardingState> emit,
   ) async {
-    final completed = await _repository.isOnboardingCompleted();
+    final completed =
+        await _repository.isOnboardingCompleted();
     final goals = await _repository.getGoals();
     emit(
       state.copyWith(
@@ -44,13 +46,22 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     OnboardingGoalToggled event,
     Emitter<OnboardingState> emit,
   ) {
-    final goals = List<GoalCategory>.from(state.selectedGoals);
+    final goals =
+        List<GoalCategory>.from(state.selectedGoals);
     if (goals.contains(event.goal)) {
       goals.remove(event.goal);
     } else {
       goals.add(event.goal);
     }
     emit(state.copyWith(selectedGoals: goals));
+  }
+
+  Future<void> _onGoalsUpdated(
+    OnboardingGoalsUpdated event,
+    Emitter<OnboardingState> emit,
+  ) async {
+    await _repository.saveGoals(event.goals);
+    emit(state.copyWith(selectedGoals: event.goals));
   }
 
   Future<void> _onCompleted(

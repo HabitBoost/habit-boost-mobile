@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/journal/domain/entities/journal_entry.dart';
 
 class MoodSelector extends StatelessWidget {
@@ -14,6 +15,7 @@ class MoodSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     return Row(
       children: Mood.values.map((mood) {
         final isSelected = mood == selected;
@@ -37,7 +39,7 @@ class MoodSelector extends StatelessWidget {
                 border: Border.all(
                   color: isSelected
                       ? AppColors.accentCoral
-                      : AppColors.borderSubtle,
+                      : colors.borderSubtle,
                   width: isSelected ? 2 : 1,
                 ),
               ),
@@ -46,7 +48,7 @@ class MoodSelector extends StatelessWidget {
                 size: 28,
                 color: isSelected
                     ? AppColors.accentCoral
-                    : AppColors.textTertiary,
+                    : colors.textTertiary,
               ),
             ),
           ),

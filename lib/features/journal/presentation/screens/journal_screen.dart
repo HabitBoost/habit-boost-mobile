@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:habit_boost/app/router/routes.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:habit_boost/features/journal/presentation/bloc/journal_bloc.dart';
 import 'package:habit_boost/features/journal/presentation/widgets/journal_card.dart';
@@ -115,6 +116,7 @@ class _JournalScreenState extends State<JournalScreen> {
   }
 
   Widget _buildBody(JournalState state) {
+    final colors = AppColorsTheme.of(context);
     if (state.status == JournalStatus.loading) {
       return const Center(
         child: CircularProgressIndicator(),
@@ -126,10 +128,10 @@ class _JournalScreenState extends State<JournalScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(
+            Icon(
               Icons.book_outlined,
               size: 64,
-              color: AppColors.textDisabled,
+              color: colors.textDisabled,
             ),
             const SizedBox(height: 16),
             Text(
@@ -142,7 +144,7 @@ class _JournalScreenState extends State<JournalScreen> {
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium
-                  ?.copyWith(color: AppColors.textSecondary),
+                  ?.copyWith(color: colors.textSecondary),
             ),
           ],
         ),

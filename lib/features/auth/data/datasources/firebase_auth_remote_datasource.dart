@@ -72,18 +72,7 @@ class FirebaseAuthRemoteDataSource implements AuthRemoteDataSource {
     try {
       final doc = await _usersCol.doc(user.uid).get();
       if (doc.exists) {
-        final data = doc.data()!;
-        return UserModel(
-          id: user.uid,
-          email: user.email ?? '',
-          name: data['name'] as String? ?? user.displayName ?? '',
-          goals: (data['goals'] as List<dynamic>?)
-                  ?.map((e) => e as String)
-                  .toList() ??
-              const [],
-          onboardingCompleted:
-              data['onboardingCompleted'] as bool? ?? false,
-        );
+        return _userFromDoc(user, doc.data()!);
       }
 
       return UserModel(
@@ -92,7 +81,6 @@ class FirebaseAuthRemoteDataSource implements AuthRemoteDataSource {
         name: user.displayName ?? '',
       );
     } on FirebaseException {
-      // Offline fallback — return basic user info from FirebaseAuth cache
       return UserModel(
         id: user.uid,
         email: user.email ?? '',
@@ -110,23 +98,14 @@ class FirebaseAuthRemoteDataSource implements AuthRemoteDataSource {
     }
   }
 
-  Future<UserModel> _userFromCredential(UserCredential credential) async {
+  Future<UserModel> _userFromCredential(
+    UserCredential credential,
+  ) async {
     final user = credential.user!;
     try {
       final doc = await _usersCol.doc(user.uid).get();
       if (doc.exists) {
-        final data = doc.data()!;
-        return UserModel(
-          id: user.uid,
-          email: user.email ?? '',
-          name: data['name'] as String? ?? user.displayName ?? '',
-          goals: (data['goals'] as List<dynamic>?)
-                  ?.map((e) => e as String)
-                  .toList() ??
-              const [],
-          onboardingCompleted:
-              data['onboardingCompleted'] as bool? ?? false,
-        );
+        return _userFromDoc(user, doc.data()!);
       }
     } on FirebaseException {
       // Firestore unavailable, use auth data only
@@ -135,6 +114,27 @@ class FirebaseAuthRemoteDataSource implements AuthRemoteDataSource {
       id: user.uid,
       email: user.email ?? '',
       name: user.displayName ?? '',
+    );
+  }
+
+  UserModel _userFromDoc(
+    User user,
+    Map<String, dynamic> data,
+  ) {
+    final createdAtTs = data['createdAt'] as Timestamp?;
+    return UserModel(
+      id: user.uid,
+      email: user.email ?? '',
+      name: data['name'] as String? ??
+          user.displayName ??
+          '',
+      goals: (data['goals'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      onboardingCompleted:
+          data['onboardingCompleted'] as bool? ?? false,
+      createdAt: createdAtTs?.toDate(),
     );
   }
 

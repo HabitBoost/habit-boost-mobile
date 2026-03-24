@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:habit_boost/app/router/routes.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/core/utils/validators.dart';
 import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:habit_boost/features/auth/presentation/widgets/auth_field.dart';
@@ -57,13 +58,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     return Scaffold(
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthError) {
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
-              ..showSnackBar(SnackBar(content: Text(state.message)));
+              ..showSnackBar(
+                SnackBar(content: Text(state.message)),
+              );
           } else if (state is Authenticated) {
             context.go(Routes.onboarding);
           }
@@ -83,29 +87,40 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     style: Theme.of(context)
                         .textTheme
                         .headlineLarge
-                        ?.copyWith(color: AppColors.textPrimary),
+                        ?.copyWith(
+                          color: colors.textPrimary,
+                        ),
                   ),
-                  const SizedBox(height: AppDimensions.paddingL),
+                  const SizedBox(
+                    height: AppDimensions.paddingL,
+                  ),
                   AuthField(
                     label: 'Имя',
                     hint: 'Ваше имя',
                     controller: _nameController,
-                    validator: (v) => Validators.required(v, 'Имя'),
+                    validator: (v) =>
+                        Validators.required(v, 'Имя'),
                     textInputAction: TextInputAction.next,
                   ),
-                  const SizedBox(height: AppDimensions.paddingM),
+                  const SizedBox(
+                    height: AppDimensions.paddingM,
+                  ),
                   AuthField(
                     label: 'Email',
                     hint: 'example@email.com',
                     controller: _emailController,
                     validator: Validators.email,
-                    keyboardType: TextInputType.emailAddress,
+                    keyboardType:
+                        TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
                   ),
-                  const SizedBox(height: AppDimensions.paddingM),
+                  const SizedBox(
+                    height: AppDimensions.paddingM,
+                  ),
                   AuthField(
                     label: 'Пароль',
-                    hint: '••••••••',
+                    hint: '\u2022\u2022\u2022\u2022'
+                        '\u2022\u2022\u2022\u2022',
                     controller: _passwordController,
                     validator: Validators.password,
                     obscureText: _obscurePassword,
@@ -115,19 +130,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         _obscurePassword
                             ? Icons.visibility_off_outlined
                             : Icons.visibility_outlined,
-                        color: AppColors.textTertiary,
+                        color: colors.textTertiary,
                         size: 20,
                       ),
-                      onPressed: () =>
-                          setState(() => _obscurePassword = !_obscurePassword),
+                      onPressed: () => setState(
+                        () => _obscurePassword =
+                            !_obscurePassword,
+                      ),
                     ),
                   ),
-                  const SizedBox(height: AppDimensions.paddingM),
+                  const SizedBox(
+                    height: AppDimensions.paddingM,
+                  ),
                   AuthField(
                     label: 'Подтвердите пароль',
-                    hint: '••••••••',
+                    hint: '\u2022\u2022\u2022\u2022'
+                        '\u2022\u2022\u2022\u2022',
                     controller: _confirmPasswordController,
-                    validator: (v) => Validators.confirmPassword(
+                    validator: (v) =>
+                        Validators.confirmPassword(
                       v,
                       _passwordController.text,
                     ),
@@ -139,16 +160,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         _obscureConfirm
                             ? Icons.visibility_off_outlined
                             : Icons.visibility_outlined,
-                        color: AppColors.textTertiary,
+                        color: colors.textTertiary,
                         size: 20,
                       ),
-                      onPressed: () =>
-                          setState(() => _obscureConfirm = !_obscureConfirm),
+                      onPressed: () => setState(
+                        () => _obscureConfirm =
+                            !_obscureConfirm,
+                      ),
                     ),
                   ),
-                  const SizedBox(height: AppDimensions.paddingL),
-                  _buildTermsCheckbox(),
-                  const SizedBox(height: AppDimensions.paddingL),
+                  const SizedBox(
+                    height: AppDimensions.paddingL,
+                  ),
+                  _buildTermsCheckbox(colors),
+                  const SizedBox(
+                    height: AppDimensions.paddingL,
+                  ),
                   BlocBuilder<AuthBloc, AuthState>(
                     builder: (context, state) {
                       final isLoading = state is AuthLoading;
@@ -156,18 +183,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         width: double.infinity,
                         height: 52,
                         child: FilledButton(
-                          onPressed: isLoading ? null : _onRegister,
+                          onPressed: isLoading
+                              ? null
+                              : _onRegister,
                           style: FilledButton.styleFrom(
-                            backgroundColor: AppColors.primary,
+                            backgroundColor:
+                                AppColors.primary,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius:
+                                  BorderRadius.circular(20),
                             ),
                           ),
                           child: isLoading
                               ? const SizedBox(
                                   height: 20,
                                   width: 20,
-                                  child: CircularProgressIndicator(
+                                  child:
+                                      CircularProgressIndicator(
                                     strokeWidth: 2,
                                     color: Colors.white,
                                   ),
@@ -176,7 +208,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   'Зарегистрироваться',
                                   style: TextStyle(
                                     fontSize: 16,
-                                    fontWeight: FontWeight.w600,
+                                    fontWeight:
+                                        FontWeight.w600,
                                     color: Colors.white,
                                   ),
                                 ),
@@ -184,16 +217,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       );
                     },
                   ),
-                  const SizedBox(height: AppDimensions.paddingM),
+                  const SizedBox(
+                    height: AppDimensions.paddingM,
+                  ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment:
+                        MainAxisAlignment.center,
                     children: [
                       Text(
                         'Уже есть аккаунт? ',
                         style: Theme.of(context)
                             .textTheme
                             .bodyMedium
-                            ?.copyWith(color: AppColors.textSecondary),
+                            ?.copyWith(
+                              color: colors.textSecondary,
+                            ),
                       ),
                       GestureDetector(
                         onTap: () => context.pop(),
@@ -203,7 +241,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               .textTheme
                               .bodyMedium
                               ?.copyWith(
-                                color: AppColors.accentCoral,
+                                color:
+                                    AppColors.accentCoral,
                                 fontWeight: FontWeight.w600,
                               ),
                         ),
@@ -219,23 +258,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  Widget _buildTermsCheckbox() {
+  Widget _buildTermsCheckbox(AppColorsTheme colors) {
     return GestureDetector(
-      onTap: () => setState(() => _agreedToTerms = !_agreedToTerms),
+      onTap: () =>
+          setState(() => _agreedToTerms = !_agreedToTerms),
       child: Row(
         children: [
           Container(
             width: 22,
             height: 22,
             decoration: BoxDecoration(
-              color: _agreedToTerms ? AppColors.primary : Colors.transparent,
+              color: _agreedToTerms
+                  ? AppColors.primary
+                  : Colors.transparent,
               borderRadius: BorderRadius.circular(6),
               border: _agreedToTerms
                   ? null
-                  : Border.all(color: AppColors.borderEmpty, width: 2),
+                  : Border.all(
+                      color: colors.borderEmpty,
+                      width: 2,
+                    ),
             ),
             child: _agreedToTerms
-                ? const Icon(Icons.check, color: Colors.white, size: 14)
+                ? const Icon(
+                    Icons.check,
+                    color: Colors.white,
+                    size: 14,
+                  )
                 : null,
           ),
           const SizedBox(width: 10),
@@ -245,7 +294,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               style: Theme.of(context)
                   .textTheme
                   .labelMedium
-                  ?.copyWith(color: AppColors.textSecondary),
+                  ?.copyWith(
+                    color: colors.textSecondary,
+                  ),
             ),
           ),
         ],

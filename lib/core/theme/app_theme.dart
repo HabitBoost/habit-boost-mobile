@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 
 abstract class AppTheme {
   static const _fontHeading = 'BricolageGrotesque';
@@ -14,19 +15,46 @@ abstract class AppTheme {
       error: AppColors.accentCoral,
     );
 
-    return _buildTheme(colorScheme);
+    return _buildTheme(
+      colorScheme: colorScheme,
+      bgPage: AppColors.bgPage,
+      bgCard: AppColors.bgCard,
+      textPrimary: AppColors.textPrimary,
+      textSecondary: AppColors.textSecondary,
+      borderSubtle: AppColors.borderSubtle,
+      colorsTheme: AppColorsTheme.light,
+    );
   }
 
   static ThemeData dark() {
     final colorScheme = ColorScheme.fromSeed(
       seedColor: AppColors.primary,
       brightness: Brightness.dark,
+      surface: AppColors.darkBgPage,
+      onSurface: AppColors.darkTextPrimary,
+      error: AppColors.accentCoral,
     );
 
-    return _buildTheme(colorScheme);
+    return _buildTheme(
+      colorScheme: colorScheme,
+      bgPage: AppColors.darkBgPage,
+      bgCard: AppColors.darkBgCard,
+      textPrimary: AppColors.darkTextPrimary,
+      textSecondary: AppColors.darkTextSecondary,
+      borderSubtle: AppColors.darkBorderSubtle,
+      colorsTheme: AppColorsTheme.dark,
+    );
   }
 
-  static ThemeData _buildTheme(ColorScheme colorScheme) {
+  static ThemeData _buildTheme({
+    required ColorScheme colorScheme,
+    required Color bgPage,
+    required Color bgCard,
+    required Color textPrimary,
+    required Color textSecondary,
+    required Color borderSubtle,
+    required AppColorsTheme colorsTheme,
+  }) {
     final textTheme = TextTheme(
       displayLarge: const TextStyle(
         fontFamily: _fontHeading,
@@ -52,20 +80,20 @@ abstract class AppTheme {
         fontFamily: _fontBody,
         fontSize: 16,
         fontWeight: FontWeight.w600,
-        color: colorScheme.onSurface,
+        color: textPrimary,
       ),
       bodyLarge: TextStyle(
         fontFamily: _fontBody,
         fontSize: 15,
         fontWeight: FontWeight.w400,
         height: 1.5,
-        color: colorScheme.onSurface,
+        color: textPrimary,
       ),
       bodyMedium: TextStyle(
         fontFamily: _fontBody,
         fontSize: 14,
         fontWeight: FontWeight.w400,
-        color: colorScheme.onSurface,
+        color: textPrimary,
       ),
       labelLarge: const TextStyle(
         fontFamily: _fontBody,
@@ -91,9 +119,11 @@ abstract class AppTheme {
       textTheme: textTheme,
       cardTheme: CardThemeData(
         elevation: 0,
-        color: AppColors.bgCard,
+        color: bgCard,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppDimensions.radiusCard),
+          borderRadius: BorderRadius.circular(
+            AppDimensions.radiusCard,
+          ),
         ),
       ),
       filledButtonTheme: FilledButtonThemeData(
@@ -122,7 +152,10 @@ abstract class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          side: const BorderSide(color: AppColors.primary, width: 2),
+          side: const BorderSide(
+            color: AppColors.primary,
+            width: 2,
+          ),
           minimumSize: const Size(double.infinity, 52),
         ),
       ),
@@ -138,52 +171,68 @@ abstract class AppTheme {
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.bgCard,
+        fillColor: bgCard,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppDimensions.radiusButton),
+          borderRadius: BorderRadius.circular(
+            AppDimensions.radiusButton,
+          ),
           borderSide: BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppDimensions.radiusButton),
+          borderRadius: BorderRadius.circular(
+            AppDimensions.radiusButton,
+          ),
           borderSide: BorderSide.none,
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppDimensions.radiusButton),
-          borderSide: const BorderSide(color: AppColors.primary, width: 2),
+          borderRadius: BorderRadius.circular(
+            AppDimensions.radiusButton,
+          ),
+          borderSide: const BorderSide(
+            color: AppColors.primary,
+            width: 2,
+          ),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppDimensions.radiusButton),
-          borderSide: const BorderSide(color: AppColors.accentCoral),
+          borderRadius: BorderRadius.circular(
+            AppDimensions.radiusButton,
+          ),
+          borderSide: const BorderSide(
+            color: AppColors.accentCoral,
+          ),
         ),
-        labelStyle: const TextStyle(
+        labelStyle: TextStyle(
           fontFamily: _fontBody,
           fontSize: 14,
-          color: AppColors.textSecondary,
+          color: textSecondary,
         ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: AppDimensions.paddingM,
           vertical: AppDimensions.paddingM,
         ),
       ),
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         centerTitle: false,
         elevation: 0,
         scrolledUnderElevation: 0,
-        backgroundColor: AppColors.bgPage,
-        foregroundColor: AppColors.textPrimary,
+        backgroundColor: bgPage,
+        foregroundColor: textPrimary,
         titleTextStyle: TextStyle(
           fontFamily: _fontHeading,
           fontSize: 20,
           fontWeight: FontWeight.w700,
-          color: AppColors.textPrimary,
+          color: textPrimary,
         ),
       ),
       navigationBarTheme: NavigationBarThemeData(
-        backgroundColor: AppColors.bgPage,
-        indicatorColor: AppColors.primary.withValues(alpha: 0.12),
-        labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+        backgroundColor: bgPage,
+        indicatorColor:
+            AppColors.primary.withValues(alpha: 0.12),
+        labelBehavior:
+            NavigationDestinationLabelBehavior.alwaysShow,
         height: AppDimensions.bottomNavHeight,
-        labelTextStyle: WidgetStateProperty.resolveWith((states) {
+        labelTextStyle:
+            WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
             return const TextStyle(
               fontFamily: _fontBody,
@@ -192,15 +241,32 @@ abstract class AppTheme {
               color: AppColors.primary,
             );
           }
-          return const TextStyle(
+          return TextStyle(
             fontFamily: _fontBody,
             fontSize: 12,
             fontWeight: FontWeight.w500,
-            color: AppColors.textSecondary,
+            color: textSecondary,
           );
         }),
       ),
-      scaffoldBackgroundColor: AppColors.bgPage,
+      scaffoldBackgroundColor: bgPage,
+      dividerColor: borderSubtle,
+      dialogTheme: DialogThemeData(
+        backgroundColor: bgCard,
+      ),
+      switchTheme: SwitchThemeData(
+        thumbColor: WidgetStateProperty.resolveWith(
+          (states) => states.contains(WidgetState.selected)
+              ? Colors.white
+              : textSecondary,
+        ),
+        trackColor: WidgetStateProperty.resolveWith(
+          (states) => states.contains(WidgetState.selected)
+              ? AppColors.primary
+              : bgCard,
+        ),
+      ),
+      extensions: [colorsTheme],
     );
   }
 }

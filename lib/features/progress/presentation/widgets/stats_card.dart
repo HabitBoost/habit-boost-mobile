@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 
 class StatsCard extends StatelessWidget {
   const StatsCard({
@@ -16,11 +16,12 @@ class StatsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     return Expanded(
       child: Container(
         padding: const EdgeInsets.all(AppDimensions.paddingM),
         decoration: BoxDecoration(
-          color: AppColors.bgCard,
+          color: colors.bgCard,
           borderRadius:
               BorderRadius.circular(AppDimensions.radiusCard),
         ),
@@ -40,7 +41,7 @@ class StatsCard extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .bodySmall
-                  ?.copyWith(color: AppColors.textSecondary),
+                  ?.copyWith(color: colors.textSecondary),
               textAlign: TextAlign.center,
             ),
           ],

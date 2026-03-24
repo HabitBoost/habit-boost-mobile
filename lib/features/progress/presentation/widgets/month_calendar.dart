@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/progress/domain/entities/progress_stats.dart';
 
 class MonthCalendar extends StatelessWidget {
@@ -15,6 +16,7 @@ class MonthCalendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     final firstOfMonth = DateTime(now.year, now.month);
@@ -26,7 +28,7 @@ class MonthCalendar extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppDimensions.paddingM),
       decoration: BoxDecoration(
-        color: AppColors.bgCard,
+        color: colors.bgCard,
         borderRadius: BorderRadius.circular(AppDimensions.radiusCard),
       ),
       child: Column(
@@ -47,10 +49,10 @@ class MonthCalendar extends StatelessWidget {
                     child: Text(
                       l,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
-                        color: AppColors.textTertiary,
+                        color: colors.textTertiary,
                       ),
                     ),
                   ),
@@ -58,13 +60,16 @@ class MonthCalendar extends StatelessWidget {
                 .toList(),
           ),
           const SizedBox(height: 8),
-          ..._buildWeeks(today, firstOfMonth, daysInMonth, startWeekday),
+          ..._buildWeeks(
+            colors, today, firstOfMonth, daysInMonth, startWeekday,
+          ),
         ],
       ),
     );
   }
 
   List<Widget> _buildWeeks(
+    AppColorsTheme colors,
     DateTime today,
     DateTime firstOfMonth,
     int daysInMonth,
@@ -100,13 +105,13 @@ class MonthCalendar extends StatelessWidget {
             textColor = Colors.white;
           } else if (partial) {
             circleColor = AppColors.accentGreen.withValues(alpha: 0.3);
-            textColor = AppColors.textPrimary;
+            textColor = colors.textPrimary;
           } else if (isToday) {
             circleColor = AppColors.accentCoral;
             textColor = Colors.white;
           } else {
             circleColor = Colors.transparent;
-            textColor = AppColors.textPrimary;
+            textColor = colors.textPrimary;
           }
 
           cells.add(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/habits/domain/entities/habit.dart';
 import 'package:habit_boost/features/habits/presentation/widgets/habit_icon.dart';
 
@@ -20,18 +21,22 @@ class HabitCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     final habitColor = _parseColor(habit.color);
 
     return Material(
       color: isCompleted
           ? habitColor.withValues(alpha: 0.08)
-          : AppColors.bgCard,
-      borderRadius: BorderRadius.circular(AppDimensions.radiusCard),
+          : colors.bgCard,
+      borderRadius:
+          BorderRadius.circular(AppDimensions.radiusCard),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(AppDimensions.radiusCard),
+        borderRadius:
+            BorderRadius.circular(AppDimensions.radiusCard),
         child: Padding(
-          padding: const EdgeInsets.all(AppDimensions.paddingM),
+          padding:
+              const EdgeInsets.all(AppDimensions.paddingM),
           child: Row(
             children: [
               // Icon
@@ -45,32 +50,38 @@ class HabitCard extends StatelessWidget {
               // Title + category
               Expanded(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment:
+                      CrossAxisAlignment.start,
                   children: [
                     Text(
                       habit.title,
-                      style:
-                          Theme.of(context).textTheme.titleSmall?.copyWith(
-                                fontWeight: FontWeight.w600,
-                                decoration: isCompleted
-                                    ? TextDecoration.lineThrough
-                                    : null,
-                                color: isCompleted
-                                    ? AppColors.textSecondary
-                                    : AppColors.textPrimary,
-                              ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleSmall
+                          ?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            decoration: isCompleted
+                                ? TextDecoration.lineThrough
+                                : null,
+                            color: isCompleted
+                                ? colors.textSecondary
+                                : colors.textPrimary,
+                          ),
                     ),
                     const SizedBox(height: 4),
                     Row(
                       children: [
                         Container(
-                          padding: const EdgeInsets.symmetric(
+                          padding:
+                              const EdgeInsets.symmetric(
                             horizontal: 8,
                             vertical: 2,
                           ),
                           decoration: BoxDecoration(
-                            color: habitColor.withValues(alpha: 0.1),
-                            borderRadius: BorderRadius.circular(
+                            color: habitColor
+                                .withValues(alpha: 0.1),
+                            borderRadius:
+                                BorderRadius.circular(
                               AppDimensions.radiusChip,
                             ),
                           ),
@@ -79,7 +90,8 @@ class HabitCard extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .labelSmall
-                                ?.copyWith(color: habitColor),
+                                ?.copyWith(
+                                    color: habitColor),
                           ),
                         ),
                         if (habit.currentStreak > 0) ...[
@@ -96,8 +108,10 @@ class HabitCard extends StatelessWidget {
                                 .textTheme
                                 .labelSmall
                                 ?.copyWith(
-                                  color: AppColors.accentOrange,
-                                  fontWeight: FontWeight.w600,
+                                  color:
+                                      AppColors.accentOrange,
+                                  fontWeight:
+                                      FontWeight.w600,
                                 ),
                           ),
                         ],
@@ -111,18 +125,22 @@ class HabitCard extends StatelessWidget {
               GestureDetector(
                 onTap: onToggle,
                 child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
+                  duration:
+                      const Duration(milliseconds: 200),
                   width: 32,
                   height: 32,
                   decoration: BoxDecoration(
-                    color: isCompleted ? habitColor : Colors.transparent,
+                    color: isCompleted
+                        ? habitColor
+                        : Colors.transparent,
                     border: Border.all(
                       color: isCompleted
                           ? habitColor
-                          : AppColors.borderEmpty,
+                          : colors.borderEmpty,
                       width: 2,
                     ),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius:
+                        BorderRadius.circular(8),
                   ),
                   child: isCompleted
                       ? const Icon(

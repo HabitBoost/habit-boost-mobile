@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:habit_boost/app/di/injection_container.dart';
 import 'package:habit_boost/app/router/routes.dart';
-import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_strings.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:habit_boost/features/auth/presentation/screens/forgot_password_screen.dart';
 import 'package:habit_boost/features/auth/presentation/screens/login_screen.dart';
@@ -92,8 +92,11 @@ GoRouter createRouter() {
           GoRoute(
             path: Routes.profile,
             pageBuilder: (context, state) =>
-                const NoTransitionPage(
-              child: ProfileScreen(),
+                NoTransitionPage(
+              child: BlocProvider(
+                create: (_) => sl<HabitsBloc>(),
+                child: const ProfileScreen(),
+              ),
             ),
           ),
         ],
@@ -217,16 +220,17 @@ class _PlaceholderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     return Scaffold(
       appBar: AppBar(title: Text(title)),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(
+            Icon(
               Icons.construction,
               size: 64,
-              color: AppColors.textDisabled,
+              color: colors.textDisabled,
             ),
             const SizedBox(height: 16),
             Text(
@@ -239,7 +243,7 @@ class _PlaceholderScreen extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium
-                  ?.copyWith(color: AppColors.textSecondary),
+                  ?.copyWith(color: colors.textSecondary),
             ),
           ],
         ),

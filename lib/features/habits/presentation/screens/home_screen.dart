@@ -5,6 +5,7 @@ import 'package:habit_boost/app/router/routes.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
 import 'package:habit_boost/core/constants/app_strings.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:habit_boost/features/habits/presentation/bloc/habits_bloc.dart';
 import 'package:habit_boost/features/habits/presentation/widgets/habit_card.dart';
@@ -37,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     final today = DateTime.now();
     final dateFormat = DateFormat('d MMMM, EEEE', 'ru');
 
@@ -77,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     .textTheme
                                     .bodyMedium
                                     ?.copyWith(
-                                      color: AppColors.textSecondary,
+                                      color: colors.textSecondary,
                                     ),
                               ),
                             ],
@@ -90,12 +92,16 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: AppColors.accentCoral,
                           ),
                         ),
-                        const CircleAvatar(
-                          radius: 20,
-                          backgroundColor: AppColors.bgCard,
-                          child: Icon(
-                            Icons.person,
-                            color: AppColors.textSecondary,
+                        GestureDetector(
+                          onTap: () =>
+                              context.go(Routes.profile),
+                          child: CircleAvatar(
+                            radius: 20,
+                            backgroundColor: colors.bgCard,
+                            child: Icon(
+                              Icons.person,
+                              color: colors.textSecondary,
+                            ),
                           ),
                         ),
                       ],
@@ -186,6 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildContent(BuildContext context, HabitsState state) {
+    final colors = AppColorsTheme.of(context);
     if (state.status == HabitsStatus.loading) {
       return const SliverFillRemaining(
         child: Center(child: CircularProgressIndicator()),
@@ -241,7 +248,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Text(
                 AppStrings.noHabitsYetSubtitle,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppColors.textSecondary,
+                      color: colors.textSecondary,
                     ),
               ),
             ],

@@ -7,6 +7,7 @@ class UserModel extends AppUser {
     super.name,
     super.goals,
     super.onboardingCompleted,
+    super.createdAt,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {

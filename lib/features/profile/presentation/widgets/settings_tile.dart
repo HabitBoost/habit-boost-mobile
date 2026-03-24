@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:habit_boost/core/constants/app_colors.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 
 class SettingsTile extends StatelessWidget {
   const SettingsTile({
@@ -17,6 +17,7 @@ class SettingsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     return InkWell(
       onTap: onTap,
       child: Padding(
@@ -37,10 +38,10 @@ class SettingsTile extends StatelessWidget {
                 ),
               ),
             ),
-            const Icon(
+            Icon(
               Icons.chevron_right,
               size: 18,
-              color: AppColors.textTertiary,
+              color: colors.textTertiary,
             ),
           ],
         ),

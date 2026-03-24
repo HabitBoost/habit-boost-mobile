@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/onboarding/domain/entities/user_goals.dart';
 import 'package:habit_boost/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:habit_boost/features/onboarding/presentation/widgets/page_dots.dart';
@@ -13,6 +14,7 @@ class GoalSelectionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     return Padding(
       padding: const EdgeInsets.all(AppDimensions.paddingL),
       child: Column(
@@ -24,14 +26,14 @@ class GoalSelectionPage extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .headlineLarge
-                ?.copyWith(color: AppColors.textPrimary),
+                ?.copyWith(color: colors.textPrimary),
           ),
           const SizedBox(height: AppDimensions.paddingS),
           Text(
             'Выберите области, на которых хотите '
             'сфокусироваться',
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: AppColors.textSecondary,
+                  color: colors.textSecondary,
                 ),
           ),
           const SizedBox(height: AppDimensions.paddingL),
@@ -100,7 +102,9 @@ class GoalSelectionPage extends StatelessWidget {
                           onTap: () => context
                               .read<OnboardingBloc>()
                               .add(
-                                OnboardingGoalToggled(goals[i + 1]),
+                                OnboardingGoalToggled(
+                                  goals[i + 1],
+                                ),
                               ),
                         ),
                       )
@@ -129,17 +133,19 @@ class _GoalChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     return GestureDetector(
       onTap: onTap,
       child: Container(
         height: 100,
         decoration: BoxDecoration(
           color: isSelected
-              ? AppColors.badgeGreenBg
-              : AppColors.bgCard,
+              ? colors.badgeGreenBg
+              : colors.bgCard,
           borderRadius: BorderRadius.circular(16),
           border: isSelected
-              ? Border.all(color: AppColors.primary, width: 2)
+              ? Border.all(
+                  color: AppColors.primary, width: 2)
               : null,
         ),
         child: Column(
@@ -150,11 +156,11 @@ class _GoalChip extends StatelessWidget {
             Text(
               goal.label,
               textAlign: TextAlign.center,
-              style: const TextStyle(
+              style: TextStyle(
                 fontFamily: 'DMSans',
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
-                color: AppColors.textPrimary,
+                color: colors.textPrimary,
               ),
             ),
           ],

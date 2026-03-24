@@ -5,6 +5,7 @@ import 'package:habit_boost/app/di/injection_container.dart';
 import 'package:habit_boost/app/router/routes.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/sync/sync_service.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:habit_boost/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 
@@ -82,6 +83,7 @@ class _Logo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -99,13 +101,13 @@ class _Logo extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 16),
-        const Text(
+        Text(
           'HabitBoost',
           style: TextStyle(
             fontFamily: 'BricolageGrotesque',
             fontSize: 36,
             fontWeight: FontWeight.w800,
-            color: AppColors.textPrimary,
+            color: colors.textPrimary,
           ),
         ),
         const SizedBox(height: 8),
@@ -114,7 +116,7 @@ class _Logo extends StatelessWidget {
           style: TextStyle(
             fontFamily: 'DMSans',
             fontSize: 14,
-            color: AppColors.textSecondary.withValues(alpha: 0.8),
+            color: colors.textSecondary.withValues(alpha: 0.8),
           ),
         ),
       ],

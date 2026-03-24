@@ -6,6 +6,7 @@ import 'package:habit_boost/app/router/routes.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
 import 'package:habit_boost/core/sync/sync_service.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/core/utils/validators.dart';
 import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:habit_boost/features/auth/presentation/widgets/auth_field.dart';
@@ -44,6 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     return Scaffold(
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) async {
@@ -77,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: Theme.of(context)
                         .textTheme
                         .headlineLarge
-                        ?.copyWith(color: AppColors.textPrimary),
+                        ?.copyWith(color: colors.textPrimary),
                   ),
                   const SizedBox(height: AppDimensions.paddingL),
                   AuthField(
@@ -102,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         _obscurePassword
                             ? Icons.visibility_off_outlined
                             : Icons.visibility_outlined,
-                        color: AppColors.textTertiary,
+                        color: colors.textTertiary,
                         size: 20,
                       ),
                       onPressed: () =>
@@ -126,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: const Text('Забыли пароль?'),
                   ),
                   const SizedBox(height: AppDimensions.paddingM),
-                  _buildDivider(),
+                  _buildDivider(colors),
                   const SizedBox(height: AppDimensions.paddingM),
                   _GreenOutlineButton(
                     label: 'Создать аккаунт',
@@ -141,10 +143,10 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildDivider() {
+  Widget _buildDivider(AppColorsTheme colors) {
     return Row(
       children: [
-        const Expanded(child: Divider(color: AppColors.borderSubtle)),
+        Expanded(child: Divider(color: colors.borderSubtle)),
         Padding(
           padding:
               const EdgeInsets.symmetric(horizontal: AppDimensions.paddingM),
@@ -153,10 +155,10 @@ class _LoginScreenState extends State<LoginScreen> {
             style: Theme.of(context)
                 .textTheme
                 .labelMedium
-                ?.copyWith(color: AppColors.textTertiary),
+                ?.copyWith(color: colors.textTertiary),
           ),
         ),
-        const Expanded(child: Divider(color: AppColors.borderSubtle)),
+        Expanded(child: Divider(color: colors.borderSubtle)),
       ],
     );
   }

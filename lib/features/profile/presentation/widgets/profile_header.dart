@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader({
@@ -13,6 +14,7 @@ class ProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     return Column(
       children: [
         CircleAvatar(
@@ -41,7 +43,7 @@ class ProfileHeader extends StatelessWidget {
           style: Theme.of(context)
               .textTheme
               .bodyMedium
-              ?.copyWith(color: AppColors.textSecondary),
+              ?.copyWith(color: colors.textSecondary),
         ),
       ],
     );

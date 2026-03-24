@@ -29,6 +29,15 @@ final class OnboardingGoalToggled extends OnboardingEvent {
   List<Object?> get props => [goal];
 }
 
+final class OnboardingGoalsUpdated extends OnboardingEvent {
+  const OnboardingGoalsUpdated(this.goals);
+
+  final List<GoalCategory> goals;
+
+  @override
+  List<Object?> get props => [goals];
+}
+
 final class OnboardingCompleted extends OnboardingEvent {
   const OnboardingCompleted();
 }

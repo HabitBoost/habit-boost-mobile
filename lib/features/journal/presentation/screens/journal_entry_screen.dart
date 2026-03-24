@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:habit_boost/features/journal/domain/entities/journal_entry.dart';
 import 'package:habit_boost/features/journal/presentation/bloc/journal_bloc.dart';
@@ -89,6 +90,7 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -142,16 +144,16 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
                 borderRadius: BorderRadius.circular(
                   AppDimensions.radiusCard,
                 ),
-                borderSide: const BorderSide(
-                  color: AppColors.borderSubtle,
+                borderSide: BorderSide(
+                  color: colors.borderSubtle,
                 ),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(
                   AppDimensions.radiusCard,
                 ),
-                borderSide: const BorderSide(
-                  color: AppColors.borderSubtle,
+                borderSide: BorderSide(
+                  color: colors.borderSubtle,
                 ),
               ),
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/progress/domain/entities/progress_period.dart';
 
 class PeriodSelector extends StatelessWidget {
@@ -14,10 +15,11 @@ class PeriodSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     return Container(
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color: AppColors.bgCard,
+        color: colors.bgCard,
         borderRadius: BorderRadius.circular(22),
       ),
       child: Row(
@@ -56,6 +58,7 @@ class _PeriodChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -78,7 +81,7 @@ class _PeriodChip extends StatelessWidget {
                 : FontWeight.w500,
             color: isSelected
                 ? Colors.white
-                : AppColors.textSecondary,
+                : colors.textSecondary,
           ),
         ),
       ),

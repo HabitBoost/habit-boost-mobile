@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/core/utils/validators.dart';
 import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:habit_boost/features/auth/presentation/widgets/auth_field.dart';
@@ -11,10 +12,12 @@ class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
 
   @override
-  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
+  State<ForgotPasswordScreen> createState() =>
+      _ForgotPasswordScreenState();
 }
 
-class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+class _ForgotPasswordScreenState
+    extends State<ForgotPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
 
@@ -27,26 +30,33 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   void _onSend() {
     if (_formKey.currentState?.validate() ?? false) {
       context.read<AuthBloc>().add(
-            AuthResetPasswordRequested(email: _emailController.text.trim()),
+            AuthResetPasswordRequested(
+              email: _emailController.text.trim(),
+            ),
           );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     return Scaffold(
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthError) {
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
-              ..showSnackBar(SnackBar(content: Text(state.message)));
+              ..showSnackBar(
+                SnackBar(content: Text(state.message)),
+              );
           } else if (state is AuthPasswordResetSent) {
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(
                 const SnackBar(
-                  content: Text('Ссылка для сброса отправлена на email'),
+                  content: Text(
+                    'Ссылка для сброса отправлена на email',
+                  ),
                 ),
               );
             context.pop();
@@ -64,34 +74,48 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 8,
+                    ),
                     child: GestureDetector(
                       onTap: () => context.pop(),
-                      child: const Icon(
+                      child: Icon(
                         Icons.arrow_back,
-                        color: AppColors.textPrimary,
+                        color: colors.textPrimary,
                         size: 24,
                       ),
                     ),
                   ),
-                  const SizedBox(height: AppDimensions.paddingL),
+                  const SizedBox(
+                    height: AppDimensions.paddingL,
+                  ),
                   Text(
                     'Сброс пароля',
                     style: Theme.of(context)
                         .textTheme
                         .headlineLarge
-                        ?.copyWith(color: AppColors.textPrimary),
+                        ?.copyWith(
+                          color: colors.textPrimary,
+                        ),
                   ),
-                  const SizedBox(height: AppDimensions.paddingL),
+                  const SizedBox(
+                    height: AppDimensions.paddingL,
+                  ),
                   Text(
-                    'Введите email, привязанный к вашему аккаунту. '
+                    'Введите email, привязанный к вашему '
+                    'аккаунту. '
                     'Мы отправим ссылку для сброса пароля.',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: AppColors.textSecondary,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyLarge
+                        ?.copyWith(
+                          color: colors.textSecondary,
                           height: 1.5,
                         ),
                   ),
-                  const SizedBox(height: AppDimensions.paddingL),
+                  const SizedBox(
+                    height: AppDimensions.paddingL,
+                  ),
                   AuthField(
                     label: 'Email',
                     hint: 'example@email.com',
@@ -101,7 +125,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     textInputAction: TextInputAction.done,
                     onFieldSubmitted: (_) => _onSend(),
                   ),
-                  const SizedBox(height: AppDimensions.paddingL),
+                  const SizedBox(
+                    height: AppDimensions.paddingL,
+                  ),
                   BlocBuilder<AuthBloc, AuthState>(
                     builder: (context, state) {
                       final isLoading = state is AuthLoading;
@@ -109,18 +135,22 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         width: double.infinity,
                         height: 52,
                         child: FilledButton(
-                          onPressed: isLoading ? null : _onSend,
+                          onPressed:
+                              isLoading ? null : _onSend,
                           style: FilledButton.styleFrom(
-                            backgroundColor: AppColors.accentCoral,
+                            backgroundColor:
+                                AppColors.accentCoral,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius:
+                                  BorderRadius.circular(20),
                             ),
                           ),
                           child: isLoading
                               ? const SizedBox(
                                   height: 20,
                                   width: 20,
-                                  child: CircularProgressIndicator(
+                                  child:
+                                      CircularProgressIndicator(
                                     strokeWidth: 2,
                                     color: Colors.white,
                                   ),
@@ -129,7 +159,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                   'Отправить ссылку',
                                   style: TextStyle(
                                     fontSize: 16,
-                                    fontWeight: FontWeight.w600,
+                                    fontWeight:
+                                        FontWeight.w600,
                                     color: Colors.white,
                                   ),
                                 ),

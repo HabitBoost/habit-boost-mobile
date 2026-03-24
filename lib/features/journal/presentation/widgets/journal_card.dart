@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/journal/domain/entities/journal_entry.dart';
 import 'package:intl/intl.dart';
 
@@ -14,16 +15,25 @@ class JournalCard extends StatelessWidget {
   final JournalEntry entry;
   final VoidCallback onTap;
 
-  static const _tagColors = {
-    'Продуктивность': (AppColors.accentGreen, AppColors.badgeGreenBg),
-    'Рефлексия': (AppColors.accentOrange, AppColors.badgeYellowBg),
-    'Здоровье': (AppColors.accentIndigo, AppColors.badgeIndigoBg),
-    'Спорт': (AppColors.accentGreen, AppColors.badgeGreenBg),
-    'Учёба': (AppColors.accentIndigo, AppColors.badgeIndigoBg),
+  static const _tagTextColors = {
+    'Продуктивность': AppColors.accentGreen,
+    'Рефлексия': AppColors.accentOrange,
+    'Здоровье': AppColors.accentIndigo,
+    'Спорт': AppColors.accentGreen,
+    'Учёба': AppColors.accentIndigo,
   };
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
+    final tagBgColors = {
+      'Продуктивность': colors.badgeGreenBg,
+      'Рефлексия': colors.badgeYellowBg,
+      'Здоровье': colors.badgeIndigoBg,
+      'Спорт': colors.badgeGreenBg,
+      'Учёба': colors.badgeIndigoBg,
+    };
+
     final dateStr = DateFormat(
       'd MMMM',
       'ru',
@@ -34,7 +44,7 @@ class JournalCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(AppDimensions.paddingM),
         decoration: BoxDecoration(
-          color: AppColors.bgCard,
+          color: colors.bgCard,
           borderRadius:
               BorderRadius.circular(AppDimensions.radiusCard),
         ),
@@ -55,16 +65,16 @@ class JournalCard extends StatelessWidget {
                 Icon(
                   entry.mood.icon,
                   size: 24,
-                  color: AppColors.textTertiary,
+                  color: colors.textTertiary,
                 ),
               ],
             ),
             const SizedBox(height: 10),
             Text(
               entry.content,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 14,
-                color: AppColors.textSecondary,
+                color: colors.textSecondary,
                 height: 1.5,
               ),
               maxLines: 3,
@@ -75,11 +85,10 @@ class JournalCard extends StatelessWidget {
               Wrap(
                 spacing: 8,
                 children: entry.tags.map((tag) {
-                  final colors = _tagColors[tag];
-                  final textColor =
-                      colors?.$1 ?? AppColors.textSecondary;
+                  final textColor = _tagTextColors[tag] ??
+                      colors.textSecondary;
                   final bgColor =
-                      colors?.$2 ?? AppColors.bgCard;
+                      tagBgColors[tag] ?? colors.bgCard;
 
                   return Container(
                     padding: const EdgeInsets.symmetric(

@@ -4,6 +4,7 @@ import 'package:habit_boost/app/router/routes.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
 import 'package:habit_boost/core/constants/app_strings.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/habits/domain/entities/habit.dart';
 import 'package:habit_boost/features/habits/presentation/widgets/habit_icon.dart';
 
@@ -19,6 +20,7 @@ class HabitDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Детали привычки'),
@@ -46,11 +48,12 @@ class HabitDetailScreen extends StatelessWidget {
             const SizedBox(height: AppDimensions.paddingL),
 
             // Schedule info
-            _buildScheduleSection(context),
+            _buildScheduleSection(context, colors),
             const SizedBox(height: AppDimensions.paddingL),
 
             // Reminder info
-            if (habit.reminderEnabled) _buildReminderInfo(context),
+            if (habit.reminderEnabled)
+              _buildReminderInfo(context, colors),
           ],
         ),
       ),
@@ -140,7 +143,10 @@ class HabitDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildScheduleSection(BuildContext context) {
+  Widget _buildScheduleSection(
+    BuildContext context,
+    AppColorsTheme colors,
+  ) {
     const dayLabels = [
       'Пн',
       'Вт',
@@ -156,9 +162,10 @@ class HabitDetailScreen extends StatelessWidget {
       children: [
         Text(
           'Расписание',
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
+          style:
+              Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
         ),
         const SizedBox(height: AppDimensions.paddingS),
         Row(
@@ -172,7 +179,7 @@ class HabitDetailScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: isActive
                     ? _habitColor.withValues(alpha: 0.15)
-                    : AppColors.bgCard,
+                    : colors.bgCard,
                 borderRadius: BorderRadius.circular(
                   AppDimensions.radiusChip,
                 ),
@@ -189,7 +196,7 @@ class HabitDetailScreen extends StatelessWidget {
                     ?.copyWith(
                       color: isActive
                           ? _habitColor
-                          : AppColors.textSecondary,
+                          : colors.textSecondary,
                       fontWeight: FontWeight.w600,
                     ),
               ),
@@ -200,11 +207,14 @@ class HabitDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildReminderInfo(BuildContext context) {
+  Widget _buildReminderInfo(
+    BuildContext context,
+    AppColorsTheme colors,
+  ) {
     return Container(
       padding: const EdgeInsets.all(AppDimensions.paddingM),
       decoration: BoxDecoration(
-        color: AppColors.bgCard,
+        color: colors.bgCard,
         borderRadius: BorderRadius.circular(
           AppDimensions.radiusCard,
         ),
@@ -232,7 +242,7 @@ class HabitDetailScreen extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .bodyMedium
-                    ?.copyWith(color: AppColors.textSecondary),
+                    ?.copyWith(color: colors.textSecondary),
               ),
             ],
           ),
@@ -257,10 +267,11 @@ class _StatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     return Container(
       padding: const EdgeInsets.all(AppDimensions.paddingM),
       decoration: BoxDecoration(
-        color: AppColors.bgCard,
+        color: colors.bgCard,
         borderRadius: BorderRadius.circular(
           AppDimensions.radiusCard,
         ),
@@ -282,7 +293,7 @@ class _StatCard extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .labelSmall
-                ?.copyWith(color: AppColors.textSecondary),
+                ?.copyWith(color: colors.textSecondary),
             textAlign: TextAlign.center,
           ),
         ],

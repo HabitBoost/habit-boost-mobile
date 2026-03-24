@@ -19,6 +19,7 @@ import 'package:habit_boost/core/database/app_database.dart' as _i935;
 import 'package:habit_boost/core/network/network_info.dart' as _i931;
 import 'package:habit_boost/core/sync/connectivity_listener.dart' as _i851;
 import 'package:habit_boost/core/sync/sync_service.dart' as _i833;
+import 'package:habit_boost/core/theme/theme_cubit.dart' as _i294;
 import 'package:habit_boost/features/auth/data/datasources/auth_local_datasource.dart'
     as _i972;
 import 'package:habit_boost/features/auth/data/datasources/auth_remote_datasource.dart'
@@ -144,6 +145,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i497.ProgressRepository>(
       () => _i453.ProgressRepositoryImpl(gh<_i382.ProgressLocalDataSource>()),
     );
+    gh.factory<_i294.ThemeCubit>(
+      () => _i294.ThemeCubit(gh<_i460.SharedPreferences>()),
+    );
     gh.factory<_i385.GetProgressStats>(
       () => _i385.GetProgressStats(gh<_i497.ProgressRepository>()),
     );
@@ -183,8 +187,11 @@ extension GetItInjectableX on _i174.GetIt {
       ),
     );
     gh.lazySingleton<_i809.OnboardingRepository>(
-      () =>
-          _i55.OnboardingRepositoryImpl(gh<_i802.OnboardingLocalDataSource>()),
+      () => _i55.OnboardingRepositoryImpl(
+        gh<_i802.OnboardingLocalDataSource>(),
+        gh<_i59.FirebaseAuth>(),
+        gh<_i974.FirebaseFirestore>(),
+      ),
     );
     gh.factory<_i162.OnboardingBloc>(
       () => _i162.OnboardingBloc(gh<_i809.OnboardingRepository>()),

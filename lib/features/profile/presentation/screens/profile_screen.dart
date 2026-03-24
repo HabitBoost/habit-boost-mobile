@@ -4,16 +4,42 @@ import 'package:go_router/go_router.dart';
 import 'package:habit_boost/app/router/routes.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
+import 'package:habit_boost/core/theme/theme_cubit.dart';
 import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:habit_boost/features/habits/presentation/bloc/habits_bloc.dart';
+import 'package:habit_boost/features/profile/presentation/screens/about_screen.dart';
+import 'package:habit_boost/features/profile/presentation/screens/goals_screen.dart';
 import 'package:habit_boost/features/profile/presentation/widgets/profile_header.dart';
 import 'package:habit_boost/features/profile/presentation/widgets/settings_tile.dart';
 import 'package:habit_boost/features/progress/presentation/widgets/stats_card.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
   @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final authState = context.read<AuthBloc>().state;
+      if (authState is Authenticated) {
+        context.read<HabitsBloc>().add(
+              HabitsLoadRequested(
+                userId: authState.user.id,
+              ),
+            );
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     return Scaffold(
       body: SafeArea(
         child: BlocBuilder<AuthBloc, AuthState>(
@@ -21,6 +47,10 @@ class ProfileScreen extends StatelessWidget {
             final user = authState is Authenticated
                 ? authState.user
                 : null;
+
+            final daysSinceReg = _daysSinceRegistration(
+              user?.createdAt,
+            );
 
             return ListView(
               padding: const EdgeInsets.symmetric(
@@ -33,132 +63,307 @@ class ProfileScreen extends StatelessWidget {
                   email: user?.email ?? '',
                 ),
                 const SizedBox(height: AppDimensions.paddingL),
-                const Row(
-                  children: [
-                    StatsCard(
-                      value: '—',
-                      label: 'Всего дней',
-                      valueColor: AppColors.accentCoral,
-                    ),
-                    SizedBox(width: 12),
-                    StatsCard(
-                      value: '—',
-                      label: 'Привычек',
-                      valueColor: AppColors.accentIndigo,
-                    ),
-                    SizedBox(width: 12),
-                    StatsCard(
-                      value: '—',
-                      label: 'Бейджей',
-                      valueColor: AppColors.accentGreen,
-                    ),
-                  ],
-                ),
+                _buildStats(context, daysSinceReg),
                 const SizedBox(height: AppDimensions.paddingL),
                 Text(
                   'Настройки',
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium
-                      ?.copyWith(fontWeight: FontWeight.w700),
+                      ?.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
                 ),
                 const SizedBox(height: 2),
-                Container(
-                  decoration: BoxDecoration(
-                    color: AppColors.bgCard,
-                    borderRadius: BorderRadius.circular(
-                      AppDimensions.radiusCard,
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      SettingsTile(
-                        icon: Icons.notifications_outlined,
-                        iconColor: AppColors.accentCoral,
-                        title: 'Уведомления',
-                        onTap: () {},
-                      ),
-                      const Divider(
-                        height: 1,
-                        color: AppColors.borderSubtle,
-                      ),
-                      SettingsTile(
-                        icon: Icons.gps_fixed,
-                        iconColor: AppColors.accentGreen,
-                        title: 'Мои цели',
-                        onTap: () {},
-                      ),
-                      const Divider(
-                        height: 1,
-                        color: AppColors.borderSubtle,
-                      ),
-                      SettingsTile(
-                        icon: Icons.dark_mode_outlined,
-                        iconColor: AppColors.accentIndigo,
-                        title: 'Тема оформления',
-                        onTap: () {},
-                      ),
-                      const Divider(
-                        height: 1,
-                        color: AppColors.borderSubtle,
-                      ),
-                      SettingsTile(
-                        icon: Icons.language,
-                        iconColor: AppColors.accentOrange,
-                        title: 'Язык',
-                        onTap: () {},
-                      ),
-                      const Divider(
-                        height: 1,
-                        color: AppColors.borderSubtle,
-                      ),
-                      SettingsTile(
-                        icon: Icons.info_outline,
-                        iconColor: AppColors.textTertiary,
-                        title: 'О приложении',
-                        onTap: () {},
-                      ),
-                    ],
-                  ),
-                ),
+                _buildSettingsCard(context, colors),
                 const SizedBox(height: AppDimensions.paddingL),
-                SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton(
-                    onPressed: () {
-                      context
-                          .read<AuthBloc>()
-                          .add(const AuthLogoutRequested());
-                      context.go(Routes.login);
-                    },
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: AppColors.accentCoral,
-                      side: const BorderSide(
-                        color: AppColors.accentCoral,
-                      ),
-                      padding:
-                          const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                          AppDimensions.radiusCard,
-                        ),
-                      ),
-                    ),
-                    child: const Text(
-                      'Выйти из аккаунта',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
+                _buildLogoutButton(context),
                 const SizedBox(height: AppDimensions.paddingL),
               ],
             );
           },
         ),
       ),
+    );
+  }
+
+  int _daysSinceRegistration(DateTime? createdAt) {
+    if (createdAt == null) return 0;
+    return DateTime.now().difference(createdAt).inDays + 1;
+  }
+
+  Widget _buildStats(BuildContext context, int days) {
+    final habitsBloc = context.watch<HabitsBloc>();
+    final habitCount = habitsBloc.state.habits.length;
+
+    return IntrinsicHeight(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          StatsCard(
+            value: '$days',
+            label: 'Дней с нами',
+            valueColor: AppColors.accentCoral,
+          ),
+          const SizedBox(width: 12),
+          StatsCard(
+            value: '$habitCount',
+            label: 'Привычек',
+            valueColor: AppColors.accentIndigo,
+          ),
+          const SizedBox(width: 12),
+          const StatsCard(
+            value: '0',
+            label: 'Бейджей',
+            valueColor: AppColors.accentGreen,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSettingsCard(
+    BuildContext context,
+    AppColorsTheme colors,
+  ) {
+    return Container(
+      decoration: BoxDecoration(
+        color: colors.bgCard,
+        borderRadius: BorderRadius.circular(
+          AppDimensions.radiusCard,
+        ),
+      ),
+      child: Column(
+        children: [
+          SettingsTile(
+            icon: Icons.notifications_outlined,
+            iconColor: AppColors.accentCoral,
+            title: 'Уведомления',
+            onTap: () {},
+          ),
+          Divider(
+            height: 1,
+            color: colors.borderSubtle,
+          ),
+          SettingsTile(
+            icon: Icons.gps_fixed,
+            iconColor: AppColors.accentGreen,
+            title: 'Мои цели',
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(
+                builder: (_) => const GoalsScreen(),
+              ),
+            ),
+          ),
+          Divider(
+            height: 1,
+            color: colors.borderSubtle,
+          ),
+          SettingsTile(
+            icon: Icons.dark_mode_outlined,
+            iconColor: AppColors.accentIndigo,
+            title: 'Тема оформления',
+            onTap: () => _showThemePicker(context),
+          ),
+          Divider(
+            height: 1,
+            color: colors.borderSubtle,
+          ),
+          SettingsTile(
+            icon: Icons.info_outline,
+            iconColor: colors.textTertiary,
+            title: 'О приложении',
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(
+                builder: (_) => const AboutScreen(),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLogoutButton(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: OutlinedButton(
+        onPressed: () => _confirmLogout(context),
+        style: OutlinedButton.styleFrom(
+          foregroundColor: AppColors.accentCoral,
+          side: const BorderSide(
+            color: AppColors.accentCoral,
+          ),
+          padding: const EdgeInsets.symmetric(vertical: 14),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(
+              AppDimensions.radiusCard,
+            ),
+          ),
+        ),
+        child: const Text(
+          'Выйти из аккаунта',
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showThemePicker(BuildContext context) {
+    final cubit = context.read<ThemeCubit>();
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (_) => BlocProvider.value(
+        value: cubit,
+        child: const _ThemePickerSheet(),
+      ),
+    );
+  }
+
+  void _confirmLogout(BuildContext context) {
+    showDialog<void>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('Выход'),
+        content: const Text(
+          'Вы уверены, что хотите выйти из аккаунта?',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: const Text('Отмена'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(dialogContext);
+              context
+                  .read<AuthBloc>()
+                  .add(const AuthLogoutRequested());
+              context.go(Routes.login);
+            },
+            child: const Text(
+              'Выйти',
+              style: TextStyle(
+                color: AppColors.accentCoral,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ThemePickerSheet extends StatelessWidget {
+  const _ThemePickerSheet();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ThemeCubit, ThemeMode>(
+      builder: (context, current) {
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: AppDimensions.paddingM,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppDimensions.paddingL,
+                  ),
+                  child: Text(
+                    'Тема оформления',
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium
+                        ?.copyWith(
+                          fontWeight: FontWeight.w700,
+                        ),
+                  ),
+                ),
+                const SizedBox(
+                  height: AppDimensions.paddingM,
+                ),
+                _ThemeOption(
+                  icon: Icons.brightness_auto,
+                  title: 'Системная',
+                  isSelected: current == ThemeMode.system,
+                  onTap: () {
+                    context
+                        .read<ThemeCubit>()
+                        .setTheme(ThemeMode.system);
+                    Navigator.pop(context);
+                  },
+                ),
+                _ThemeOption(
+                  icon: Icons.light_mode_outlined,
+                  title: 'Светлая',
+                  isSelected: current == ThemeMode.light,
+                  onTap: () {
+                    context
+                        .read<ThemeCubit>()
+                        .setTheme(ThemeMode.light);
+                    Navigator.pop(context);
+                  },
+                ),
+                _ThemeOption(
+                  icon: Icons.dark_mode_outlined,
+                  title: 'Тёмная',
+                  isSelected: current == ThemeMode.dark,
+                  onTap: () {
+                    context
+                        .read<ThemeCubit>()
+                        .setTheme(ThemeMode.dark);
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _ThemeOption extends StatelessWidget {
+  const _ThemeOption({
+    required this.icon,
+    required this.title,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final String title;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
+    return ListTile(
+      leading: Icon(
+        icon,
+        color: isSelected
+            ? AppColors.primary
+            : colors.textTertiary,
+      ),
+      title: Text(title),
+      trailing: isSelected
+          ? const Icon(
+              Icons.check_circle,
+              color: AppColors.primary,
+            )
+          : null,
+      onTap: onTap,
     );
   }
 }

@@ -7,6 +7,7 @@ class AppUser extends Equatable {
     this.name = '',
     this.goals = const [],
     this.onboardingCompleted = false,
+    this.createdAt,
   });
 
   final String id;
@@ -14,6 +15,7 @@ class AppUser extends Equatable {
   final String name;
   final List<String> goals;
   final bool onboardingCompleted;
+  final DateTime? createdAt;
 
   AppUser copyWith({
     String? id,
@@ -21,16 +23,26 @@ class AppUser extends Equatable {
     String? name,
     List<String>? goals,
     bool? onboardingCompleted,
+    DateTime? createdAt,
   }) {
     return AppUser(
       id: id ?? this.id,
       email: email ?? this.email,
       name: name ?? this.name,
       goals: goals ?? this.goals,
-      onboardingCompleted: onboardingCompleted ?? this.onboardingCompleted,
+      onboardingCompleted:
+          onboardingCompleted ?? this.onboardingCompleted,
+      createdAt: createdAt ?? this.createdAt,
     );
   }
 
   @override
-  List<Object?> get props => [id, email, name, goals, onboardingCompleted];
+  List<Object?> get props => [
+        id,
+        email,
+        name,
+        goals,
+        onboardingCompleted,
+        createdAt,
+      ];
 }

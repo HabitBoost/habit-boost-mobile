@@ -6,6 +6,7 @@ import 'package:habit_boost/app/router/routes.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
 import 'package:habit_boost/core/constants/app_strings.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:habit_boost/features/habits/domain/entities/habit.dart';
 import 'package:habit_boost/features/habits/presentation/bloc/habit_form_bloc.dart';
@@ -76,6 +77,7 @@ class _AddEditHabitView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     return BlocListener<HabitFormBloc, HabitFormState>(
       listenWhen: (prev, curr) =>
           prev.status != curr.status ||
@@ -134,14 +136,14 @@ class _AddEditHabitView extends StatelessWidget {
                   // Icon picker
                   const _SectionLabel(label: 'Иконка'),
                   const SizedBox(height: AppDimensions.paddingS),
-                  _buildIconPicker(context, state),
+                  _buildIconPicker(context, state, colors),
 
                   const SizedBox(height: AppDimensions.paddingL),
 
                   // Color picker
                   const _SectionLabel(label: 'Цвет'),
                   const SizedBox(height: AppDimensions.paddingS),
-                  _buildColorPicker(context, state),
+                  _buildColorPicker(context, state, colors),
 
                   const SizedBox(height: AppDimensions.paddingL),
 
@@ -155,7 +157,7 @@ class _AddEditHabitView extends StatelessWidget {
                   // Day selector
                   const _SectionLabel(label: 'Дни недели'),
                   const SizedBox(height: AppDimensions.paddingS),
-                  _buildDaySelector(context, state),
+                  _buildDaySelector(context, state, colors),
 
                   const SizedBox(height: AppDimensions.paddingL),
 
@@ -212,6 +214,7 @@ class _AddEditHabitView extends StatelessWidget {
   Widget _buildIconPicker(
     BuildContext context,
     HabitFormState state,
+    AppColorsTheme colors,
   ) {
     final selectedColor = _parseColor(state.color);
 
@@ -236,7 +239,7 @@ class _AddEditHabitView extends StatelessWidget {
               icon: icon,
               color: isSelected
                   ? selectedColor
-                  : AppColors.textSecondary,
+                  : colors.textSecondary,
             ),
           ),
         );
@@ -247,6 +250,7 @@ class _AddEditHabitView extends StatelessWidget {
   Widget _buildColorPicker(
     BuildContext context,
     HabitFormState state,
+    AppColorsTheme colors,
   ) {
     return Wrap(
       spacing: AppDimensions.paddingS,
@@ -266,7 +270,7 @@ class _AddEditHabitView extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               border: isSelected
                   ? Border.all(
-                      color: AppColors.textPrimary,
+                      color: colors.textPrimary,
                       width: 3,
                     )
                   : null,
@@ -307,6 +311,7 @@ class _AddEditHabitView extends StatelessWidget {
   Widget _buildDaySelector(
     BuildContext context,
     HabitFormState state,
+    AppColorsTheme colors,
   ) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -324,7 +329,7 @@ class _AddEditHabitView extends StatelessWidget {
             decoration: BoxDecoration(
               color: isSelected
                   ? AppColors.primary
-                  : AppColors.bgCard,
+                  : colors.bgCard,
               borderRadius: BorderRadius.circular(
                 AppDimensions.radiusChip,
               ),
@@ -338,7 +343,7 @@ class _AddEditHabitView extends StatelessWidget {
                   ?.copyWith(
                     color: isSelected
                         ? Colors.white
-                        : AppColors.textSecondary,
+                        : colors.textSecondary,
                     fontWeight: FontWeight.w600,
                   ),
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 
 class LogoHeader extends StatelessWidget {
   const LogoHeader({this.compact = false, super.key});
@@ -8,6 +9,7 @@ class LogoHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     final iconSize = compact ? 32.0 : 48.0;
     final circleSize = compact ? 40.0 : 48.0;
     final fontSize = compact ? 20.0 : 24.0;
@@ -20,7 +22,8 @@ class LogoHeader extends StatelessWidget {
           height: circleSize,
           decoration: BoxDecoration(
             color: AppColors.primary,
-            borderRadius: BorderRadius.circular(circleSize / 2),
+            borderRadius:
+                BorderRadius.circular(circleSize / 2),
           ),
           child: Icon(
             Icons.eco,
@@ -35,7 +38,7 @@ class LogoHeader extends StatelessWidget {
             fontFamily: 'BricolageGrotesque',
             fontSize: fontSize,
             fontWeight: FontWeight.w700,
-            color: AppColors.textPrimary,
+            color: colors.textPrimary,
           ),
         ),
       ],

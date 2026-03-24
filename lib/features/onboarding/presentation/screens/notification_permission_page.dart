@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/onboarding/presentation/widgets/page_dots.dart';
 
 class NotificationPermissionPage extends StatelessWidget {
@@ -13,6 +14,7 @@ class NotificationPermissionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: AppDimensions.paddingL,
@@ -40,7 +42,7 @@ class NotificationPermissionPage extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .headlineLarge
-                ?.copyWith(color: AppColors.textPrimary),
+                ?.copyWith(color: colors.textPrimary),
           ),
           const SizedBox(height: AppDimensions.paddingS + 4),
           Padding(
@@ -56,7 +58,7 @@ class NotificationPermissionPage extends StatelessWidget {
                   .textTheme
                   .bodyLarge
                   ?.copyWith(
-                    color: AppColors.textSecondary,
+                    color: colors.textSecondary,
                     height: 1.5,
                   ),
             ),
@@ -92,7 +94,7 @@ class NotificationPermissionPage extends StatelessWidget {
                   .textTheme
                   .bodyLarge
                   ?.copyWith(
-                    color: AppColors.textSecondary,
+                    color: colors.textSecondary,
                     fontWeight: FontWeight.w500,
                   ),
             ),

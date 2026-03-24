@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/progress/domain/entities/progress_stats.dart';
 
 class HabitProgressBar extends StatelessWidget {
@@ -22,6 +23,7 @@ class HabitProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     final pct = (progress.completionRate * 100).round();
 
     return Column(
@@ -54,7 +56,7 @@ class HabitProgressBar extends StatelessWidget {
           borderRadius: BorderRadius.circular(4),
           child: LinearProgressIndicator(
             value: progress.completionRate,
-            backgroundColor: AppColors.bgCard,
+            backgroundColor: colors.bgCard,
             valueColor: AlwaysStoppedAnimation<Color>(_color),
             minHeight: 8,
           ),

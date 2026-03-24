@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/onboarding/presentation/widgets/page_dots.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -10,13 +11,14 @@ class WelcomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     return Column(
       children: [
         Expanded(
           flex: 4,
           child: Container(
             width: double.infinity,
-            color: AppColors.bgCard,
+            color: colors.bgCard,
             child: const Icon(
               Icons.eco,
               size: 120,
@@ -27,29 +29,36 @@ class WelcomePage extends StatelessWidget {
         Expanded(
           flex: 5,
           child: Padding(
-            padding: const EdgeInsets.all(AppDimensions.paddingL),
+            padding:
+                const EdgeInsets.all(AppDimensions.paddingL),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: AppDimensions.paddingXL),
+                const SizedBox(
+                    height: AppDimensions.paddingXL),
                 Text(
                   'Создавай полезные привычки',
                   style: Theme.of(context)
                       .textTheme
                       .headlineLarge
-                      ?.copyWith(color: AppColors.textPrimary),
+                      ?.copyWith(
+                          color: colors.textPrimary),
                 ),
-                const SizedBox(height: AppDimensions.paddingM),
+                const SizedBox(
+                    height: AppDimensions.paddingM),
                 Text(
-                  'HabitBoost поможет вам выработать полезные '
-                  'привычки шаг за шагом. Отслеживайте прогресс, '
-                  'получайте напоминания и достигайте целей '
+                  'HabitBoost поможет вам выработать '
+                  'полезные '
+                  'привычки шаг за шагом. Отслеживайте '
+                  'прогресс, '
+                  'получайте напоминания и достигайте '
+                  'целей '
                   'каждый день.',
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge
                       ?.copyWith(
-                        color: AppColors.textSecondary,
+                        color: colors.textSecondary,
                         height: 1.5,
                       ),
                 ),
@@ -62,7 +71,8 @@ class WelcomePage extends StatelessWidget {
                     style: FilledButton.styleFrom(
                       backgroundColor: AppColors.primary,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius:
+                            BorderRadius.circular(20),
                       ),
                     ),
                     child: const Text(
@@ -75,7 +85,8 @@ class WelcomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: AppDimensions.paddingM),
+                const SizedBox(
+                    height: AppDimensions.paddingM),
                 const PageDots(count: 3, current: 0),
               ],
             ),

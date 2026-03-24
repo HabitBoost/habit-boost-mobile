@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 
 class AuthField extends StatelessWidget {
   const AuthField({
@@ -27,16 +28,17 @@ class AuthField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           label,
-          style: const TextStyle(
+          style: TextStyle(
             fontFamily: 'DMSans',
             fontSize: 13,
             fontWeight: FontWeight.w500,
-            color: AppColors.textSecondary,
+            color: colors.textSecondary,
           ),
         ),
         const SizedBox(height: 6),
@@ -47,20 +49,20 @@ class AuthField extends StatelessWidget {
           keyboardType: keyboardType,
           textInputAction: textInputAction,
           onFieldSubmitted: onFieldSubmitted,
-          style: const TextStyle(
+          style: TextStyle(
             fontFamily: 'DMSans',
             fontSize: 15,
-            color: AppColors.textPrimary,
+            color: colors.textPrimary,
           ),
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: const TextStyle(
+            hintStyle: TextStyle(
               fontFamily: 'DMSans',
               fontSize: 15,
-              color: AppColors.textTertiary,
+              color: colors.textTertiary,
             ),
             filled: true,
-            fillColor: AppColors.bgCard,
+            fillColor: colors.bgCard,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
               borderSide: BorderSide.none,
@@ -78,9 +80,12 @@ class AuthField extends StatelessWidget {
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
-              borderSide: const BorderSide(color: AppColors.accentCoral),
+              borderSide: const BorderSide(
+                color: AppColors.accentCoral,
+              ),
             ),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 16),
             suffixIcon: suffixIcon,
             constraints: const BoxConstraints(minHeight: 48),
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/theme/app_colors_theme.dart';
 
 class MotivationCard extends StatelessWidget {
   const MotivationCard({super.key});
@@ -22,26 +23,35 @@ class MotivationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
     final quoteIndex = DateTime.now().day % _quotes.length;
 
     return Container(
       padding: const EdgeInsets.all(AppDimensions.paddingM),
       decoration: BoxDecoration(
-        color: AppColors.bgHighlight,
-        borderRadius: BorderRadius.circular(AppDimensions.radiusCard),
+        color: colors.bgHighlight,
+        borderRadius:
+            BorderRadius.circular(AppDimensions.radiusCard),
         border: Border.all(
-          color: AppColors.accentYellow.withValues(alpha: 0.3),
+          color:
+              AppColors.accentYellow.withValues(alpha: 0.3),
         ),
       ),
       child: Row(
         children: [
-          const Text('💡', style: TextStyle(fontSize: 24)),
+          const Text(
+            '\u{1F4A1}',
+            style: TextStyle(fontSize: 24),
+          ),
           const SizedBox(width: AppDimensions.paddingS),
           Expanded(
             child: Text(
               _quotes[quoteIndex],
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: AppColors.textPrimary,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(
+                    color: colors.textPrimary,
                     fontStyle: FontStyle.italic,
                   ),
             ),
