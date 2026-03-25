@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:habit_boost/app/di/injection_container.dart';
 import 'package:habit_boost/app/router/routes.dart';
 import 'package:habit_boost/core/constants/app_strings.dart';
-import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:habit_boost/features/auth/presentation/screens/forgot_password_screen.dart';
 import 'package:habit_boost/features/auth/presentation/screens/login_screen.dart';
@@ -24,6 +23,7 @@ import 'package:habit_boost/features/onboarding/presentation/screens/onboarding_
 import 'package:habit_boost/features/profile/presentation/screens/profile_screen.dart';
 import 'package:habit_boost/features/progress/presentation/bloc/progress_bloc.dart';
 import 'package:habit_boost/features/progress/presentation/screens/progress_screen.dart';
+import 'package:habit_boost/features/sos/presentation/screens/sos_screen.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
@@ -137,8 +137,7 @@ GoRouter createRouter() {
       GoRoute(
         path: Routes.sos,
         parentNavigatorKey: _rootNavigatorKey,
-        builder: (context, state) =>
-            const _PlaceholderScreen(title: 'SOS'),
+        builder: (context, state) => const SosScreen(),
       ),
     ],
   );
@@ -184,6 +183,8 @@ class _ScaffoldWithNavBar extends StatelessWidget {
       bottomNavigationBar: NavigationBar(
         selectedIndex: currentIndex,
         onDestinationSelected: (index) {
+          _shellNavigatorKey.currentState
+              ?.popUntil((route) => route.isFirst);
           context.go(_tabs[index]);
         },
         destinations: const [
@@ -208,45 +209,6 @@ class _ScaffoldWithNavBar extends StatelessWidget {
             label: AppStrings.profile,
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _PlaceholderScreen extends StatelessWidget {
-  const _PlaceholderScreen({required this.title});
-
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = AppColorsTheme.of(context);
-    return Scaffold(
-      appBar: AppBar(title: Text(title)),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              Icons.construction,
-              size: 64,
-              color: colors.textDisabled,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              title,
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Скоро здесь будет контент',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium
-                  ?.copyWith(color: colors.textSecondary),
-            ),
-          ],
-        ),
       ),
     );
   }

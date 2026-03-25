@@ -6,14 +6,20 @@ import 'package:habit_boost/features/habits/data/datasources/habits_local_dataso
 import 'package:habit_boost/features/habits/domain/entities/habit.dart';
 import 'package:habit_boost/features/habits/domain/entities/habit_completion.dart';
 import 'package:habit_boost/features/habits/domain/repositories/habits_repository.dart';
+import 'package:habit_boost/features/notifications/domain/repositories/notification_repository.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: HabitsRepository)
 class HabitsRepositoryImpl implements HabitsRepository {
-  const HabitsRepositoryImpl(this._local, this._syncService);
+  const HabitsRepositoryImpl(
+    this._local,
+    this._syncService,
+    this._notificationRepository,
+  );
 
   final HabitsLocalDataSource _local;
   final SyncService _syncService;
+  final NotificationRepository _notificationRepository;
 
   @override
   Future<Either<Failure, List<Habit>>> getTodayHabits(
@@ -47,6 +53,7 @@ class HabitsRepositoryImpl implements HabitsRepository {
         createdAt: now,
       );
       await _local.insertHabit(newHabit);
+      await _notificationRepository.scheduleForHabit(newHabit);
       await _syncService.enqueueAndSync(
         entityType: 'habit',
         entityId: newHabit.id,
@@ -63,6 +70,7 @@ class HabitsRepositoryImpl implements HabitsRepository {
   Future<Either<Failure, Habit>> updateHabit(Habit habit) async {
     try {
       await _local.updateHabit(habit);
+      await _notificationRepository.scheduleForHabit(habit);
       await _syncService.enqueueAndSync(
         entityType: 'habit',
         entityId: habit.id,
@@ -80,6 +88,7 @@ class HabitsRepositoryImpl implements HabitsRepository {
     try {
       final habit = await _local.getHabit(id);
       await _local.deleteHabit(id);
+      await _notificationRepository.cancelForHabit(id);
       await _syncService.enqueueAndSync(
         entityType: 'habit',
         entityId: id,

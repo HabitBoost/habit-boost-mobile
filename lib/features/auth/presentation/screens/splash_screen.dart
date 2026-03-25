@@ -66,8 +66,10 @@ class _SplashScreenState extends State<SplashScreen> {
     if (authState is Unauthenticated || authState is AuthError) {
       context.go(Routes.login);
     } else if (authState is Authenticated) {
-      // Wait for initial sync before navigating
-      await sl<SyncService>().pullAndMerge(authState.user.id);
+      // Wait for initial sync with a timeout to avoid hanging
+      await sl<SyncService>()
+          .pullAndMerge(authState.user.id)
+          .timeout(const Duration(seconds: 10), onTimeout: () {});
       if (!context.mounted) return;
       if (!onboardingState.isCompleted) {
         context.go(Routes.onboarding);

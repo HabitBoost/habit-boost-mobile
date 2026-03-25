@@ -237,8 +237,9 @@ class HabitDetailScreen extends StatelessWidget {
                     ?.copyWith(fontWeight: FontWeight.w600),
               ),
               Text(
-                '${habit.reminderHour.toString().padLeft(2, '0')}'
-                ':${habit.reminderMinute.toString().padLeft(2, '0')}',
+                habit.reminderTimes
+                    .map((t) => t.toStorageString())
+                    .join(', '),
                 style: Theme.of(context)
                     .textTheme
                     .bodyMedium

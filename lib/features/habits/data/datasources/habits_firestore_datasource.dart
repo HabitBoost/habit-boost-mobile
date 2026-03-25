@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:habit_boost/features/habits/data/datasources/habits_remote_datasource.dart';
 import 'package:habit_boost/features/habits/domain/entities/habit.dart';
 import 'package:habit_boost/features/habits/domain/entities/habit_completion.dart';
+import 'package:habit_boost/features/habits/domain/entities/reminder_time.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: HabitsRemoteDataSource)
@@ -81,8 +82,16 @@ class HabitsFirestoreDataSource implements HabitsRemoteDataSource {
               .toList() ??
           const [1, 2, 3, 4, 5, 6, 7],
       reminderEnabled: d['reminderEnabled'] as bool? ?? false,
-      reminderHour: d['reminderHour'] as int? ?? 8,
-      reminderMinute: d['reminderMinute'] as int? ?? 0,
+      reminderTimes: d['reminderTimes'] != null
+          ? ReminderTime.fromFirestoreList(
+              d['reminderTimes'] as List<dynamic>,
+            )
+          : [
+              ReminderTime(
+                hour: d['reminderHour'] as int? ?? 8,
+                minute: d['reminderMinute'] as int? ?? 0,
+              ),
+            ],
       createdAt: (d['createdAt'] as Timestamp?)?.toDate(),
       currentStreak: d['currentStreak'] as int? ?? 0,
       bestStreak: d['bestStreak'] as int? ?? 0,
@@ -98,8 +107,7 @@ class HabitsFirestoreDataSource implements HabitsRemoteDataSource {
       'category': h.category,
       'scheduleDays': h.scheduleDays,
       'reminderEnabled': h.reminderEnabled,
-      'reminderHour': h.reminderHour,
-      'reminderMinute': h.reminderMinute,
+      'reminderTimes': ReminderTime.toFirestoreList(h.reminderTimes),
       'createdAt': h.createdAt != null
           ? Timestamp.fromDate(h.createdAt!)
           : FieldValue.serverTimestamp(),

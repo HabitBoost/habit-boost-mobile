@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habit_boost/features/habits/domain/entities/habit.dart';
+import 'package:habit_boost/features/habits/domain/entities/reminder_time.dart';
 import 'package:habit_boost/features/habits/domain/usecases/create_habit.dart';
 import 'package:habit_boost/features/habits/domain/usecases/delete_habit.dart';
 import 'package:habit_boost/features/habits/domain/usecases/update_habit.dart';
@@ -26,7 +27,9 @@ class HabitFormBloc extends Bloc<HabitFormEvent, HabitFormState> {
     on<HabitFormCategoryChanged>(_onCategoryChanged);
     on<HabitFormDayToggled>(_onDayToggled);
     on<HabitFormReminderToggled>(_onReminderToggled);
-    on<HabitFormReminderTimeChanged>(_onReminderTimeChanged);
+    on<HabitFormReminderTimeAdded>(_onReminderTimeAdded);
+    on<HabitFormReminderTimeRemoved>(_onReminderTimeRemoved);
+    on<HabitFormReminderTimeUpdated>(_onReminderTimeUpdated);
     on<HabitFormSubmitted>(_onSubmitted);
     on<HabitFormDeleteRequested>(_onDeleteRequested);
   }
@@ -51,8 +54,7 @@ class HabitFormBloc extends Bloc<HabitFormEvent, HabitFormState> {
           category: h.category,
           scheduleDays: h.scheduleDays,
           reminderEnabled: h.reminderEnabled,
-          reminderHour: h.reminderHour,
-          reminderMinute: h.reminderMinute,
+          reminderTimes: h.reminderTimes,
         ),
       );
     }
@@ -106,16 +108,32 @@ class HabitFormBloc extends Bloc<HabitFormEvent, HabitFormState> {
     emit(state.copyWith(reminderEnabled: !state.reminderEnabled));
   }
 
-  void _onReminderTimeChanged(
-    HabitFormReminderTimeChanged event,
+  void _onReminderTimeAdded(
+    HabitFormReminderTimeAdded event,
     Emitter<HabitFormState> emit,
   ) {
-    emit(
-      state.copyWith(
-        reminderHour: event.hour,
-        reminderMinute: event.minute,
-      ),
-    );
+    final times = [...state.reminderTimes, event.time];
+    emit(state.copyWith(reminderTimes: times));
+  }
+
+  void _onReminderTimeRemoved(
+    HabitFormReminderTimeRemoved event,
+    Emitter<HabitFormState> emit,
+  ) {
+    final times = [...state.reminderTimes]..removeAt(event.index);
+    if (times.isEmpty) {
+      times.add(const ReminderTime(hour: 8, minute: 0));
+    }
+    emit(state.copyWith(reminderTimes: times));
+  }
+
+  void _onReminderTimeUpdated(
+    HabitFormReminderTimeUpdated event,
+    Emitter<HabitFormState> emit,
+  ) {
+    final times = [...state.reminderTimes];
+    times[event.index] = event.time;
+    emit(state.copyWith(reminderTimes: times));
   }
 
   Future<void> _onSubmitted(
@@ -138,8 +156,7 @@ class HabitFormBloc extends Bloc<HabitFormEvent, HabitFormState> {
       category: state.category,
       scheduleDays: state.scheduleDays,
       reminderEnabled: state.reminderEnabled,
-      reminderHour: state.reminderHour,
-      reminderMinute: state.reminderMinute,
+      reminderTimes: state.reminderTimes,
     );
 
     (state.isEditing

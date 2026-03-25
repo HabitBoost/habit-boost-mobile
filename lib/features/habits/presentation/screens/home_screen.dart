@@ -87,9 +87,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         IconButton(
                           onPressed: () => context.push(Routes.sos),
-                          icon: const Icon(
-                            Icons.favorite_outline,
-                            color: AppColors.accentCoral,
+                          icon: const Text(
+                            'SOS',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w900,
+                              color: AppColors.accentCoral,
+                              letterSpacing: 1,
+                            ),
                           ),
                         ),
                         GestureDetector(

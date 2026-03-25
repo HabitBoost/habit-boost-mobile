@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:habit_boost/app/di/injection_container.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
 import 'package:habit_boost/core/theme/app_colors_theme.dart';
+import 'package:habit_boost/features/notifications/domain/repositories/notification_repository.dart';
 import 'package:habit_boost/features/onboarding/presentation/widgets/page_dots.dart';
 
 class NotificationPermissionPage extends StatelessWidget {
@@ -68,7 +70,10 @@ class NotificationPermissionPage extends StatelessWidget {
             width: double.infinity,
             height: 52,
             child: FilledButton(
-              onPressed: onComplete,
+              onPressed: () async {
+                await sl<NotificationRepository>().requestPermission();
+                onComplete();
+              },
               style: FilledButton.styleFrom(
                 backgroundColor: AppColors.accentCoral,
                 shape: RoundedRectangleBorder(

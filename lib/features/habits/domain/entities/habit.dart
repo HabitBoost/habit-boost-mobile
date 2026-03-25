@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:habit_boost/features/habits/domain/entities/reminder_time.dart';
 
 class Habit extends Equatable {
   const Habit({
@@ -10,8 +11,7 @@ class Habit extends Equatable {
     this.category = 'Спорт',
     this.scheduleDays = const [1, 2, 3, 4, 5, 6, 7],
     this.reminderEnabled = false,
-    this.reminderHour = 8,
-    this.reminderMinute = 0,
+    this.reminderTimes = const [ReminderTime(hour: 8, minute: 0)],
     this.createdAt,
     this.currentStreak = 0,
     this.bestStreak = 0,
@@ -26,8 +26,7 @@ class Habit extends Equatable {
   final String category;
   final List<int> scheduleDays;
   final bool reminderEnabled;
-  final int reminderHour;
-  final int reminderMinute;
+  final List<ReminderTime> reminderTimes;
   final DateTime? createdAt;
   final int currentStreak;
   final int bestStreak;
@@ -42,8 +41,7 @@ class Habit extends Equatable {
     String? category,
     List<int>? scheduleDays,
     bool? reminderEnabled,
-    int? reminderHour,
-    int? reminderMinute,
+    List<ReminderTime>? reminderTimes,
     DateTime? createdAt,
     int? currentStreak,
     int? bestStreak,
@@ -58,8 +56,7 @@ class Habit extends Equatable {
       category: category ?? this.category,
       scheduleDays: scheduleDays ?? this.scheduleDays,
       reminderEnabled: reminderEnabled ?? this.reminderEnabled,
-      reminderHour: reminderHour ?? this.reminderHour,
-      reminderMinute: reminderMinute ?? this.reminderMinute,
+      reminderTimes: reminderTimes ?? this.reminderTimes,
       createdAt: createdAt ?? this.createdAt,
       currentStreak: currentStreak ?? this.currentStreak,
       bestStreak: bestStreak ?? this.bestStreak,
@@ -77,8 +74,7 @@ class Habit extends Equatable {
         category,
         scheduleDays,
         reminderEnabled,
-        reminderHour,
-        reminderMinute,
+        reminderTimes,
         createdAt,
         currentStreak,
         bestStreak,

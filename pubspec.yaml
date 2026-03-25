@@ -19,6 +19,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.0
+  flutter_local_notifications: ^18.0.1
   flutter_secure_storage: ^9.2.4
   flutter_svg: ^2.0.17
   freezed_annotation: ^3.0.0
@@ -33,6 +34,7 @@ dependencies:
   shared_preferences: ^2.3.4
   shimmer: ^3.0.0
   sqlite3_flutter_libs: ^0.5.28
+  timezone: ^0.10.0
 
 dev_dependencies:
   bloc_test: ^10.0.0

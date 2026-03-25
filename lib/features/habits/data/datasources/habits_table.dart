@@ -13,10 +13,8 @@ class HabitsTable extends Table {
       text().withDefault(const Constant('1,2,3,4,5,6,7'))();
   BoolColumn get reminderEnabled =>
       boolean().withDefault(const Constant(false))();
-  IntColumn get reminderHour =>
-      integer().withDefault(const Constant(8))();
-  IntColumn get reminderMinute =>
-      integer().withDefault(const Constant(0))();
+  TextColumn get reminderTimes =>
+      text().withDefault(const Constant('08:00'))();
   DateTimeColumn get createdAt => dateTime()();
   IntColumn get currentStreak =>
       integer().withDefault(const Constant(0))();

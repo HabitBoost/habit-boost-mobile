@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:habit_boost/app/di/injection_container.dart';
 import 'package:habit_boost/app/router/routes.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
@@ -8,11 +9,14 @@ import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/core/theme/theme_cubit.dart';
 import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:habit_boost/features/habits/presentation/bloc/habits_bloc.dart';
+import 'package:habit_boost/features/notifications/domain/repositories/notification_repository.dart';
 import 'package:habit_boost/features/profile/presentation/screens/about_screen.dart';
 import 'package:habit_boost/features/profile/presentation/screens/goals_screen.dart';
 import 'package:habit_boost/features/profile/presentation/widgets/profile_header.dart';
 import 'package:habit_boost/features/profile/presentation/widgets/settings_tile.dart';
 import 'package:habit_boost/features/progress/presentation/widgets/stats_card.dart';
+import 'package:habit_boost/features/sos/presentation/screens/sos_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -22,9 +26,13 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  static const _notifKey = 'notifications_enabled';
+  bool _notificationsEnabled = false;
+
   @override
   void initState() {
     super.initState();
+    _loadNotificationSetting();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final authState = context.read<AuthBloc>().state;
       if (authState is Authenticated) {
@@ -34,6 +42,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             );
       }
+    });
+  }
+
+  Future<void> _loadNotificationSetting() async {
+    final prefs = sl<SharedPreferences>();
+    setState(() {
+      _notificationsEnabled = prefs.getBool(_notifKey) ?? false;
+    });
+  }
+
+  Future<void> _toggleNotifications({required bool value}) async {
+    final repo = sl<NotificationRepository>();
+    final prefs = sl<SharedPreferences>();
+
+    if (value) {
+      final granted = await repo.requestPermission();
+      if (!granted) return;
+    } else {
+      await repo.cancelAll();
+    }
+
+    await prefs.setBool(_notifKey, value);
+    setState(() {
+      _notificationsEnabled = value;
     });
   }
 
@@ -139,7 +171,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
             icon: Icons.notifications_outlined,
             iconColor: AppColors.accentCoral,
             title: 'Уведомления',
-            onTap: () {},
+            trailing: Switch.adaptive(
+              value: _notificationsEnabled,
+              activeTrackColor: AppColors.primary,
+              onChanged: (value) =>
+                  _toggleNotifications(value: value),
+            ),
+            onTap: () => _toggleNotifications(
+              value: !_notificationsEnabled,
+            ),
           ),
           Divider(
             height: 1,
@@ -178,6 +218,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
               context,
               MaterialPageRoute<void>(
                 builder: (_) => const AboutScreen(),
+              ),
+            ),
+          ),
+          Divider(
+            height: 1,
+            color: colors.borderSubtle,
+          ),
+          SettingsTile(
+            icon: Icons.sos,
+            iconColor: AppColors.accentCoral,
+            title: 'SOS — экстренная помощь',
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(
+                builder: (_) => const SosScreen(),
               ),
             ),
           ),

@@ -95,29 +95,17 @@ class $HabitsTableTable extends HabitsTable
     ),
     defaultValue: const Constant(false),
   );
-  static const VerificationMeta _reminderHourMeta = const VerificationMeta(
-    'reminderHour',
+  static const VerificationMeta _reminderTimesMeta = const VerificationMeta(
+    'reminderTimes',
   );
   @override
-  late final GeneratedColumn<int> reminderHour = GeneratedColumn<int>(
-    'reminder_hour',
+  late final GeneratedColumn<String> reminderTimes = GeneratedColumn<String>(
+    'reminder_times',
     aliasedName,
     false,
-    type: DriftSqlType.int,
+    type: DriftSqlType.string,
     requiredDuringInsert: false,
-    defaultValue: const Constant(8),
-  );
-  static const VerificationMeta _reminderMinuteMeta = const VerificationMeta(
-    'reminderMinute',
-  );
-  @override
-  late final GeneratedColumn<int> reminderMinute = GeneratedColumn<int>(
-    'reminder_minute',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-    defaultValue: const Constant(0),
+    defaultValue: const Constant('08:00'),
   );
   static const VerificationMeta _createdAtMeta = const VerificationMeta(
     'createdAt',
@@ -175,8 +163,7 @@ class $HabitsTableTable extends HabitsTable
     category,
     scheduleDays,
     reminderEnabled,
-    reminderHour,
-    reminderMinute,
+    reminderTimes,
     createdAt,
     currentStreak,
     bestStreak,
@@ -251,21 +238,12 @@ class $HabitsTableTable extends HabitsTable
         ),
       );
     }
-    if (data.containsKey('reminder_hour')) {
+    if (data.containsKey('reminder_times')) {
       context.handle(
-        _reminderHourMeta,
-        reminderHour.isAcceptableOrUnknown(
-          data['reminder_hour']!,
-          _reminderHourMeta,
-        ),
-      );
-    }
-    if (data.containsKey('reminder_minute')) {
-      context.handle(
-        _reminderMinuteMeta,
-        reminderMinute.isAcceptableOrUnknown(
-          data['reminder_minute']!,
-          _reminderMinuteMeta,
+        _reminderTimesMeta,
+        reminderTimes.isAcceptableOrUnknown(
+          data['reminder_times']!,
+          _reminderTimesMeta,
         ),
       );
     }
@@ -339,13 +317,9 @@ class $HabitsTableTable extends HabitsTable
         DriftSqlType.bool,
         data['${effectivePrefix}reminder_enabled'],
       )!,
-      reminderHour: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}reminder_hour'],
-      )!,
-      reminderMinute: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}reminder_minute'],
+      reminderTimes: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}reminder_times'],
       )!,
       createdAt: attachedDatabase.typeMapping.read(
         DriftSqlType.dateTime,
@@ -381,8 +355,7 @@ class HabitsTableData extends DataClass implements Insertable<HabitsTableData> {
   final String category;
   final String scheduleDays;
   final bool reminderEnabled;
-  final int reminderHour;
-  final int reminderMinute;
+  final String reminderTimes;
   final DateTime createdAt;
   final int currentStreak;
   final int bestStreak;
@@ -396,8 +369,7 @@ class HabitsTableData extends DataClass implements Insertable<HabitsTableData> {
     required this.category,
     required this.scheduleDays,
     required this.reminderEnabled,
-    required this.reminderHour,
-    required this.reminderMinute,
+    required this.reminderTimes,
     required this.createdAt,
     required this.currentStreak,
     required this.bestStreak,
@@ -414,8 +386,7 @@ class HabitsTableData extends DataClass implements Insertable<HabitsTableData> {
     map['category'] = Variable<String>(category);
     map['schedule_days'] = Variable<String>(scheduleDays);
     map['reminder_enabled'] = Variable<bool>(reminderEnabled);
-    map['reminder_hour'] = Variable<int>(reminderHour);
-    map['reminder_minute'] = Variable<int>(reminderMinute);
+    map['reminder_times'] = Variable<String>(reminderTimes);
     map['created_at'] = Variable<DateTime>(createdAt);
     map['current_streak'] = Variable<int>(currentStreak);
     map['best_streak'] = Variable<int>(bestStreak);
@@ -435,8 +406,7 @@ class HabitsTableData extends DataClass implements Insertable<HabitsTableData> {
       category: Value(category),
       scheduleDays: Value(scheduleDays),
       reminderEnabled: Value(reminderEnabled),
-      reminderHour: Value(reminderHour),
-      reminderMinute: Value(reminderMinute),
+      reminderTimes: Value(reminderTimes),
       createdAt: Value(createdAt),
       currentStreak: Value(currentStreak),
       bestStreak: Value(bestStreak),
@@ -460,8 +430,7 @@ class HabitsTableData extends DataClass implements Insertable<HabitsTableData> {
       category: serializer.fromJson<String>(json['category']),
       scheduleDays: serializer.fromJson<String>(json['scheduleDays']),
       reminderEnabled: serializer.fromJson<bool>(json['reminderEnabled']),
-      reminderHour: serializer.fromJson<int>(json['reminderHour']),
-      reminderMinute: serializer.fromJson<int>(json['reminderMinute']),
+      reminderTimes: serializer.fromJson<String>(json['reminderTimes']),
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
       currentStreak: serializer.fromJson<int>(json['currentStreak']),
       bestStreak: serializer.fromJson<int>(json['bestStreak']),
@@ -480,8 +449,7 @@ class HabitsTableData extends DataClass implements Insertable<HabitsTableData> {
       'category': serializer.toJson<String>(category),
       'scheduleDays': serializer.toJson<String>(scheduleDays),
       'reminderEnabled': serializer.toJson<bool>(reminderEnabled),
-      'reminderHour': serializer.toJson<int>(reminderHour),
-      'reminderMinute': serializer.toJson<int>(reminderMinute),
+      'reminderTimes': serializer.toJson<String>(reminderTimes),
       'createdAt': serializer.toJson<DateTime>(createdAt),
       'currentStreak': serializer.toJson<int>(currentStreak),
       'bestStreak': serializer.toJson<int>(bestStreak),
@@ -498,8 +466,7 @@ class HabitsTableData extends DataClass implements Insertable<HabitsTableData> {
     String? category,
     String? scheduleDays,
     bool? reminderEnabled,
-    int? reminderHour,
-    int? reminderMinute,
+    String? reminderTimes,
     DateTime? createdAt,
     int? currentStreak,
     int? bestStreak,
@@ -513,8 +480,7 @@ class HabitsTableData extends DataClass implements Insertable<HabitsTableData> {
     category: category ?? this.category,
     scheduleDays: scheduleDays ?? this.scheduleDays,
     reminderEnabled: reminderEnabled ?? this.reminderEnabled,
-    reminderHour: reminderHour ?? this.reminderHour,
-    reminderMinute: reminderMinute ?? this.reminderMinute,
+    reminderTimes: reminderTimes ?? this.reminderTimes,
     createdAt: createdAt ?? this.createdAt,
     currentStreak: currentStreak ?? this.currentStreak,
     bestStreak: bestStreak ?? this.bestStreak,
@@ -534,12 +500,9 @@ class HabitsTableData extends DataClass implements Insertable<HabitsTableData> {
       reminderEnabled: data.reminderEnabled.present
           ? data.reminderEnabled.value
           : this.reminderEnabled,
-      reminderHour: data.reminderHour.present
-          ? data.reminderHour.value
-          : this.reminderHour,
-      reminderMinute: data.reminderMinute.present
-          ? data.reminderMinute.value
-          : this.reminderMinute,
+      reminderTimes: data.reminderTimes.present
+          ? data.reminderTimes.value
+          : this.reminderTimes,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
       currentStreak: data.currentStreak.present
           ? data.currentStreak.value
@@ -562,8 +525,7 @@ class HabitsTableData extends DataClass implements Insertable<HabitsTableData> {
           ..write('category: $category, ')
           ..write('scheduleDays: $scheduleDays, ')
           ..write('reminderEnabled: $reminderEnabled, ')
-          ..write('reminderHour: $reminderHour, ')
-          ..write('reminderMinute: $reminderMinute, ')
+          ..write('reminderTimes: $reminderTimes, ')
           ..write('createdAt: $createdAt, ')
           ..write('currentStreak: $currentStreak, ')
           ..write('bestStreak: $bestStreak, ')
@@ -582,8 +544,7 @@ class HabitsTableData extends DataClass implements Insertable<HabitsTableData> {
     category,
     scheduleDays,
     reminderEnabled,
-    reminderHour,
-    reminderMinute,
+    reminderTimes,
     createdAt,
     currentStreak,
     bestStreak,
@@ -601,8 +562,7 @@ class HabitsTableData extends DataClass implements Insertable<HabitsTableData> {
           other.category == this.category &&
           other.scheduleDays == this.scheduleDays &&
           other.reminderEnabled == this.reminderEnabled &&
-          other.reminderHour == this.reminderHour &&
-          other.reminderMinute == this.reminderMinute &&
+          other.reminderTimes == this.reminderTimes &&
           other.createdAt == this.createdAt &&
           other.currentStreak == this.currentStreak &&
           other.bestStreak == this.bestStreak &&
@@ -618,8 +578,7 @@ class HabitsTableCompanion extends UpdateCompanion<HabitsTableData> {
   final Value<String> category;
   final Value<String> scheduleDays;
   final Value<bool> reminderEnabled;
-  final Value<int> reminderHour;
-  final Value<int> reminderMinute;
+  final Value<String> reminderTimes;
   final Value<DateTime> createdAt;
   final Value<int> currentStreak;
   final Value<int> bestStreak;
@@ -634,8 +593,7 @@ class HabitsTableCompanion extends UpdateCompanion<HabitsTableData> {
     this.category = const Value.absent(),
     this.scheduleDays = const Value.absent(),
     this.reminderEnabled = const Value.absent(),
-    this.reminderHour = const Value.absent(),
-    this.reminderMinute = const Value.absent(),
+    this.reminderTimes = const Value.absent(),
     this.createdAt = const Value.absent(),
     this.currentStreak = const Value.absent(),
     this.bestStreak = const Value.absent(),
@@ -651,8 +609,7 @@ class HabitsTableCompanion extends UpdateCompanion<HabitsTableData> {
     this.category = const Value.absent(),
     this.scheduleDays = const Value.absent(),
     this.reminderEnabled = const Value.absent(),
-    this.reminderHour = const Value.absent(),
-    this.reminderMinute = const Value.absent(),
+    this.reminderTimes = const Value.absent(),
     required DateTime createdAt,
     this.currentStreak = const Value.absent(),
     this.bestStreak = const Value.absent(),
@@ -671,8 +628,7 @@ class HabitsTableCompanion extends UpdateCompanion<HabitsTableData> {
     Expression<String>? category,
     Expression<String>? scheduleDays,
     Expression<bool>? reminderEnabled,
-    Expression<int>? reminderHour,
-    Expression<int>? reminderMinute,
+    Expression<String>? reminderTimes,
     Expression<DateTime>? createdAt,
     Expression<int>? currentStreak,
     Expression<int>? bestStreak,
@@ -688,8 +644,7 @@ class HabitsTableCompanion extends UpdateCompanion<HabitsTableData> {
       if (category != null) 'category': category,
       if (scheduleDays != null) 'schedule_days': scheduleDays,
       if (reminderEnabled != null) 'reminder_enabled': reminderEnabled,
-      if (reminderHour != null) 'reminder_hour': reminderHour,
-      if (reminderMinute != null) 'reminder_minute': reminderMinute,
+      if (reminderTimes != null) 'reminder_times': reminderTimes,
       if (createdAt != null) 'created_at': createdAt,
       if (currentStreak != null) 'current_streak': currentStreak,
       if (bestStreak != null) 'best_streak': bestStreak,
@@ -707,8 +662,7 @@ class HabitsTableCompanion extends UpdateCompanion<HabitsTableData> {
     Value<String>? category,
     Value<String>? scheduleDays,
     Value<bool>? reminderEnabled,
-    Value<int>? reminderHour,
-    Value<int>? reminderMinute,
+    Value<String>? reminderTimes,
     Value<DateTime>? createdAt,
     Value<int>? currentStreak,
     Value<int>? bestStreak,
@@ -724,8 +678,7 @@ class HabitsTableCompanion extends UpdateCompanion<HabitsTableData> {
       category: category ?? this.category,
       scheduleDays: scheduleDays ?? this.scheduleDays,
       reminderEnabled: reminderEnabled ?? this.reminderEnabled,
-      reminderHour: reminderHour ?? this.reminderHour,
-      reminderMinute: reminderMinute ?? this.reminderMinute,
+      reminderTimes: reminderTimes ?? this.reminderTimes,
       createdAt: createdAt ?? this.createdAt,
       currentStreak: currentStreak ?? this.currentStreak,
       bestStreak: bestStreak ?? this.bestStreak,
@@ -761,11 +714,8 @@ class HabitsTableCompanion extends UpdateCompanion<HabitsTableData> {
     if (reminderEnabled.present) {
       map['reminder_enabled'] = Variable<bool>(reminderEnabled.value);
     }
-    if (reminderHour.present) {
-      map['reminder_hour'] = Variable<int>(reminderHour.value);
-    }
-    if (reminderMinute.present) {
-      map['reminder_minute'] = Variable<int>(reminderMinute.value);
+    if (reminderTimes.present) {
+      map['reminder_times'] = Variable<String>(reminderTimes.value);
     }
     if (createdAt.present) {
       map['created_at'] = Variable<DateTime>(createdAt.value);
@@ -796,8 +746,7 @@ class HabitsTableCompanion extends UpdateCompanion<HabitsTableData> {
           ..write('category: $category, ')
           ..write('scheduleDays: $scheduleDays, ')
           ..write('reminderEnabled: $reminderEnabled, ')
-          ..write('reminderHour: $reminderHour, ')
-          ..write('reminderMinute: $reminderMinute, ')
+          ..write('reminderTimes: $reminderTimes, ')
           ..write('createdAt: $createdAt, ')
           ..write('currentStreak: $currentStreak, ')
           ..write('bestStreak: $bestStreak, ')
@@ -2107,8 +2056,7 @@ typedef $$HabitsTableTableCreateCompanionBuilder =
       Value<String> category,
       Value<String> scheduleDays,
       Value<bool> reminderEnabled,
-      Value<int> reminderHour,
-      Value<int> reminderMinute,
+      Value<String> reminderTimes,
       required DateTime createdAt,
       Value<int> currentStreak,
       Value<int> bestStreak,
@@ -2125,8 +2073,7 @@ typedef $$HabitsTableTableUpdateCompanionBuilder =
       Value<String> category,
       Value<String> scheduleDays,
       Value<bool> reminderEnabled,
-      Value<int> reminderHour,
-      Value<int> reminderMinute,
+      Value<String> reminderTimes,
       Value<DateTime> createdAt,
       Value<int> currentStreak,
       Value<int> bestStreak,
@@ -2216,13 +2163,8 @@ class $$HabitsTableTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
-  ColumnFilters<int> get reminderHour => $composableBuilder(
-    column: $table.reminderHour,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<int> get reminderMinute => $composableBuilder(
-    column: $table.reminderMinute,
+  ColumnFilters<String> get reminderTimes => $composableBuilder(
+    column: $table.reminderTimes,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -2322,13 +2264,8 @@ class $$HabitsTableTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
-  ColumnOrderings<int> get reminderHour => $composableBuilder(
-    column: $table.reminderHour,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<int> get reminderMinute => $composableBuilder(
-    column: $table.reminderMinute,
+  ColumnOrderings<String> get reminderTimes => $composableBuilder(
+    column: $table.reminderTimes,
     builder: (column) => ColumnOrderings(column),
   );
 
@@ -2390,13 +2327,8 @@ class $$HabitsTableTableAnnotationComposer
     builder: (column) => column,
   );
 
-  GeneratedColumn<int> get reminderHour => $composableBuilder(
-    column: $table.reminderHour,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<int> get reminderMinute => $composableBuilder(
-    column: $table.reminderMinute,
+  GeneratedColumn<String> get reminderTimes => $composableBuilder(
+    column: $table.reminderTimes,
     builder: (column) => column,
   );
 
@@ -2479,8 +2411,7 @@ class $$HabitsTableTableTableManager
                 Value<String> category = const Value.absent(),
                 Value<String> scheduleDays = const Value.absent(),
                 Value<bool> reminderEnabled = const Value.absent(),
-                Value<int> reminderHour = const Value.absent(),
-                Value<int> reminderMinute = const Value.absent(),
+                Value<String> reminderTimes = const Value.absent(),
                 Value<DateTime> createdAt = const Value.absent(),
                 Value<int> currentStreak = const Value.absent(),
                 Value<int> bestStreak = const Value.absent(),
@@ -2495,8 +2426,7 @@ class $$HabitsTableTableTableManager
                 category: category,
                 scheduleDays: scheduleDays,
                 reminderEnabled: reminderEnabled,
-                reminderHour: reminderHour,
-                reminderMinute: reminderMinute,
+                reminderTimes: reminderTimes,
                 createdAt: createdAt,
                 currentStreak: currentStreak,
                 bestStreak: bestStreak,
@@ -2513,8 +2443,7 @@ class $$HabitsTableTableTableManager
                 Value<String> category = const Value.absent(),
                 Value<String> scheduleDays = const Value.absent(),
                 Value<bool> reminderEnabled = const Value.absent(),
-                Value<int> reminderHour = const Value.absent(),
-                Value<int> reminderMinute = const Value.absent(),
+                Value<String> reminderTimes = const Value.absent(),
                 required DateTime createdAt,
                 Value<int> currentStreak = const Value.absent(),
                 Value<int> bestStreak = const Value.absent(),
@@ -2529,8 +2458,7 @@ class $$HabitsTableTableTableManager
                 category: category,
                 scheduleDays: scheduleDays,
                 reminderEnabled: reminderEnabled,
-                reminderHour: reminderHour,
-                reminderMinute: reminderMinute,
+                reminderTimes: reminderTimes,
                 createdAt: createdAt,
                 currentStreak: currentStreak,
                 bestStreak: bestStreak,

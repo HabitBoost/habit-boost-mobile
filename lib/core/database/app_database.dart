@@ -26,7 +26,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.forTesting(super.connection);
 
   @override
-  int get schemaVersion => 3;
+  int get schemaVersion => 4;
 
   @override
   MigrationStrategy get migration {
@@ -42,6 +42,16 @@ class AppDatabase extends _$AppDatabase {
           await m.addColumn(
             habitCompletionsTable,
             habitCompletionsTable.updatedAt,
+          );
+        }
+        if (from < 4) {
+          await customStatement(
+            'ALTER TABLE habits_table ADD COLUMN '
+            "reminder_times TEXT NOT NULL DEFAULT '08:00'",
+          );
+          await customStatement(
+            'UPDATE habits_table SET reminder_times = '
+            "printf('%02d:%02d', reminder_hour, reminder_minute)",
           );
         }
       },

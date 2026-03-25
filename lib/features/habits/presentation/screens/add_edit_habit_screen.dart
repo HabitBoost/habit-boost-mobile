@@ -9,6 +9,7 @@ import 'package:habit_boost/core/constants/app_strings.dart';
 import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:habit_boost/features/habits/domain/entities/habit.dart';
+import 'package:habit_boost/features/habits/domain/entities/reminder_time.dart';
 import 'package:habit_boost/features/habits/presentation/bloc/habit_form_bloc.dart';
 import 'package:habit_boost/features/habits/presentation/widgets/habit_icon.dart';
 
@@ -368,35 +369,41 @@ class _AddEditHabitView extends StatelessWidget {
               .read<HabitFormBloc>()
               .add(const HabitFormReminderToggled()),
         ),
-        if (state.reminderEnabled)
-          ListTile(
-            contentPadding: EdgeInsets.zero,
-            title: const Text('Время'),
-            trailing: Text(
-              '${state.reminderHour.toString().padLeft(2, '0')}'
-              ':${state.reminderMinute.toString().padLeft(2, '0')}',
-              style: Theme.of(context).textTheme.titleMedium,
+        if (state.reminderEnabled) ...[
+          for (var i = 0; i < state.reminderTimes.length; i++)
+            _ReminderTimeTile(
+              index: i,
+              time: state.reminderTimes[i],
+              canDelete: state.reminderTimes.length > 1,
             ),
-            onTap: () async {
-              final time = await showTimePicker(
-                context: context,
-                initialTime: TimeOfDay(
-                  hour: state.reminderHour,
-                  minute: state.reminderMinute,
-                ),
-              );
-              if (time != null && context.mounted) {
-                context.read<HabitFormBloc>().add(
-                      HabitFormReminderTimeChanged(
-                        hour: time.hour,
-                        minute: time.minute,
-                      ),
-                    );
-              }
-            },
-          ),
+          if (state.reminderTimes.length < 10)
+            Padding(
+              padding: const EdgeInsets.only(
+                top: AppDimensions.paddingS,
+              ),
+              child: TextButton.icon(
+                onPressed: () => _addReminderTime(context),
+                icon: const Icon(Icons.add, size: 18),
+                label: const Text('Добавить напоминание'),
+              ),
+            ),
+        ],
       ],
     );
+  }
+
+  Future<void> _addReminderTime(BuildContext context) async {
+    final time = await showTimePicker(
+      context: context,
+      initialTime: const TimeOfDay(hour: 12, minute: 0),
+    );
+    if (time != null && context.mounted) {
+      context.read<HabitFormBloc>().add(
+            HabitFormReminderTimeAdded(
+              ReminderTime(hour: time.hour, minute: time.minute),
+            ),
+          );
+    }
   }
 
   void _confirmDelete(BuildContext context) {
@@ -447,6 +454,59 @@ class _SectionLabel extends StatelessWidget {
       style: Theme.of(context).textTheme.titleSmall?.copyWith(
             fontWeight: FontWeight.w600,
           ),
+    );
+  }
+}
+
+class _ReminderTimeTile extends StatelessWidget {
+  const _ReminderTimeTile({
+    required this.index,
+    required this.time,
+    required this.canDelete,
+  });
+
+  final int index;
+  final ReminderTime time;
+  final bool canDelete;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      leading: const Icon(Icons.access_time, size: 20),
+      title: Text(time.toStorageString()),
+      trailing: canDelete
+          ? IconButton(
+              icon: const Icon(
+                Icons.remove_circle_outline,
+                color: AppColors.accentCoral,
+                size: 20,
+              ),
+              onPressed: () => context
+                  .read<HabitFormBloc>()
+                  .add(HabitFormReminderTimeRemoved(index)),
+            )
+          : null,
+      onTap: () async {
+        final picked = await showTimePicker(
+          context: context,
+          initialTime: TimeOfDay(
+            hour: time.hour,
+            minute: time.minute,
+          ),
+        );
+        if (picked != null && context.mounted) {
+          context.read<HabitFormBloc>().add(
+                HabitFormReminderTimeUpdated(
+                  index: index,
+                  time: ReminderTime(
+                    hour: picked.hour,
+                    minute: picked.minute,
+                  ),
+                ),
+              );
+        }
+      },
     );
   }
 }

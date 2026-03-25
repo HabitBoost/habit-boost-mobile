@@ -4,6 +4,7 @@ import 'package:habit_boost/core/error/exceptions.dart';
 import 'package:habit_boost/core/utils/app_logger.dart';
 import 'package:habit_boost/features/habits/domain/entities/habit.dart';
 import 'package:habit_boost/features/habits/domain/entities/habit_completion.dart';
+import 'package:habit_boost/features/habits/domain/entities/reminder_time.dart';
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
@@ -69,8 +70,9 @@ class HabitsLocalDataSource {
               habit.scheduleDays.join(','),
             ),
             reminderEnabled: Value(habit.reminderEnabled),
-            reminderHour: Value(habit.reminderHour),
-            reminderMinute: Value(habit.reminderMinute),
+            reminderTimes: Value(
+              ReminderTime.toStorageList(habit.reminderTimes),
+            ),
             createdAt: habit.createdAt ?? DateTime.now(),
             currentStreak: Value(habit.currentStreak),
             bestStreak: Value(habit.bestStreak),
@@ -93,8 +95,9 @@ class HabitsLocalDataSource {
           habit.scheduleDays.join(','),
         ),
         reminderEnabled: Value(habit.reminderEnabled),
-        reminderHour: Value(habit.reminderHour),
-        reminderMinute: Value(habit.reminderMinute),
+        reminderTimes: Value(
+          ReminderTime.toStorageList(habit.reminderTimes),
+        ),
         currentStreak: Value(habit.currentStreak),
         bestStreak: Value(habit.bestStreak),
         updatedAt: Value(DateTime.now()),
@@ -174,8 +177,7 @@ class HabitsLocalDataSource {
           ? const []
           : row.scheduleDays.split(',').map(int.parse).toList(),
       reminderEnabled: row.reminderEnabled,
-      reminderHour: row.reminderHour,
-      reminderMinute: row.reminderMinute,
+      reminderTimes: ReminderTime.parseList(row.reminderTimes),
       createdAt: row.createdAt,
       currentStreak: row.currentStreak,
       bestStreak: row.bestStreak,

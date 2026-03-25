@@ -65,17 +65,35 @@ class HabitFormReminderToggled extends HabitFormEvent {
   const HabitFormReminderToggled();
 }
 
-class HabitFormReminderTimeChanged extends HabitFormEvent {
-  const HabitFormReminderTimeChanged({
-    required this.hour,
-    required this.minute,
-  });
+class HabitFormReminderTimeAdded extends HabitFormEvent {
+  const HabitFormReminderTimeAdded(this.time);
 
-  final int hour;
-  final int minute;
+  final ReminderTime time;
 
   @override
-  List<Object?> get props => [hour, minute];
+  List<Object?> get props => [time];
+}
+
+class HabitFormReminderTimeRemoved extends HabitFormEvent {
+  const HabitFormReminderTimeRemoved(this.index);
+
+  final int index;
+
+  @override
+  List<Object?> get props => [index];
+}
+
+class HabitFormReminderTimeUpdated extends HabitFormEvent {
+  const HabitFormReminderTimeUpdated({
+    required this.index,
+    required this.time,
+  });
+
+  final int index;
+  final ReminderTime time;
+
+  @override
+  List<Object?> get props => [index, time];
 }
 
 class HabitFormSubmitted extends HabitFormEvent {

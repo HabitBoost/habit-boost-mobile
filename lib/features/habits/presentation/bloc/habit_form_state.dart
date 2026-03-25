@@ -13,8 +13,7 @@ class HabitFormState extends Equatable {
     this.category = 'Спорт',
     this.scheduleDays = const [1, 2, 3, 4, 5, 6, 7],
     this.reminderEnabled = false,
-    this.reminderHour = 8,
-    this.reminderMinute = 0,
+    this.reminderTimes = const [ReminderTime(hour: 8, minute: 0)],
     this.errorMessage,
   });
 
@@ -27,8 +26,7 @@ class HabitFormState extends Equatable {
   final String category;
   final List<int> scheduleDays;
   final bool reminderEnabled;
-  final int reminderHour;
-  final int reminderMinute;
+  final List<ReminderTime> reminderTimes;
   final String? errorMessage;
 
   HabitFormState copyWith({
@@ -41,8 +39,7 @@ class HabitFormState extends Equatable {
     String? category,
     List<int>? scheduleDays,
     bool? reminderEnabled,
-    int? reminderHour,
-    int? reminderMinute,
+    List<ReminderTime>? reminderTimes,
     String? errorMessage,
   }) {
     return HabitFormState(
@@ -55,8 +52,7 @@ class HabitFormState extends Equatable {
       category: category ?? this.category,
       scheduleDays: scheduleDays ?? this.scheduleDays,
       reminderEnabled: reminderEnabled ?? this.reminderEnabled,
-      reminderHour: reminderHour ?? this.reminderHour,
-      reminderMinute: reminderMinute ?? this.reminderMinute,
+      reminderTimes: reminderTimes ?? this.reminderTimes,
       errorMessage: errorMessage,
     );
   }
@@ -72,8 +68,7 @@ class HabitFormState extends Equatable {
         category,
         scheduleDays,
         reminderEnabled,
-        reminderHour,
-        reminderMinute,
+        reminderTimes,
         errorMessage,
       ];
 }

@@ -7,6 +7,7 @@ class SettingsTile extends StatelessWidget {
     required this.iconColor,
     required this.title,
     required this.onTap,
+    this.trailing,
     super.key,
   });
 
@@ -14,6 +15,7 @@ class SettingsTile extends StatelessWidget {
   final Color iconColor;
   final String title;
   final VoidCallback onTap;
+  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +40,12 @@ class SettingsTile extends StatelessWidget {
                 ),
               ),
             ),
-            Icon(
-              Icons.chevron_right,
-              size: 18,
-              color: colors.textTertiary,
-            ),
+            trailing ??
+                Icon(
+                  Icons.chevron_right,
+                  size: 18,
+                  color: colors.textTertiary,
+                ),
           ],
         ),
       ),

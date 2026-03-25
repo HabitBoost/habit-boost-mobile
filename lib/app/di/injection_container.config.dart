@@ -86,6 +86,16 @@ import 'package:habit_boost/features/journal/domain/usecases/update_journal_entr
     as _i636;
 import 'package:habit_boost/features/journal/presentation/bloc/journal_bloc.dart'
     as _i949;
+import 'package:habit_boost/features/notifications/data/datasources/notification_service.dart'
+    as _i1035;
+import 'package:habit_boost/features/notifications/data/repositories/notification_repository_impl.dart'
+    as _i189;
+import 'package:habit_boost/features/notifications/domain/repositories/notification_repository.dart'
+    as _i722;
+import 'package:habit_boost/features/notifications/domain/usecases/cancel_habit_reminder.dart'
+    as _i984;
+import 'package:habit_boost/features/notifications/domain/usecases/schedule_habit_reminder.dart'
+    as _i478;
 import 'package:habit_boost/features/onboarding/data/datasources/onboarding_local_datasource.dart'
     as _i802;
 import 'package:habit_boost/features/onboarding/data/repositories/onboarding_repository_impl.dart'
@@ -127,11 +137,17 @@ extension GetItInjectableX on _i174.GetIt {
       () => registerModule.secureStorage,
     );
     gh.lazySingleton<_i935.AppDatabase>(() => databaseModule.database);
+    gh.lazySingleton<_i1035.NotificationService>(
+      () => _i1035.NotificationService(),
+    );
     gh.lazySingleton<_i76.AuthRemoteDataSource>(
       () => _i578.FirebaseAuthRemoteDataSource(
         gh<_i59.FirebaseAuth>(),
         gh<_i974.FirebaseFirestore>(),
       ),
+    );
+    gh.lazySingleton<_i722.NotificationRepository>(
+      () => _i189.NotificationRepositoryImpl(gh<_i1035.NotificationService>()),
     );
     gh.lazySingleton<_i1015.HabitsLocalDataSource>(
       () => _i1015.HabitsLocalDataSource(gh<_i935.AppDatabase>()),
@@ -169,6 +185,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i81.ProgressBloc>(
       () => _i81.ProgressBloc(getProgressStats: gh<_i385.GetProgressStats>()),
     );
+    gh.factory<_i984.CancelHabitReminder>(
+      () => _i984.CancelHabitReminder(gh<_i722.NotificationRepository>()),
+    );
+    gh.factory<_i478.ScheduleHabitReminder>(
+      () => _i478.ScheduleHabitReminder(gh<_i722.NotificationRepository>()),
+    );
     gh.lazySingleton<_i683.AuthRepository>(
       () => _i398.AuthRepositoryImpl(
         gh<_i76.AuthRemoteDataSource>(),
@@ -193,6 +215,31 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i974.FirebaseFirestore>(),
       ),
     );
+    gh.lazySingleton<_i419.HabitsRepository>(
+      () => _i771.HabitsRepositoryImpl(
+        gh<_i1015.HabitsLocalDataSource>(),
+        gh<_i833.SyncService>(),
+        gh<_i722.NotificationRepository>(),
+      ),
+    );
+    gh.factory<_i164.CreateHabit>(
+      () => _i164.CreateHabit(gh<_i419.HabitsRepository>()),
+    );
+    gh.factory<_i1031.DeleteHabit>(
+      () => _i1031.DeleteHabit(gh<_i419.HabitsRepository>()),
+    );
+    gh.factory<_i103.GetCompletionsForDate>(
+      () => _i103.GetCompletionsForDate(gh<_i419.HabitsRepository>()),
+    );
+    gh.factory<_i42.GetTodayHabits>(
+      () => _i42.GetTodayHabits(gh<_i419.HabitsRepository>()),
+    );
+    gh.factory<_i87.ToggleCompletion>(
+      () => _i87.ToggleCompletion(gh<_i419.HabitsRepository>()),
+    );
+    gh.factory<_i543.UpdateHabit>(
+      () => _i543.UpdateHabit(gh<_i419.HabitsRepository>()),
+    );
     gh.factory<_i162.OnboardingBloc>(
       () => _i162.OnboardingBloc(gh<_i809.OnboardingRepository>()),
     );
@@ -216,6 +263,13 @@ extension GetItInjectableX on _i174.GetIt {
         resetPassword: gh<_i161.ResetPassword>(),
       ),
     );
+    gh.factory<_i26.HabitFormBloc>(
+      () => _i26.HabitFormBloc(
+        createHabit: gh<_i164.CreateHabit>(),
+        updateHabit: gh<_i543.UpdateHabit>(),
+        deleteHabit: gh<_i1031.DeleteHabit>(),
+      ),
+    );
     gh.lazySingleton<_i851.ConnectivityListener>(
       () => _i851.ConnectivityListener(
         gh<_i895.Connectivity>(),
@@ -225,12 +279,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i249.JournalRepository>(
       () => _i1068.JournalRepositoryImpl(
         gh<_i314.JournalLocalDataSource>(),
-        gh<_i833.SyncService>(),
-      ),
-    );
-    gh.lazySingleton<_i419.HabitsRepository>(
-      () => _i771.HabitsRepositoryImpl(
-        gh<_i1015.HabitsLocalDataSource>(),
         gh<_i833.SyncService>(),
       ),
     );
@@ -252,31 +300,6 @@ extension GetItInjectableX on _i174.GetIt {
         createJournalEntry: gh<_i360.CreateJournalEntry>(),
         updateJournalEntry: gh<_i636.UpdateJournalEntry>(),
         deleteJournalEntry: gh<_i413.DeleteJournalEntry>(),
-      ),
-    );
-    gh.factory<_i164.CreateHabit>(
-      () => _i164.CreateHabit(gh<_i419.HabitsRepository>()),
-    );
-    gh.factory<_i1031.DeleteHabit>(
-      () => _i1031.DeleteHabit(gh<_i419.HabitsRepository>()),
-    );
-    gh.factory<_i103.GetCompletionsForDate>(
-      () => _i103.GetCompletionsForDate(gh<_i419.HabitsRepository>()),
-    );
-    gh.factory<_i42.GetTodayHabits>(
-      () => _i42.GetTodayHabits(gh<_i419.HabitsRepository>()),
-    );
-    gh.factory<_i87.ToggleCompletion>(
-      () => _i87.ToggleCompletion(gh<_i419.HabitsRepository>()),
-    );
-    gh.factory<_i543.UpdateHabit>(
-      () => _i543.UpdateHabit(gh<_i419.HabitsRepository>()),
-    );
-    gh.factory<_i26.HabitFormBloc>(
-      () => _i26.HabitFormBloc(
-        createHabit: gh<_i164.CreateHabit>(),
-        updateHabit: gh<_i543.UpdateHabit>(),
-        deleteHabit: gh<_i1031.DeleteHabit>(),
       ),
     );
     gh.factory<_i342.HabitsBloc>(
