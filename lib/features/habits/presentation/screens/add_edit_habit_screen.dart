@@ -28,10 +28,26 @@ class AddEditHabitScreen extends StatelessWidget {
   }
 }
 
-class _AddEditHabitView extends StatelessWidget {
+class _AddEditHabitView extends StatefulWidget {
   const _AddEditHabitView({required this.isEditing});
 
   final bool isEditing;
+
+  @override
+  State<_AddEditHabitView> createState() => _AddEditHabitViewState();
+}
+
+class _AddEditHabitViewState extends State<_AddEditHabitView> {
+  final _titleController = TextEditingController();
+  bool _titleInitialized = false;
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    super.dispose();
+  }
+
+  bool get isEditing => widget.isEditing;
 
   static const _categories = [
     'Спорт',
@@ -116,6 +132,11 @@ class _AddEditHabitView extends StatelessWidget {
           padding: const EdgeInsets.all(AppDimensions.paddingM),
           child: BlocBuilder<HabitFormBloc, HabitFormState>(
             builder: (context, state) {
+              if (!_titleInitialized &&
+                  state.title.isNotEmpty) {
+                _titleInitialized = true;
+                _titleController.text = state.title;
+              }
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -123,7 +144,7 @@ class _AddEditHabitView extends StatelessWidget {
                   const _SectionLabel(label: AppStrings.habitTitle),
                   const SizedBox(height: AppDimensions.paddingS),
                   TextFormField(
-                    initialValue: state.title,
+                    controller: _titleController,
                     onChanged: (v) => context
                         .read<HabitFormBloc>()
                         .add(HabitFormTitleChanged(v)),

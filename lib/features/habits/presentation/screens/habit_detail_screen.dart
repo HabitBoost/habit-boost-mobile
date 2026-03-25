@@ -1,20 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:habit_boost/app/di/injection_container.dart';
 import 'package:habit_boost/app/router/routes.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
 import 'package:habit_boost/core/constants/app_strings.dart';
 import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/habits/domain/entities/habit.dart';
+import 'package:habit_boost/features/habits/domain/repositories/habits_repository.dart';
 import 'package:habit_boost/features/habits/presentation/widgets/habit_icon.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class HabitDetailScreen extends StatelessWidget {
+class HabitDetailScreen extends StatefulWidget {
   const HabitDetailScreen({required this.habit, super.key});
 
   final Habit habit;
 
+  @override
+  State<HabitDetailScreen> createState() => _HabitDetailScreenState();
+}
+
+class _HabitDetailScreenState extends State<HabitDetailScreen> {
+  late Habit _habit;
+  bool _notificationsEnabled = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _habit = widget.habit;
+    _loadNotificationSetting();
+  }
+
+  Future<void> _loadNotificationSetting() async {
+    final prefs = sl<SharedPreferences>();
+    final enabled = prefs.getBool('notifications_enabled') ?? true;
+    if (mounted) {
+      setState(() => _notificationsEnabled = enabled);
+    }
+  }
+
+  Future<void> _openEdit() async {
+    final result = await context.push<bool>(
+      Routes.editHabit,
+      extra: _habit,
+    );
+    if ((result ?? false) && mounted) {
+      final either =
+          await sl<HabitsRepository>().getHabit(_habit.id);
+      either.fold(
+        (_) {},
+        (updated) => setState(() => _habit = updated),
+      );
+      // Re-check notification setting in case user toggled it.
+      await _loadNotificationSetting();
+    }
+  }
+
   Color get _habitColor {
-    final hexCode = habit.color.replaceAll('#', '');
+    final hexCode = _habit.color.replaceAll('#', '');
     return Color(int.parse('FF$hexCode', radix: 16));
   }
 
@@ -26,10 +69,7 @@ class HabitDetailScreen extends StatelessWidget {
         title: const Text('Детали привычки'),
         actions: [
           IconButton(
-            onPressed: () => context.push(
-              Routes.editHabit,
-              extra: habit,
-            ),
+            onPressed: _openEdit,
             icon: const Icon(Icons.edit_outlined),
           ),
         ],
@@ -39,21 +79,13 @@ class HabitDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Header card
             _buildHeaderCard(context),
             const SizedBox(height: AppDimensions.paddingM),
-
-            // Stats grid
             _buildStatsGrid(context),
             const SizedBox(height: AppDimensions.paddingL),
-
-            // Schedule info
             _buildScheduleSection(context, colors),
             const SizedBox(height: AppDimensions.paddingL),
-
-            // Reminder info
-            if (habit.reminderEnabled)
-              _buildReminderInfo(context, colors),
+            _buildReminderSection(context, colors),
           ],
         ),
       ),
@@ -78,13 +110,13 @@ class HabitDetailScreen extends StatelessWidget {
       child: Column(
         children: [
           HabitIcon(
-            icon: habit.icon,
+            icon: _habit.icon,
             color: Colors.white,
             size: 64,
           ),
           const SizedBox(height: AppDimensions.paddingM),
           Text(
-            habit.title,
+            _habit.title,
             style: Theme.of(context)
                 .textTheme
                 .headlineSmall
@@ -107,7 +139,7 @@ class HabitDetailScreen extends StatelessWidget {
               ),
             ),
             child: Text(
-              habit.category,
+              _habit.category,
               style: Theme.of(context)
                   .textTheme
                   .labelMedium
@@ -127,7 +159,7 @@ class HabitDetailScreen extends StatelessWidget {
             icon: Icons.local_fire_department,
             iconColor: AppColors.accentOrange,
             label: AppStrings.currentStreak,
-            value: '${habit.currentStreak}',
+            value: '${_habit.currentStreak}',
           ),
         ),
         const SizedBox(width: AppDimensions.paddingS),
@@ -136,7 +168,7 @@ class HabitDetailScreen extends StatelessWidget {
             icon: Icons.emoji_events,
             iconColor: AppColors.accentYellow,
             label: AppStrings.bestStreak,
-            value: '${habit.bestStreak}',
+            value: '${_habit.bestStreak}',
           ),
         ),
       ],
@@ -172,7 +204,7 @@ class HabitDetailScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(7, (index) {
             final day = index + 1;
-            final isActive = habit.scheduleDays.contains(day);
+            final isActive = _habit.scheduleDays.contains(day);
             return Container(
               width: 40,
               height: 40,
@@ -207,48 +239,111 @@ class HabitDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildReminderInfo(
+  Widget _buildReminderSection(
     BuildContext context,
     AppColorsTheme colors,
   ) {
-    return Container(
-      padding: const EdgeInsets.all(AppDimensions.paddingM),
-      decoration: BoxDecoration(
-        color: colors.bgCard,
-        borderRadius: BorderRadius.circular(
-          AppDimensions.radiusCard,
-        ),
-      ),
-      child: Row(
-        children: [
-          const Icon(
-            Icons.notifications_outlined,
-            color: AppColors.primary,
+    if (!_habit.reminderEnabled) {
+      return const SizedBox.shrink();
+    }
+
+    final showWarning =
+        _habit.reminderEnabled && !_notificationsEnabled;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(AppDimensions.paddingM),
+          decoration: BoxDecoration(
+            color: colors.bgCard,
+            borderRadius: BorderRadius.circular(
+              AppDimensions.radiusCard,
+            ),
           ),
-          const SizedBox(width: AppDimensions.paddingM),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
             children: [
-              Text(
-                'Напоминание',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall
-                    ?.copyWith(fontWeight: FontWeight.w600),
+              const Icon(
+                Icons.notifications_outlined,
+                color: AppColors.primary,
               ),
-              Text(
-                habit.reminderTimes
-                    .map((t) => t.toStorageString())
-                    .join(', '),
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium
-                    ?.copyWith(color: colors.textSecondary),
+              const SizedBox(width: AppDimensions.paddingM),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Напоминание',
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleSmall
+                          ?.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                    ),
+                    Text(
+                      _habit.reminderTimes
+                          .map((t) => t.toStorageString())
+                          .join(', '),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(
+                            color: colors.textSecondary,
+                          ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
+        ),
+        if (showWarning) ...[
+          const SizedBox(height: AppDimensions.paddingS),
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppDimensions.paddingM,
+              vertical: AppDimensions.paddingS,
+            ),
+            decoration: BoxDecoration(
+              color: AppColors.accentOrange.withValues(
+                alpha: 0.1,
+              ),
+              borderRadius: BorderRadius.circular(
+                AppDimensions.radiusCard,
+              ),
+              border: Border.all(
+                color: AppColors.accentOrange.withValues(
+                  alpha: 0.3,
+                ),
+              ),
+            ),
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.notifications_off_outlined,
+                  color: AppColors.accentOrange,
+                  size: 20,
+                ),
+                const SizedBox(width: AppDimensions.paddingS),
+                Expanded(
+                  child: Text(
+                    'Уведомления отключены в настройках. '
+                    'Включите их в профиле, чтобы '
+                    'получать напоминания.',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodySmall
+                        ?.copyWith(
+                          color: AppColors.accentOrange,
+                        ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
-      ),
+      ],
     );
   }
 }
