@@ -138,8 +138,9 @@ class NotificationService {
 
   /// Deterministic notification ID from habit ID + reminder index + weekday.
   ///
-  /// The result must fit in a signed 32-bit integer (flutter_local_notifications
-  /// requirement). We truncate the hash to leave room for the suffix
+  /// The result must fit in a signed 32-bit integer 
+  /// (flutter_local_notifications requirement).
+  /// We truncate the hash to leave room for the suffix
   /// (reminderIndex 0-9 × 10 + weekday 1-7 → max 97), keeping the sign bit
   /// clear so IDs stay positive.
   int _notificationId(String habitId, int reminderIndex, int weekday) {
