@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:habit_boost/app/router/routes.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/extensions/l10n_extension.dart';
 import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/core/utils/validators.dart';
 import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
@@ -41,8 +42,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(
-          const SnackBar(
-            content: Text('Примите условия использования'),
+          SnackBar(
+            content: Text(context.l10n.authAcceptTerms),
           ),
         );
       return;
@@ -59,6 +60,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     final colors = AppColorsTheme.of(context);
+    final l10n = context.l10n;
     return Scaffold(
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
@@ -83,7 +85,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Column(
                 children: [
                   Text(
-                    'Создать аккаунт',
+                    l10n.authRegisterTitle,
                     style: Theme.of(context)
                         .textTheme
                         .headlineLarge
@@ -95,21 +97,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: AppDimensions.paddingL,
                   ),
                   AuthField(
-                    label: 'Имя',
-                    hint: 'Ваше имя',
+                    label: l10n.authName,
+                    hint: l10n.authNameHint,
                     controller: _nameController,
-                    validator: (v) =>
-                        Validators.required(v, 'Имя'),
+                    validator: (v) => Validators.required(
+                      v,
+                      l10n,
+                      l10n.authName,
+                    ),
                     textInputAction: TextInputAction.next,
                   ),
                   const SizedBox(
                     height: AppDimensions.paddingM,
                   ),
                   AuthField(
-                    label: 'Email',
-                    hint: 'example@email.com',
+                    label: l10n.authEmail,
+                    hint: l10n.authEmailHint,
                     controller: _emailController,
-                    validator: Validators.email,
+                    validator: (v) =>
+                        Validators.email(v, l10n),
                     keyboardType:
                         TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
@@ -118,11 +124,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: AppDimensions.paddingM,
                   ),
                   AuthField(
-                    label: 'Пароль',
+                    label: l10n.authPassword,
                     hint: '\u2022\u2022\u2022\u2022'
                         '\u2022\u2022\u2022\u2022',
                     controller: _passwordController,
-                    validator: Validators.password,
+                    validator: (v) =>
+                        Validators.password(v, l10n),
                     obscureText: _obscurePassword,
                     textInputAction: TextInputAction.next,
                     suffixIcon: IconButton(
@@ -143,7 +150,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: AppDimensions.paddingM,
                   ),
                   AuthField(
-                    label: 'Подтвердите пароль',
+                    label: l10n.authConfirmPassword,
                     hint: '\u2022\u2022\u2022\u2022'
                         '\u2022\u2022\u2022\u2022',
                     controller: _confirmPasswordController,
@@ -151,6 +158,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Validators.confirmPassword(
                       v,
                       _passwordController.text,
+                      l10n,
                     ),
                     obscureText: _obscureConfirm,
                     textInputAction: TextInputAction.done,
@@ -204,9 +212,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     color: Colors.white,
                                   ),
                                 )
-                              : const Text(
-                                  'Зарегистрироваться',
-                                  style: TextStyle(
+                              : Text(
+                                  l10n.authRegister,
+                                  style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight:
                                         FontWeight.w600,
@@ -225,7 +233,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Уже есть аккаунт? ',
+                        l10n.authHaveAccount,
                         style: Theme.of(context)
                             .textTheme
                             .bodyMedium
@@ -236,7 +244,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       GestureDetector(
                         onTap: () => context.pop(),
                         child: Text(
-                          'Войти',
+                          l10n.authLogin,
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium
@@ -290,7 +298,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           const SizedBox(width: 10),
           Expanded(
             child: Text(
-              'Согласен с условиями использования',
+              context.l10n.authAgreeTerms,
               style: Theme.of(context)
                   .textTheme
                   .labelMedium

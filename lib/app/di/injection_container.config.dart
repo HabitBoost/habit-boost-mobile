@@ -16,6 +16,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:habit_boost/app/di/register_module.dart' as _i258;
 import 'package:habit_boost/core/database/app_database.dart' as _i935;
+import 'package:habit_boost/core/locale/locale_cubit.dart' as _i371;
 import 'package:habit_boost/core/network/network_info.dart' as _i931;
 import 'package:habit_boost/core/sync/connectivity_listener.dart' as _i851;
 import 'package:habit_boost/core/sync/sync_service.dart' as _i833;
@@ -146,9 +147,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i974.FirebaseFirestore>(),
       ),
     );
-    gh.lazySingleton<_i722.NotificationRepository>(
-      () => _i189.NotificationRepositoryImpl(gh<_i1035.NotificationService>()),
-    );
     gh.lazySingleton<_i1015.HabitsLocalDataSource>(
       () => _i1015.HabitsLocalDataSource(gh<_i935.AppDatabase>()),
     );
@@ -161,8 +159,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i497.ProgressRepository>(
       () => _i453.ProgressRepositoryImpl(gh<_i382.ProgressLocalDataSource>()),
     );
+    gh.factory<_i371.LocaleCubit>(
+      () => _i371.LocaleCubit(gh<_i460.SharedPreferences>()),
+    );
     gh.factory<_i294.ThemeCubit>(
       () => _i294.ThemeCubit(gh<_i460.SharedPreferences>()),
+    );
+    gh.lazySingleton<_i722.NotificationRepository>(
+      () => _i189.NotificationRepositoryImpl(
+        gh<_i1035.NotificationService>(),
+        gh<_i460.SharedPreferences>(),
+      ),
     );
     gh.factory<_i385.GetProgressStats>(
       () => _i385.GetProgressStats(gh<_i497.ProgressRepository>()),

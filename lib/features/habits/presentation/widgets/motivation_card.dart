@@ -1,30 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/extensions/l10n_extension.dart';
 import 'package:habit_boost/core/theme/app_colors_theme.dart';
+import 'package:habit_boost/l10n/app_localizations.dart';
 
 class MotivationCard extends StatelessWidget {
   const MotivationCard({super.key});
 
-  // TODO(sergey): fetch from remote or local quotes list
-  static const _quotes = [
-    // Russian string cannot be split mid-word.
-    // ignore: lines_longer_than_80_chars
-    'Маленькие ежедневные улучшения — ключ к ошеломляющим долгосрочным результатам.',
-    // Russian string cannot be split mid-word.
-    // ignore: lines_longer_than_80_chars
-    'Вы не поднимаетесь до уровня своих целей. Вы опускаетесь до уровня своих систем.',
-    'Привычка — это не финишная черта, а образ жизни.',
-    // Russian string cannot be split mid-word.
-    // ignore: lines_longer_than_80_chars
-    'Лучшее время посадить дерево было 20 лет назад. Второе лучшее время — сейчас.',
-    'Дисциплина — это мост между целями и достижениями.',
-  ];
+  static List<String> _quotes(AppLocalizations l10n) => [
+        l10n.quote0,
+        l10n.quote1,
+        l10n.quote2,
+        l10n.quote3,
+        l10n.quote4,
+      ];
 
   @override
   Widget build(BuildContext context) {
     final colors = AppColorsTheme.of(context);
-    final quoteIndex = DateTime.now().day % _quotes.length;
+    final quotes = _quotes(context.l10n);
+    final quoteIndex = DateTime.now().day % quotes.length;
 
     return Container(
       padding: const EdgeInsets.all(AppDimensions.paddingM),
@@ -46,7 +42,7 @@ class MotivationCard extends StatelessWidget {
           const SizedBox(width: AppDimensions.paddingS),
           Expanded(
             child: Text(
-              _quotes[quoteIndex],
+              quotes[quoteIndex],
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium

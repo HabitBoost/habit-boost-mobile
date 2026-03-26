@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/extensions/l10n_extension.dart';
 
 class StreakBanner extends StatelessWidget {
   const StreakBanner({
@@ -14,6 +15,7 @@ class StreakBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final progress = totalCount > 0 ? completedCount / totalCount : 0.0;
     final allDone = completedCount == totalCount && totalCount > 0;
 
@@ -49,8 +51,11 @@ class StreakBanner extends StatelessWidget {
               children: [
                 Text(
                   allDone
-                      ? 'Все привычки выполнены!'
-                      : 'Выполнено $completedCount из $totalCount',
+                      ? l10n.streakAllDone
+                      : l10n.streakProgress(
+                          completedCount,
+                          totalCount,
+                        ),
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,

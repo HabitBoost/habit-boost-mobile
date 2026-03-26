@@ -1,17 +1,32 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:habit_boost/l10n/app_localizations.dart';
 
 enum Mood {
-  great(Icons.sentiment_very_satisfied, 'Отлично'),
-  good(Icons.sentiment_satisfied, 'Хорошо'),
-  neutral(Icons.sentiment_neutral, 'Нормально'),
-  bad(Icons.sentiment_dissatisfied, 'Плохо'),
-  terrible(Icons.sentiment_very_dissatisfied, 'Ужасно');
+  great(Icons.sentiment_very_satisfied),
+  good(Icons.sentiment_satisfied),
+  neutral(Icons.sentiment_neutral),
+  bad(Icons.sentiment_dissatisfied),
+  terrible(Icons.sentiment_very_dissatisfied);
 
-  const Mood(this.icon, this.label);
+  const Mood(this.icon);
 
   final IconData icon;
-  final String label;
+
+  String localizedLabel(AppLocalizations l10n) {
+    switch (this) {
+      case Mood.great:
+        return l10n.moodGreat;
+      case Mood.good:
+        return l10n.moodGood;
+      case Mood.neutral:
+        return l10n.moodNeutral;
+      case Mood.bad:
+        return l10n.moodBad;
+      case Mood.terrible:
+        return l10n.moodTerrible;
+    }
+  }
 
   static Mood fromString(String value) {
     return Mood.values.firstWhere(

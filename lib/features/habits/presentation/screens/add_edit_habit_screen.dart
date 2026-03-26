@@ -5,13 +5,14 @@ import 'package:habit_boost/app/di/injection_container.dart';
 import 'package:habit_boost/app/router/routes.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
-import 'package:habit_boost/core/constants/app_strings.dart';
+import 'package:habit_boost/core/extensions/l10n_extension.dart';
 import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:habit_boost/features/habits/domain/entities/habit.dart';
 import 'package:habit_boost/features/habits/domain/entities/reminder_time.dart';
 import 'package:habit_boost/features/habits/presentation/bloc/habit_form_bloc.dart';
 import 'package:habit_boost/features/habits/presentation/widgets/habit_icon.dart';
+import 'package:habit_boost/l10n/app_localizations.dart';
 
 class AddEditHabitScreen extends StatelessWidget {
   const AddEditHabitScreen({this.habit, super.key});
@@ -49,14 +50,33 @@ class _AddEditHabitViewState extends State<_AddEditHabitView> {
 
   bool get isEditing => widget.isEditing;
 
-  static const _categories = [
-    'Спорт',
-    'Здоровье',
-    'Продуктивность',
-    'Ментальное здоровье',
-    'Питание',
-    'Обучение',
+  static const _categoryKeys = [
+    'sport',
+    'health',
+    'productivity',
+    'mentalHealth',
+    'nutrition',
+    'learning',
   ];
+
+  static String _categoryLabel(String key, AppLocalizations l10n) {
+    switch (key) {
+      case 'sport':
+        return l10n.categorySport;
+      case 'health':
+        return l10n.categoryHealth;
+      case 'productivity':
+        return l10n.categoryProductivity;
+      case 'mentalHealth':
+        return l10n.categoryMentalHealth;
+      case 'nutrition':
+        return l10n.categoryNutrition;
+      case 'learning':
+        return l10n.categoryLearning;
+      default:
+        return key;
+    }
+  }
 
   static const _colors = [
     '#4CAF50',
@@ -90,11 +110,10 @@ class _AddEditHabitViewState extends State<_AddEditHabitView> {
     'write',
   ];
 
-  static const _dayLabels = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
-
   @override
   Widget build(BuildContext context) {
     final colors = AppColorsTheme.of(context);
+    final l10n = context.l10n;
     return BlocListener<HabitFormBloc, HabitFormState>(
       listenWhen: (prev, curr) =>
           prev.status != curr.status ||
@@ -115,7 +134,7 @@ class _AddEditHabitViewState extends State<_AddEditHabitView> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            isEditing ? AppStrings.editHabit : AppStrings.addHabit,
+            isEditing ? l10n.habitEdit : l10n.habitAdd,
           ),
           actions: [
             if (isEditing)
@@ -141,43 +160,43 @@ class _AddEditHabitViewState extends State<_AddEditHabitView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Title field
-                  const _SectionLabel(label: AppStrings.habitTitle),
+                  _SectionLabel(label: l10n.habitTitle),
                   const SizedBox(height: AppDimensions.paddingS),
                   TextFormField(
                     controller: _titleController,
                     onChanged: (v) => context
                         .read<HabitFormBloc>()
                         .add(HabitFormTitleChanged(v)),
-                    decoration: const InputDecoration(
-                      hintText: 'Например: Утренняя пробежка',
+                    decoration: InputDecoration(
+                      hintText: l10n.habitTitleHint,
                     ),
                   ),
 
                   const SizedBox(height: AppDimensions.paddingL),
 
                   // Icon picker
-                  const _SectionLabel(label: 'Иконка'),
+                  _SectionLabel(label: l10n.habitIcon),
                   const SizedBox(height: AppDimensions.paddingS),
                   _buildIconPicker(context, state, colors),
 
                   const SizedBox(height: AppDimensions.paddingL),
 
                   // Color picker
-                  const _SectionLabel(label: 'Цвет'),
+                  _SectionLabel(label: l10n.habitColor),
                   const SizedBox(height: AppDimensions.paddingS),
                   _buildColorPicker(context, state, colors),
 
                   const SizedBox(height: AppDimensions.paddingL),
 
                   // Category chips
-                  const _SectionLabel(label: 'Категория'),
+                  _SectionLabel(label: l10n.habitCategory),
                   const SizedBox(height: AppDimensions.paddingS),
                   _buildCategoryChips(context, state),
 
                   const SizedBox(height: AppDimensions.paddingL),
 
                   // Day selector
-                  const _SectionLabel(label: 'Дни недели'),
+                  _SectionLabel(label: l10n.habitDaysOfWeek),
                   const SizedBox(height: AppDimensions.paddingS),
                   _buildDaySelector(context, state, colors),
 
@@ -219,7 +238,7 @@ class _AddEditHabitViewState extends State<_AddEditHabitView> {
                                 color: Colors.white,
                               ),
                             )
-                          : const Text(AppStrings.save),
+                          : Text(l10n.save),
                     ),
                   ),
 
@@ -314,17 +333,18 @@ class _AddEditHabitViewState extends State<_AddEditHabitView> {
     BuildContext context,
     HabitFormState state,
   ) {
+    final l10n = context.l10n;
     return Wrap(
       spacing: AppDimensions.paddingS,
       runSpacing: AppDimensions.paddingS,
-      children: _categories.map((cat) {
-        final isSelected = state.category == cat;
+      children: _categoryKeys.map((key) {
+        final isSelected = state.category == key;
         return ChoiceChip(
-          label: Text(cat),
+          label: Text(_categoryLabel(key, l10n)),
           selected: isSelected,
           onSelected: (_) => context
               .read<HabitFormBloc>()
-              .add(HabitFormCategoryChanged(cat)),
+              .add(HabitFormCategoryChanged(key)),
         );
       }).toList(),
     );
@@ -335,6 +355,17 @@ class _AddEditHabitViewState extends State<_AddEditHabitView> {
     HabitFormState state,
     AppColorsTheme colors,
   ) {
+    final l10n = context.l10n;
+    final dayLabels = [
+      l10n.dayMon,
+      l10n.dayTue,
+      l10n.dayWed,
+      l10n.dayThu,
+      l10n.dayFri,
+      l10n.daySat,
+      l10n.daySun,
+    ];
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: List.generate(7, (index) {
@@ -358,7 +389,7 @@ class _AddEditHabitViewState extends State<_AddEditHabitView> {
             ),
             alignment: Alignment.center,
             child: Text(
-              _dayLabels[index],
+              dayLabels[index],
               style: Theme.of(context)
                   .textTheme
                   .labelMedium
@@ -379,12 +410,13 @@ class _AddEditHabitViewState extends State<_AddEditHabitView> {
     BuildContext context,
     HabitFormState state,
   ) {
+    final l10n = context.l10n;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
-          title: const Text('Напоминание'),
+          title: Text(l10n.habitReminder),
           value: state.reminderEnabled,
           onChanged: (_) => context
               .read<HabitFormBloc>()
@@ -405,7 +437,7 @@ class _AddEditHabitViewState extends State<_AddEditHabitView> {
               child: TextButton.icon(
                 onPressed: () => _addReminderTime(context),
                 icon: const Icon(Icons.add, size: 18),
-                label: const Text('Добавить напоминание'),
+                label: Text(l10n.habitAddReminder),
               ),
             ),
         ],
@@ -428,17 +460,16 @@ class _AddEditHabitViewState extends State<_AddEditHabitView> {
   }
 
   void _confirmDelete(BuildContext context) {
+    final l10n = context.l10n;
     showDialog<void>(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: const Text(AppStrings.deleteHabit),
-        content: const Text(
-          'Вы уверены, что хотите удалить эту привычку?',
-        ),
+        title: Text(l10n.habitDelete),
+        content: Text(l10n.habitDeleteConfirm),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(dialogContext),
-            child: const Text(AppStrings.cancel),
+            child: Text(l10n.cancel),
           ),
           TextButton(
             onPressed: () {
@@ -447,9 +478,9 @@ class _AddEditHabitViewState extends State<_AddEditHabitView> {
                   .read<HabitFormBloc>()
                   .add(const HabitFormDeleteRequested());
             },
-            child: const Text(
-              AppStrings.deleteHabit,
-              style: TextStyle(color: AppColors.accentCoral),
+            child: Text(
+              l10n.habitDelete,
+              style: const TextStyle(color: AppColors.accentCoral),
             ),
           ),
         ],

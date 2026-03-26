@@ -10,7 +10,7 @@ class HabitFormState extends Equatable {
     this.title = '',
     this.icon = 'dumbbell',
     this.color = '#4CAF50',
-    this.category = 'Спорт',
+    this.category = 'sport',
     this.scheduleDays = const [1, 2, 3, 4, 5, 6, 7],
     this.reminderEnabled = false,
     this.reminderTimes = const [ReminderTime(hour: 8, minute: 0)],

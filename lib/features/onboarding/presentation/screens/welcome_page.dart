@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/extensions/l10n_extension.dart';
 import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/onboarding/presentation/widgets/page_dots.dart';
 
@@ -12,6 +13,7 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = AppColorsTheme.of(context);
+    final l10n = context.l10n;
     return Column(
       children: [
         Expanded(
@@ -37,7 +39,7 @@ class WelcomePage extends StatelessWidget {
                 const SizedBox(
                     height: AppDimensions.paddingXL),
                 Text(
-                  'Создавай полезные привычки',
+                  l10n.onboardingWelcomeTitle,
                   style: Theme.of(context)
                       .textTheme
                       .headlineLarge
@@ -47,13 +49,7 @@ class WelcomePage extends StatelessWidget {
                 const SizedBox(
                     height: AppDimensions.paddingM),
                 Text(
-                  'HabitBoost поможет вам выработать '
-                  'полезные '
-                  'привычки шаг за шагом. Отслеживайте '
-                  'прогресс, '
-                  'получайте напоминания и достигайте '
-                  'целей '
-                  'каждый день.',
+                  l10n.onboardingWelcomeDesc,
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge
@@ -75,9 +71,9 @@ class WelcomePage extends StatelessWidget {
                             BorderRadius.circular(20),
                       ),
                     ),
-                    child: const Text(
-                      'Далее',
-                      style: TextStyle(
+                    child: Text(
+                      l10n.next,
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                         color: Colors.white,

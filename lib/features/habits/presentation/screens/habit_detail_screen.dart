@@ -4,11 +4,12 @@ import 'package:habit_boost/app/di/injection_container.dart';
 import 'package:habit_boost/app/router/routes.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
-import 'package:habit_boost/core/constants/app_strings.dart';
+import 'package:habit_boost/core/extensions/l10n_extension.dart';
 import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/habits/domain/entities/habit.dart';
 import 'package:habit_boost/features/habits/domain/repositories/habits_repository.dart';
 import 'package:habit_boost/features/habits/presentation/widgets/habit_icon.dart';
+import 'package:habit_boost/l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HabitDetailScreen extends StatefulWidget {
@@ -61,12 +62,32 @@ class _HabitDetailScreenState extends State<HabitDetailScreen> {
     return Color(int.parse('FF$hexCode', radix: 16));
   }
 
+  static String _categoryLabel(String key, AppLocalizations l10n) {
+    switch (key) {
+      case 'sport':
+        return l10n.categorySport;
+      case 'health':
+        return l10n.categoryHealth;
+      case 'productivity':
+        return l10n.categoryProductivity;
+      case 'mentalHealth':
+        return l10n.categoryMentalHealth;
+      case 'nutrition':
+        return l10n.categoryNutrition;
+      case 'learning':
+        return l10n.categoryLearning;
+      default:
+        return key;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final colors = AppColorsTheme.of(context);
+    final l10n = context.l10n;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Детали привычки'),
+        title: Text(l10n.habitDetail),
         actions: [
           IconButton(
             onPressed: _openEdit,
@@ -93,6 +114,7 @@ class _HabitDetailScreenState extends State<HabitDetailScreen> {
   }
 
   Widget _buildHeaderCard(BuildContext context) {
+    final l10n = context.l10n;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(AppDimensions.paddingL),
@@ -139,7 +161,7 @@ class _HabitDetailScreenState extends State<HabitDetailScreen> {
               ),
             ),
             child: Text(
-              _habit.category,
+              _categoryLabel(_habit.category, l10n),
               style: Theme.of(context)
                   .textTheme
                   .labelMedium
@@ -152,13 +174,14 @@ class _HabitDetailScreenState extends State<HabitDetailScreen> {
   }
 
   Widget _buildStatsGrid(BuildContext context) {
+    final l10n = context.l10n;
     return Row(
       children: [
         Expanded(
           child: _StatCard(
             icon: Icons.local_fire_department,
             iconColor: AppColors.accentOrange,
-            label: AppStrings.currentStreak,
+            label: l10n.currentStreak,
             value: '${_habit.currentStreak}',
           ),
         ),
@@ -167,7 +190,7 @@ class _HabitDetailScreenState extends State<HabitDetailScreen> {
           child: _StatCard(
             icon: Icons.emoji_events,
             iconColor: AppColors.accentYellow,
-            label: AppStrings.bestStreak,
+            label: l10n.bestStreak,
             value: '${_habit.bestStreak}',
           ),
         ),
@@ -179,21 +202,22 @@ class _HabitDetailScreenState extends State<HabitDetailScreen> {
     BuildContext context,
     AppColorsTheme colors,
   ) {
-    const dayLabels = [
-      'Пн',
-      'Вт',
-      'Ср',
-      'Чт',
-      'Пт',
-      'Сб',
-      'Вс',
+    final l10n = context.l10n;
+    final dayLabels = [
+      l10n.dayMon,
+      l10n.dayTue,
+      l10n.dayWed,
+      l10n.dayThu,
+      l10n.dayFri,
+      l10n.daySat,
+      l10n.daySun,
     ];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Расписание',
+          l10n.habitSchedule,
           style:
               Theme.of(context).textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w600,
@@ -247,6 +271,7 @@ class _HabitDetailScreenState extends State<HabitDetailScreen> {
       return const SizedBox.shrink();
     }
 
+    final l10n = context.l10n;
     final showWarning =
         _habit.reminderEnabled && !_notificationsEnabled;
 
@@ -273,7 +298,7 @@ class _HabitDetailScreenState extends State<HabitDetailScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Напоминание',
+                      l10n.habitReminder,
                       style: Theme.of(context)
                           .textTheme
                           .titleSmall
@@ -328,9 +353,7 @@ class _HabitDetailScreenState extends State<HabitDetailScreen> {
                 const SizedBox(width: AppDimensions.paddingS),
                 Expanded(
                   child: Text(
-                    'Уведомления отключены в настройках. '
-                    'Включите их в профиле, чтобы '
-                    'получать напоминания.',
+                    l10n.habitNotifDisabled,
                     style: Theme.of(context)
                         .textTheme
                         .bodySmall

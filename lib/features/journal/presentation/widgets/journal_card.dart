@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/extensions/l10n_extension.dart';
 import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/journal/domain/entities/journal_entry.dart';
+import 'package:habit_boost/l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 
 class JournalCard extends StatelessWidget {
@@ -16,27 +18,46 @@ class JournalCard extends StatelessWidget {
   final VoidCallback onTap;
 
   static const _tagTextColors = {
-    'Продуктивность': AppColors.accentGreen,
-    'Рефлексия': AppColors.accentOrange,
-    'Здоровье': AppColors.accentIndigo,
-    'Спорт': AppColors.accentGreen,
-    'Учёба': AppColors.accentIndigo,
+    'productivity': AppColors.accentGreen,
+    'reflection': AppColors.accentOrange,
+    'health': AppColors.accentIndigo,
+    'sport': AppColors.accentGreen,
+    'learning': AppColors.accentIndigo,
   };
+
+  static String _tagLabel(String key, AppLocalizations l10n) {
+    switch (key) {
+      case 'productivity':
+        return l10n.tagProductivity;
+      case 'reflection':
+        return l10n.tagReflection;
+      case 'health':
+        return l10n.tagHealth;
+      case 'sport':
+        return l10n.tagSport;
+      case 'learning':
+        return l10n.tagLearning;
+      default:
+        return key;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final colors = AppColorsTheme.of(context);
+    final l10n = context.l10n;
     final tagBgColors = {
-      'Продуктивность': colors.badgeGreenBg,
-      'Рефлексия': colors.badgeYellowBg,
-      'Здоровье': colors.badgeIndigoBg,
-      'Спорт': colors.badgeGreenBg,
-      'Учёба': colors.badgeIndigoBg,
+      'productivity': colors.badgeGreenBg,
+      'reflection': colors.badgeYellowBg,
+      'health': colors.badgeIndigoBg,
+      'sport': colors.badgeGreenBg,
+      'learning': colors.badgeIndigoBg,
     };
 
+    final locale = Localizations.localeOf(context).languageCode;
     final dateStr = DateFormat(
       'd MMMM',
-      'ru',
+      locale,
     ).format(entry.date);
 
     return GestureDetector(
@@ -101,7 +122,7 @@ class JournalCard extends StatelessWidget {
                           BorderRadius.circular(12),
                     ),
                     child: Text(
-                      tag,
+                      _tagLabel(tag, l10n),
                       style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w600,

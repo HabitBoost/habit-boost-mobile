@@ -3,11 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/extensions/l10n_extension.dart';
 import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:habit_boost/features/journal/domain/entities/journal_entry.dart';
 import 'package:habit_boost/features/journal/presentation/bloc/journal_bloc.dart';
 import 'package:habit_boost/features/journal/presentation/widgets/mood_selector.dart';
+import 'package:habit_boost/l10n/app_localizations.dart';
 
 class JournalEntryScreen extends StatefulWidget {
   const JournalEntryScreen({this.entry, super.key});
@@ -26,13 +28,30 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
   late DateTime _date;
   bool get _isEditing => widget.entry != null;
 
-  static const _availableTags = [
-    'Продуктивность',
-    'Рефлексия',
-    'Здоровье',
-    'Спорт',
-    'Учёба',
+  static const _tagKeys = [
+    'productivity',
+    'reflection',
+    'health',
+    'sport',
+    'learning',
   ];
+
+  static String _tagLabel(String key, AppLocalizations l10n) {
+    switch (key) {
+      case 'productivity':
+        return l10n.tagProductivity;
+      case 'reflection':
+        return l10n.tagReflection;
+      case 'health':
+        return l10n.tagHealth;
+      case 'sport':
+        return l10n.tagSport;
+      case 'learning':
+        return l10n.tagLearning;
+      default:
+        return key;
+    }
+  }
 
   @override
   void initState() {
@@ -91,10 +110,11 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
   @override
   Widget build(BuildContext context) {
     final colors = AppColorsTheme.of(context);
+    final l10n = context.l10n;
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          _isEditing ? 'Редактировать запись' : 'Новая запись',
+          _isEditing ? l10n.journalEditEntry : l10n.journalNewEntryTitle,
         ),
         actions: [
           if (_isEditing)
@@ -107,7 +127,7 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
             ),
           TextButton(
             onPressed: _save,
-            child: const Text('Сохранить'),
+            child: Text(l10n.save),
           ),
         ],
       ),
@@ -115,7 +135,7 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
         padding: const EdgeInsets.all(AppDimensions.paddingL),
         children: [
           Text(
-            'Как ваше настроение?',
+            l10n.journalMoodQuestion,
             style:
                 Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
@@ -128,7 +148,7 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
           ),
           const SizedBox(height: AppDimensions.paddingL),
           Text(
-            'Что произошло сегодня?',
+            l10n.journalContentQuestion,
             style:
                 Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
@@ -139,7 +159,7 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
             controller: _contentController,
             maxLines: 8,
             decoration: InputDecoration(
-              hintText: 'Напишите о своём дне...',
+              hintText: l10n.journalContentHint,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(
                   AppDimensions.radiusCard,
@@ -160,7 +180,7 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
           ),
           const SizedBox(height: AppDimensions.paddingL),
           Text(
-            'Теги',
+            l10n.journalTags,
             style:
                 Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
@@ -170,17 +190,17 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
           Wrap(
             spacing: 8,
             runSpacing: 8,
-            children: _availableTags.map((tag) {
-              final selected = _tags.contains(tag);
+            children: _tagKeys.map((key) {
+              final selected = _tags.contains(key);
               return FilterChip(
-                label: Text(tag),
+                label: Text(_tagLabel(key, l10n)),
                 selected: selected,
                 onSelected: (v) {
                   setState(() {
                     if (v) {
-                      _tags.add(tag);
+                      _tags.add(key);
                     } else {
-                      _tags.remove(tag);
+                      _tags.remove(key);
                     }
                   });
                 },

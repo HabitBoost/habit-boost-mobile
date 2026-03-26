@@ -1,40 +1,52 @@
+import 'package:habit_boost/l10n/app_localizations.dart';
+
 abstract class Validators {
   static final _emailRegex = RegExp(
     r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
   );
 
-  static String? email(String? value) {
+  static String? email(String? value, AppLocalizations l10n) {
     if (value == null || value.trim().isEmpty) {
-      return 'Введите email';
+      return l10n.validatorEmailRequired;
     }
     if (!_emailRegex.hasMatch(value.trim())) {
-      return 'Некорректный email';
+      return l10n.validatorEmailInvalid;
     }
     return null;
   }
 
-  static String? password(String? value) {
+  static String? password(String? value, AppLocalizations l10n) {
     if (value == null || value.isEmpty) {
-      return 'Введите пароль';
+      return l10n.validatorPasswordRequired;
     }
     if (value.length < 6) {
-      return 'Минимум 6 символов';
+      return l10n.validatorPasswordMinLength;
     }
     return null;
   }
 
-  static String? confirmPassword(String? value, String password) {
-    final error = Validators.password(value);
+  static String? confirmPassword(
+    String? value,
+    String password,
+    AppLocalizations l10n,
+  ) {
+    final error = Validators.password(value, l10n);
     if (error != null) return error;
     if (value != password) {
-      return 'Пароли не совпадают';
+      return l10n.validatorPasswordsMismatch;
     }
     return null;
   }
 
-  static String? required(String? value, [String fieldName = 'Поле']) {
+  static String? required(
+    String? value,
+    AppLocalizations l10n, [
+    String? fieldName,
+  ]) {
     if (value == null || value.trim().isEmpty) {
-      return '$fieldName обязательно';
+      return fieldName != null
+          ? l10n.validatorFieldRequired(fieldName)
+          : l10n.validatorFieldRequired('');
     }
     return null;
   }

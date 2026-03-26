@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/extensions/l10n_extension.dart';
 import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/progress/domain/entities/progress_stats.dart';
+import 'package:intl/intl.dart';
 
 class MonthCalendar extends StatelessWidget {
   const MonthCalendar({
@@ -12,18 +14,27 @@ class MonthCalendar extends StatelessWidget {
 
   final List<DayCompletion> dayCompletions;
 
-  static const _dayLabels = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС'];
-
   @override
   Widget build(BuildContext context) {
     final colors = AppColorsTheme.of(context);
+    final l10n = context.l10n;
+    final dayLabels = [
+      l10n.dayMonShort,
+      l10n.dayTueShort,
+      l10n.dayWedShort,
+      l10n.dayThuShort,
+      l10n.dayFriShort,
+      l10n.daySatShort,
+      l10n.daySunShort,
+    ];
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     final firstOfMonth = DateTime(now.year, now.month);
     final daysInMonth =
         DateTime(now.year, now.month + 1, 0).day;
-    // Monday = 1, Sunday = 7; offset for first day of month
-    final startWeekday = firstOfMonth.weekday; // 1..7
+    final startWeekday = firstOfMonth.weekday;
+    final locale = Localizations.localeOf(context).languageCode;
+    final monthName = DateFormat('LLLL', locale).format(now);
 
     return Container(
       padding: const EdgeInsets.all(AppDimensions.paddingM),
@@ -34,7 +45,7 @@ class MonthCalendar extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            _monthName(now.month),
+            monthName[0].toUpperCase() + monthName.substring(1),
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
@@ -42,7 +53,7 @@ class MonthCalendar extends StatelessWidget {
           const SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: _dayLabels
+            children: dayLabels
                 .map(
                   (l) => SizedBox(
                     width: 36,
@@ -76,7 +87,6 @@ class MonthCalendar extends StatelessWidget {
     int startWeekday,
   ) {
     final weeks = <Widget>[];
-    // Number of rows needed
     final totalCells = (startWeekday - 1) + daysInMonth;
     final rowCount = (totalCells / 7).ceil();
 
@@ -158,13 +168,5 @@ class MonthCalendar extends StatelessWidget {
       }
     }
     return null;
-  }
-
-  String _monthName(int month) {
-    const names = [
-      'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
-      'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь',
-    ];
-    return names[month - 1];
   }
 }

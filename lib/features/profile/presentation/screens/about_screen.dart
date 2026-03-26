@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/extensions/l10n_extension.dart';
 import 'package:habit_boost/core/theme/app_colors_theme.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -9,8 +10,9 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = AppColorsTheme.of(context);
+    final l10n = context.l10n;
     return Scaffold(
-      appBar: AppBar(title: const Text('О приложении')),
+      appBar: AppBar(title: Text(l10n.profileAbout)),
       body: ListView(
         padding: const EdgeInsets.all(AppDimensions.paddingL),
         children: [
@@ -41,7 +43,7 @@ class AboutScreen extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            'Версия 0.1.0',
+            l10n.aboutVersion,
             textAlign: TextAlign.center,
             style: Theme.of(context)
                 .textTheme
@@ -50,7 +52,7 @@ class AboutScreen extends StatelessWidget {
           ),
           const SizedBox(height: AppDimensions.paddingXL),
           Text(
-            'Маленькие шаги к большим переменам',
+            l10n.appSlogan,
             textAlign: TextAlign.center,
             style: Theme.of(context)
                 .textTheme
@@ -65,34 +67,28 @@ class AboutScreen extends StatelessWidget {
             context,
             colors,
             icon: Icons.track_changes,
-            title: 'Отслеживание привычек',
-            description: 'Создавайте привычки, отмечайте '
-                'выполнение и следите за прогрессом '
-                'каждый день.',
+            title: l10n.aboutHabitTracking,
+            description: l10n.aboutHabitTrackingDesc,
           ),
           const SizedBox(height: AppDimensions.paddingM),
           _buildInfoSection(
             context,
             colors,
             icon: Icons.cloud_sync,
-            title: 'Облачная синхронизация',
-            description: 'Ваши данные безопасно '
-                'синхронизируются между устройствами '
-                'через Firebase.',
+            title: l10n.aboutCloudSync,
+            description: l10n.aboutCloudSyncDesc,
           ),
           const SizedBox(height: AppDimensions.paddingM),
           _buildInfoSection(
             context,
             colors,
             icon: Icons.book_outlined,
-            title: 'Дневник настроения',
-            description: 'Записывайте мысли и '
-                'отслеживайте настроение для '
-                'понимания своих паттернов.',
+            title: l10n.aboutMoodJournal,
+            description: l10n.aboutMoodJournalDesc,
           ),
           const SizedBox(height: AppDimensions.paddingXL),
           Text(
-            '© 2026 HabitBoost',
+            l10n.aboutCopyright,
             textAlign: TextAlign.center,
             style: Theme.of(context)
                 .textTheme
@@ -100,7 +96,7 @@ class AboutScreen extends StatelessWidget {
                 ?.copyWith(color: colors.textTertiary),
           ),
           Text(
-            'Сделано с заботой о ваших привычках',
+            l10n.aboutMadeWith,
             textAlign: TextAlign.center,
             style: Theme.of(context)
                 .textTheme

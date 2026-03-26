@@ -5,6 +5,7 @@ import 'package:habit_boost/app/di/injection_container.dart';
 import 'package:habit_boost/app/router/routes.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/extensions/l10n_extension.dart';
 import 'package:habit_boost/core/sync/sync_service.dart';
 import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/core/utils/validators.dart';
@@ -46,6 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final colors = AppColorsTheme.of(context);
+    final l10n = context.l10n;
     return Scaffold(
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) async {
@@ -75,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const LogoHeader(),
                   const SizedBox(height: AppDimensions.paddingL),
                   Text(
-                    'Вход в аккаунт',
+                    l10n.authLoginTitle,
                     style: Theme.of(context)
                         .textTheme
                         .headlineLarge
@@ -83,19 +85,21 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: AppDimensions.paddingL),
                   AuthField(
-                    label: 'Email',
-                    hint: 'example@email.com',
+                    label: l10n.authEmail,
+                    hint: l10n.authEmailHint,
                     controller: _emailController,
-                    validator: Validators.email,
+                    validator: (v) =>
+                        Validators.email(v, l10n),
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
                   ),
                   const SizedBox(height: AppDimensions.paddingM),
                   AuthField(
-                    label: 'Пароль',
+                    label: l10n.authPassword,
                     hint: '••••••••',
                     controller: _passwordController,
-                    validator: Validators.password,
+                    validator: (v) =>
+                        Validators.password(v, l10n),
                     obscureText: _obscurePassword,
                     textInputAction: TextInputAction.done,
                     onFieldSubmitted: (_) => _onLogin(),
@@ -116,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     builder: (context, state) {
                       final isLoading = state is AuthLoading;
                       return _CoralButton(
-                        label: 'Войти',
+                        label: l10n.authLogin,
                         isLoading: isLoading,
                         onPressed: _onLogin,
                       );
@@ -125,13 +129,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: AppDimensions.paddingM),
                   TextButton(
                     onPressed: () => context.push(Routes.forgotPassword),
-                    child: const Text('Забыли пароль?'),
+                    child: Text(l10n.authForgotPassword),
                   ),
                   const SizedBox(height: AppDimensions.paddingM),
                   _buildDivider(colors),
                   const SizedBox(height: AppDimensions.paddingM),
                   _GreenOutlineButton(
-                    label: 'Создать аккаунт',
+                    label: l10n.authRegisterTitle,
                     onPressed: () => context.push(Routes.register),
                   ),
                 ],
@@ -151,7 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
           padding:
               const EdgeInsets.symmetric(horizontal: AppDimensions.paddingM),
           child: Text(
-            'или',
+            context.l10n.authOr,
             style: Theme.of(context)
                 .textTheme
                 .labelMedium

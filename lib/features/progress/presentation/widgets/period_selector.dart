@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
+import 'package:habit_boost/core/extensions/l10n_extension.dart';
 import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/progress/domain/entities/progress_period.dart';
 
@@ -16,6 +17,7 @@ class PeriodSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = AppColorsTheme.of(context);
+    final l10n = context.l10n;
     return Container(
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
@@ -26,14 +28,14 @@ class PeriodSelector extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           _PeriodChip(
-            label: 'Неделя',
+            label: l10n.progressWeek,
             isSelected:
                 selected == ProgressPeriod.week,
             onTap: () =>
                 onChanged(ProgressPeriod.week),
           ),
           _PeriodChip(
-            label: 'Месяц',
+            label: l10n.progressMonth,
             isSelected:
                 selected == ProgressPeriod.month,
             onTap: () =>

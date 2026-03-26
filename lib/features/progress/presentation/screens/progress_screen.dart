@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/extensions/l10n_extension.dart';
 import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:habit_boost/features/progress/domain/entities/progress_period.dart';
 import 'package:habit_boost/features/progress/domain/entities/progress_stats.dart';
@@ -37,6 +38,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Scaffold(
       body: SafeArea(
         child: BlocBuilder<ProgressBloc, ProgressState>(
@@ -50,7 +52,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
             if (state.status == ProgressStatus.error) {
               return Center(
                 child: Text(
-                  state.errorMessage ?? 'Ошибка загрузки',
+                  state.errorMessage ?? l10n.errorLoadFailed,
                   style: const TextStyle(
                     color: AppColors.accentCoral,
                   ),
@@ -94,11 +96,12 @@ class _ProgressScreenState extends State<ProgressScreen> {
   }
 
   Widget _buildHeader(ProgressPeriod period) {
+    final l10n = context.l10n;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'Прогресс',
+          l10n.progressTitle,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.w700,
               ),
@@ -117,10 +120,11 @@ class _ProgressScreenState extends State<ProgressScreen> {
     ProgressStats s,
     ProgressPeriod period,
   ) {
+    final l10n = context.l10n;
     final ratePct = (s.periodRate * 100).round();
     final periodLabel = period == ProgressPeriod.week
-        ? 'За неделю'
-        : 'За месяц';
+        ? l10n.progressForWeek
+        : l10n.progressForMonth;
 
     return IntrinsicHeight(
       child: Row(
@@ -128,13 +132,13 @@ class _ProgressScreenState extends State<ProgressScreen> {
         children: [
           StatsCard(
             value: '${s.todayCompleted}/${s.todayTotal}',
-            label: 'Сегодня',
+            label: l10n.progressToday,
             valueColor: AppColors.accentCoral,
           ),
           const SizedBox(width: 12),
           StatsCard(
             value: '${s.currentStreak}',
-            label: 'Текущий стрик',
+            label: l10n.progressCurrentStreak,
             valueColor: AppColors.accentGreen,
           ),
           const SizedBox(width: 12),
@@ -149,12 +153,12 @@ class _ProgressScreenState extends State<ProgressScreen> {
   }
 
   Widget _buildHabitProgress(ProgressStats s) {
-
+    final l10n = context.l10n;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Прогресс привычек',
+          l10n.progressHabitProgress,
           style:
               Theme.of(context).textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w700,

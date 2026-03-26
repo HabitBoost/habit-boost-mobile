@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/extensions/l10n_extension.dart';
 import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/onboarding/domain/entities/user_goals.dart';
 import 'package:habit_boost/features/onboarding/presentation/bloc/onboarding_bloc.dart';
-
 class GoalsScreen extends StatefulWidget {
   const GoalsScreen({super.key});
 
@@ -47,13 +47,14 @@ class _GoalsScreenState extends State<GoalsScreen> {
   @override
   Widget build(BuildContext context) {
     final colors = AppColorsTheme.of(context);
+    final l10n = context.l10n;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Мои цели'),
+        title: Text(l10n.goalsTitle),
         actions: [
           TextButton(
             onPressed: _save,
-            child: const Text('Сохранить'),
+            child: Text(l10n.save),
           ),
         ],
       ),
@@ -63,8 +64,7 @@ class _GoalsScreenState extends State<GoalsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Выберите области, на которых '
-              'хотите сфокусироваться',
+              l10n.goalsSubtitle,
               style: Theme.of(context)
                   .textTheme
                   .bodyLarge
@@ -83,6 +83,7 @@ class _GoalsScreenState extends State<GoalsScreen> {
   }
 
   Widget _buildGoalGrid() {
+    final l10n = context.l10n;
     const goals = GoalCategory.values;
     return Column(
       children: [
@@ -96,6 +97,7 @@ class _GoalsScreenState extends State<GoalsScreen> {
                 Expanded(
                   child: _GoalChip(
                     goal: goals[i],
+                    label: goals[i].localizedLabel(l10n),
                     isSelected: _selected.contains(goals[i]),
                     onTap: () => _toggle(goals[i]),
                   ),
@@ -105,6 +107,7 @@ class _GoalsScreenState extends State<GoalsScreen> {
                   Expanded(
                     child: _GoalChip(
                       goal: goals[i + 1],
+                      label: goals[i + 1].localizedLabel(l10n),
                       isSelected:
                           _selected.contains(goals[i + 1]),
                       onTap: () => _toggle(goals[i + 1]),
@@ -123,11 +126,13 @@ class _GoalsScreenState extends State<GoalsScreen> {
 class _GoalChip extends StatelessWidget {
   const _GoalChip({
     required this.goal,
+    required this.label,
     required this.isSelected,
     required this.onTap,
   });
 
   final GoalCategory goal;
+  final String label;
   final bool isSelected;
   final VoidCallback onTap;
 
@@ -155,7 +160,7 @@ class _GoalChip extends StatelessWidget {
             Icon(goal.icon, size: 28, color: goal.color),
             const SizedBox(height: 8),
             Text(
-              goal.label,
+              label,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontFamily: 'DMSans',

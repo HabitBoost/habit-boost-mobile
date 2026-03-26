@@ -5,6 +5,8 @@ import 'package:habit_boost/app/di/injection_container.dart';
 import 'package:habit_boost/app/router/routes.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/extensions/l10n_extension.dart';
+import 'package:habit_boost/core/locale/locale_cubit.dart';
 import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/core/theme/theme_cubit.dart';
 import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
@@ -72,6 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final colors = AppColorsTheme.of(context);
+    final l10n = context.l10n;
     return Scaffold(
       body: SafeArea(
         child: BlocBuilder<AuthBloc, AuthState>(
@@ -91,14 +94,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 const SizedBox(height: AppDimensions.paddingM),
                 ProfileHeader(
-                  name: user?.name ?? 'Пользователь',
+                  name: user?.name ?? l10n.profileUser,
                   email: user?.email ?? '',
                 ),
                 const SizedBox(height: AppDimensions.paddingL),
                 _buildStats(context, daysSinceReg),
                 const SizedBox(height: AppDimensions.paddingL),
                 Text(
-                  'Настройки',
+                  l10n.profileSettings,
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium
@@ -125,6 +128,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildStats(BuildContext context, int days) {
+    final l10n = context.l10n;
     final habitsBloc = context.watch<HabitsBloc>();
     final habitCount = habitsBloc.state.habits.length;
 
@@ -134,19 +138,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           StatsCard(
             value: '$days',
-            label: 'Дней с нами',
+            label: l10n.profileDaysWithUs,
             valueColor: AppColors.accentCoral,
           ),
           const SizedBox(width: 12),
           StatsCard(
             value: '$habitCount',
-            label: 'Привычек',
+            label: l10n.profileHabitsCount,
             valueColor: AppColors.accentIndigo,
           ),
           const SizedBox(width: 12),
-          const StatsCard(
+          StatsCard(
             value: '0',
-            label: 'Бейджей',
+            label: l10n.profileBadgesCount,
             valueColor: AppColors.accentGreen,
           ),
         ],
@@ -158,6 +162,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     BuildContext context,
     AppColorsTheme colors,
   ) {
+    final l10n = context.l10n;
     return Container(
       decoration: BoxDecoration(
         color: colors.bgCard,
@@ -170,7 +175,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           SettingsTile(
             icon: Icons.notifications_outlined,
             iconColor: AppColors.accentCoral,
-            title: 'Уведомления',
+            title: l10n.profileNotifications,
             trailing: Switch.adaptive(
               value: _notificationsEnabled,
               activeTrackColor: AppColors.primary,
@@ -188,7 +193,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           SettingsTile(
             icon: Icons.gps_fixed,
             iconColor: AppColors.accentGreen,
-            title: 'Мои цели',
+            title: l10n.profileGoals,
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute<void>(
@@ -203,8 +208,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
           SettingsTile(
             icon: Icons.dark_mode_outlined,
             iconColor: AppColors.accentIndigo,
-            title: 'Тема оформления',
+            title: l10n.profileTheme,
             onTap: () => _showThemePicker(context),
+          ),
+          Divider(
+            height: 1,
+            color: colors.borderSubtle,
+          ),
+          SettingsTile(
+            icon: Icons.language,
+            iconColor: AppColors.accentOrange,
+            title: l10n.profileLanguage,
+            onTap: () => _showLanguagePicker(context),
           ),
           Divider(
             height: 1,
@@ -213,7 +228,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           SettingsTile(
             icon: Icons.info_outline,
             iconColor: colors.textTertiary,
-            title: 'О приложении',
+            title: l10n.profileAbout,
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute<void>(
@@ -228,7 +243,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           SettingsTile(
             icon: Icons.sos,
             iconColor: AppColors.accentCoral,
-            title: 'SOS — экстренная помощь',
+            title: l10n.profileSos,
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute<void>(
@@ -242,6 +257,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildLogoutButton(BuildContext context) {
+    final l10n = context.l10n;
     return SizedBox(
       width: double.infinity,
       child: OutlinedButton(
@@ -258,9 +274,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
         ),
-        child: const Text(
-          'Выйти из аккаунта',
-          style: TextStyle(
+        child: Text(
+          l10n.profileLogout,
+          style: const TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.w600,
           ),
@@ -280,18 +296,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
+  void _showLanguagePicker(BuildContext context) {
+    final cubit = context.read<LocaleCubit>();
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (_) => BlocProvider.value(
+        value: cubit,
+        child: const _LanguagePickerSheet(),
+      ),
+    );
+  }
+
   void _confirmLogout(BuildContext context) {
+    final l10n = context.l10n;
     showDialog<void>(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: const Text('Выход'),
-        content: const Text(
-          'Вы уверены, что хотите выйти из аккаунта?',
-        ),
+        title: Text(l10n.profileLogoutTitle),
+        content: Text(l10n.profileLogoutConfirm),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(dialogContext),
-            child: const Text('Отмена'),
+            child: Text(l10n.cancel),
           ),
           TextButton(
             onPressed: () {
@@ -301,9 +327,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   .add(const AuthLogoutRequested());
               context.go(Routes.login);
             },
-            child: const Text(
-              'Выйти',
-              style: TextStyle(
+            child: Text(
+              l10n.profileLogoutAction,
+              style: const TextStyle(
                 color: AppColors.accentCoral,
               ),
             ),
@@ -319,6 +345,7 @@ class _ThemePickerSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return BlocBuilder<ThemeCubit, ThemeMode>(
       builder: (context, current) {
         return SafeArea(
@@ -334,7 +361,7 @@ class _ThemePickerSheet extends StatelessWidget {
                     horizontal: AppDimensions.paddingL,
                   ),
                   child: Text(
-                    'Тема оформления',
+                    l10n.profileTheme,
                     style: Theme.of(context)
                         .textTheme
                         .titleMedium
@@ -348,7 +375,7 @@ class _ThemePickerSheet extends StatelessWidget {
                 ),
                 _ThemeOption(
                   icon: Icons.brightness_auto,
-                  title: 'Системная',
+                  title: l10n.themeSystem,
                   isSelected: current == ThemeMode.system,
                   onTap: () {
                     context
@@ -359,7 +386,7 @@ class _ThemePickerSheet extends StatelessWidget {
                 ),
                 _ThemeOption(
                   icon: Icons.light_mode_outlined,
-                  title: 'Светлая',
+                  title: l10n.themeLight,
                   isSelected: current == ThemeMode.light,
                   onTap: () {
                     context
@@ -370,7 +397,7 @@ class _ThemePickerSheet extends StatelessWidget {
                 ),
                 _ThemeOption(
                   icon: Icons.dark_mode_outlined,
-                  title: 'Тёмная',
+                  title: l10n.themeDark,
                   isSelected: current == ThemeMode.dark,
                   onTap: () {
                     context
@@ -388,8 +415,120 @@ class _ThemePickerSheet extends StatelessWidget {
   }
 }
 
+class _LanguagePickerSheet extends StatelessWidget {
+  const _LanguagePickerSheet();
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return BlocBuilder<LocaleCubit, Locale?>(
+      builder: (context, current) {
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: AppDimensions.paddingM,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppDimensions.paddingL,
+                  ),
+                  child: Text(
+                    l10n.profileLanguage,
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium
+                        ?.copyWith(
+                          fontWeight: FontWeight.w700,
+                        ),
+                  ),
+                ),
+                const SizedBox(
+                  height: AppDimensions.paddingM,
+                ),
+                _LanguageOption(
+                  icon: Icons.brightness_auto,
+                  title: l10n.languageSystem,
+                  isSelected: current == null,
+                  onTap: () {
+                    context
+                        .read<LocaleCubit>()
+                        .setLocale(null);
+                    Navigator.pop(context);
+                  },
+                ),
+                _LanguageOption(
+                  icon: Icons.language,
+                  title: l10n.languageRussian,
+                  isSelected:
+                      current?.languageCode == 'ru',
+                  onTap: () {
+                    context
+                        .read<LocaleCubit>()
+                        .setLocale(const Locale('ru'));
+                    Navigator.pop(context);
+                  },
+                ),
+                _LanguageOption(
+                  icon: Icons.language,
+                  title: l10n.languageEnglish,
+                  isSelected:
+                      current?.languageCode == 'en',
+                  onTap: () {
+                    context
+                        .read<LocaleCubit>()
+                        .setLocale(const Locale('en'));
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
 class _ThemeOption extends StatelessWidget {
   const _ThemeOption({
+    required this.icon,
+    required this.title,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final String title;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = AppColorsTheme.of(context);
+    return ListTile(
+      leading: Icon(
+        icon,
+        color: isSelected
+            ? AppColors.primary
+            : colors.textTertiary,
+      ),
+      title: Text(title),
+      trailing: isSelected
+          ? const Icon(
+              Icons.check_circle,
+              color: AppColors.primary,
+            )
+          : null,
+      onTap: onTap,
+    );
+  }
+}
+
+class _LanguageOption extends StatelessWidget {
+  const _LanguageOption({
     required this.icon,
     required this.title,
     required this.isSelected,

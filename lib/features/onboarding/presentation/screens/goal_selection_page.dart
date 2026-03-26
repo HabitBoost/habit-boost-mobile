@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/extensions/l10n_extension.dart';
 import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/onboarding/domain/entities/user_goals.dart';
 import 'package:habit_boost/features/onboarding/presentation/bloc/onboarding_bloc.dart';
@@ -15,6 +16,7 @@ class GoalSelectionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = AppColorsTheme.of(context);
+    final l10n = context.l10n;
     return Padding(
       padding: const EdgeInsets.all(AppDimensions.paddingL),
       child: Column(
@@ -22,7 +24,7 @@ class GoalSelectionPage extends StatelessWidget {
         children: [
           const SizedBox(height: 40),
           Text(
-            'Что для вас важно?',
+            l10n.onboardingGoalsTitle,
             style: Theme.of(context)
                 .textTheme
                 .headlineLarge
@@ -30,8 +32,7 @@ class GoalSelectionPage extends StatelessWidget {
           ),
           const SizedBox(height: AppDimensions.paddingS),
           Text(
-            'Выберите области, на которых хотите '
-            'сфокусироваться',
+            l10n.onboardingGoalsSubtitle,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: colors.textSecondary,
                 ),
@@ -50,9 +51,9 @@ class GoalSelectionPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
-              child: const Text(
-                'Далее',
-                style: TextStyle(
+              child: Text(
+                l10n.next,
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                   color: Colors.white,
@@ -68,6 +69,7 @@ class GoalSelectionPage extends StatelessWidget {
   }
 
   Widget _buildGoalGrid(BuildContext context) {
+    final l10n = context.l10n;
     const goals = GoalCategory.values;
     return BlocBuilder<OnboardingBloc, OnboardingState>(
       builder: (context, state) {
@@ -83,6 +85,7 @@ class GoalSelectionPage extends StatelessWidget {
                     Expanded(
                       child: _GoalChip(
                         goal: goals[i],
+                        label: goals[i].localizedLabel(l10n),
                         isSelected:
                             state.selectedGoals.contains(goals[i]),
                         onTap: () => context
@@ -97,6 +100,7 @@ class GoalSelectionPage extends StatelessWidget {
                       Expanded(
                         child: _GoalChip(
                           goal: goals[i + 1],
+                          label: goals[i + 1].localizedLabel(l10n),
                           isSelected: state.selectedGoals
                               .contains(goals[i + 1]),
                           onTap: () => context
@@ -123,11 +127,13 @@ class GoalSelectionPage extends StatelessWidget {
 class _GoalChip extends StatelessWidget {
   const _GoalChip({
     required this.goal,
+    required this.label,
     required this.isSelected,
     required this.onTap,
   });
 
   final GoalCategory goal;
+  final String label;
   final bool isSelected;
   final VoidCallback onTap;
 
@@ -154,7 +160,7 @@ class _GoalChip extends StatelessWidget {
             Icon(goal.icon, size: 28, color: goal.color),
             const SizedBox(height: 8),
             Text(
-              goal.label,
+              label,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontFamily: 'DMSans',

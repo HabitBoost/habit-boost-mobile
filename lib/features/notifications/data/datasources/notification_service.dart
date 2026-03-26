@@ -1,4 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:habit_boost/features/habits/domain/entities/reminder_time.dart';
 import 'package:injectable/injectable.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
@@ -15,12 +16,12 @@ class NotificationService {
   final FlutterLocalNotificationsPlugin _plugin;
 
   static const _channelId = 'habit_reminders';
-  static const _channelName = 'Напоминания о привычках';
-  static const _channelDesc = 'Напоминания о выполнении привычек';
 
   /// Must be called once at app startup.
   Future<void> init() async {
     tz.initializeTimeZones();
+    final timeZoneName = await FlutterTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(timeZoneName));
 
     const androidSettings = AndroidInitializationSettings(
       '@mipmap/ic_launcher',
@@ -72,6 +73,9 @@ class NotificationService {
     required String title,
     required List<ReminderTime> reminderTimes,
     required List<int> scheduleDays,
+    required List<String> bodyTemplates,
+    required String channelName,
+    required String channelDesc,
   }) async {
     // Cancel existing first to avoid duplicates.
     await cancelHabitReminders(habitId);
@@ -82,21 +86,22 @@ class NotificationService {
         final id = _notificationId(habitId, ri, day);
         final scheduledDate =
             _nextInstanceOfWeekday(day, rt.hour, rt.minute);
+        final body = bodyTemplates[id % bodyTemplates.length];
 
       await _plugin.zonedSchedule(
         id,
         'HabitBoost',
-        'Время для привычки «$title»',
+        body,
         scheduledDate,
-        const NotificationDetails(
+        NotificationDetails(
           android: AndroidNotificationDetails(
             _channelId,
-            _channelName,
-            channelDescription: _channelDesc,
+            channelName,
+            channelDescription: channelDesc,
             importance: Importance.high,
             priority: Priority.high,
           ),
-          iOS: DarwinNotificationDetails(
+          iOS: const DarwinNotificationDetails(
             presentAlert: true,
             presentBadge: true,
             presentSound: true,
@@ -138,7 +143,7 @@ class NotificationService {
 
   /// Deterministic notification ID from habit ID + reminder index + weekday.
   ///
-  /// The result must fit in a signed 32-bit integer 
+  /// The result must fit in a signed 32-bit integer
   /// (flutter_local_notifications requirement).
   /// We truncate the hash to leave room for the suffix
   /// (reminderIndex 0-9 × 10 + weekday 1-7 → max 97), keeping the sign bit

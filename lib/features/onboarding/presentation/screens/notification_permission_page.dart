@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:habit_boost/app/di/injection_container.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/extensions/l10n_extension.dart';
 import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/notifications/domain/repositories/notification_repository.dart';
 import 'package:habit_boost/features/onboarding/presentation/widgets/page_dots.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NotificationPermissionPage extends StatelessWidget {
   const NotificationPermissionPage({
@@ -17,6 +19,7 @@ class NotificationPermissionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = AppColorsTheme.of(context);
+    final l10n = context.l10n;
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: AppDimensions.paddingL,
@@ -39,7 +42,7 @@ class NotificationPermissionPage extends StatelessWidget {
           ),
           const SizedBox(height: AppDimensions.paddingXL),
           Text(
-            'Не пропускай привычки',
+            l10n.onboardingNotifTitle,
             textAlign: TextAlign.center,
             style: Theme.of(context)
                 .textTheme
@@ -52,9 +55,7 @@ class NotificationPermissionPage extends StatelessWidget {
               horizontal: AppDimensions.paddingS,
             ),
             child: Text(
-              'Включите уведомления, чтобы получать '
-              'напоминания о привычках в нужное время '
-              'и не пропускать ни одного дня.',
+              l10n.onboardingNotifDesc,
               textAlign: TextAlign.center,
               style: Theme.of(context)
                   .textTheme
@@ -71,7 +72,12 @@ class NotificationPermissionPage extends StatelessWidget {
             height: 52,
             child: FilledButton(
               onPressed: () async {
-                await sl<NotificationRepository>().requestPermission();
+                final granted =
+                    await sl<NotificationRepository>().requestPermission();
+                if (granted) {
+                  await sl<SharedPreferences>()
+                      .setBool('notifications_enabled', true);
+                }
                 onComplete();
               },
               style: FilledButton.styleFrom(
@@ -80,9 +86,9 @@ class NotificationPermissionPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
-              child: const Text(
-                'Разрешить уведомления',
-                style: TextStyle(
+              child: Text(
+                l10n.onboardingNotifAllow,
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                   color: Colors.white,
@@ -94,7 +100,7 @@ class NotificationPermissionPage extends StatelessWidget {
           TextButton(
             onPressed: onComplete,
             child: Text(
-              'Пропустить',
+              l10n.skip,
               style: Theme.of(context)
                   .textTheme
                   .bodyLarge

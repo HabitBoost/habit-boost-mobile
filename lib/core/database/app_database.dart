@@ -26,7 +26,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.forTesting(super.connection);
 
   @override
-  int get schemaVersion => 4;
+  int get schemaVersion => 5;
 
   @override
   MigrationStrategy get migration {
@@ -53,6 +53,37 @@ class AppDatabase extends _$AppDatabase {
             'UPDATE habits_table SET reminder_times = '
             "printf('%02d:%02d', reminder_hour, reminder_minute)",
           );
+        }
+        if (from < 5) {
+          // Migrate habit categories from Russian to internal keys.
+          const categoryMapping = {
+            'Спорт': 'sport',
+            'Здоровье': 'health',
+            'Продуктивность': 'productivity',
+            'Ментальное здоровье': 'mentalHealth',
+            'Питание': 'nutrition',
+            'Обучение': 'learning',
+          };
+          for (final entry in categoryMapping.entries) {
+            await customStatement(
+              "UPDATE habits_table SET category = '${entry.value}' "
+              "WHERE category = '${entry.key}'",
+            );
+          }
+          // Migrate journal tags from Russian to internal keys.
+          const tagMapping = {
+            'Продуктивность': 'productivity',
+            'Рефлексия': 'reflection',
+            'Здоровье': 'health',
+            'Спорт': 'sport',
+            'Учёба': 'learning',
+          };
+          for (final entry in tagMapping.entries) {
+            await customStatement(
+              'UPDATE journal_entries_table SET tags = '
+              "REPLACE(tags, '${entry.key}', '${entry.value}')",
+            );
+          }
         }
       },
     );

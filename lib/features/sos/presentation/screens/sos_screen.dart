@@ -1,50 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/extensions/l10n_extension.dart';
 import 'package:habit_boost/core/theme/app_colors_theme.dart';
+import 'package:habit_boost/l10n/app_localizations.dart';
 
 class SosScreen extends StatelessWidget {
   const SosScreen({super.key});
 
-  static const _techniques = [
-    _Technique(
-      icon: Icons.air,
-      title: 'Дыхание 4-7-8',
-      description: 'Вдох 4 сек → задержка 7 сек → выдох 8 сек. '
-          'Повторите 3–4 раза.',
-      color: AppColors.accentIndigo,
-    ),
-    _Technique(
-      icon: Icons.visibility_outlined,
-      title: 'Техника 5-4-3-2-1',
-      description: 'Назовите 5 вещей, которые видите, '
-          '4 — слышите, 3 — ощущаете, '
-          '2 — чувствуете запах, 1 — вкус.',
-      color: AppColors.accentGreen,
-    ),
-    _Technique(
-      icon: Icons.self_improvement,
-      title: 'Сканирование тела',
-      description: 'Закройте глаза. Медленно переведите внимание '
-          'от макушки к стопам, замечая ощущения.',
-      color: AppColors.accentOrange,
-    ),
-    _Technique(
-      icon: Icons.directions_walk,
-      title: 'Смена обстановки',
-      description: 'Встаньте, пройдитесь, выпейте воды. '
-          'Даже 2 минуты движения помогают.',
-      color: AppColors.primary,
-    ),
-  ];
+  static List<_Technique> _techniques(AppLocalizations l10n) => [
+        _Technique(
+          icon: Icons.air,
+          title: l10n.sosTechnique1Title,
+          description: l10n.sosTechnique1Desc,
+          color: AppColors.accentIndigo,
+        ),
+        _Technique(
+          icon: Icons.visibility_outlined,
+          title: l10n.sosTechnique2Title,
+          description: l10n.sosTechnique2Desc,
+          color: AppColors.accentGreen,
+        ),
+        _Technique(
+          icon: Icons.self_improvement,
+          title: l10n.sosTechnique3Title,
+          description: l10n.sosTechnique3Desc,
+          color: AppColors.accentOrange,
+        ),
+        _Technique(
+          icon: Icons.directions_walk,
+          title: l10n.sosTechnique4Title,
+          description: l10n.sosTechnique4Desc,
+          color: AppColors.primary,
+        ),
+      ];
 
   @override
   Widget build(BuildContext context) {
     final colors = AppColorsTheme.of(context);
+    final l10n = context.l10n;
+    final techniques = _techniques(l10n);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Экстренная помощь'),
+        title: Text(l10n.sosTitle),
       ),
       body: ListView(
         padding: const EdgeInsets.all(AppDimensions.paddingM),
@@ -70,8 +69,7 @@ class SosScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: AppDimensions.paddingS),
                 Text(
-                  'Сорвались или на грани? Это нормально.\n'
-                  'Используйте техники ниже, чтобы вернуть контроль.',
+                  l10n.sosBanner,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: colors.textSecondary,
@@ -82,13 +80,13 @@ class SosScreen extends StatelessWidget {
           ),
           const SizedBox(height: AppDimensions.paddingL),
           Text(
-            'Техники самопомощи',
+            l10n.sosTechniquesTitle,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.w700,
                 ),
           ),
           const SizedBox(height: AppDimensions.paddingS),
-          ..._techniques.map(
+          ...techniques.map(
             (t) => Padding(
               padding: const EdgeInsets.only(
                 bottom: AppDimensions.paddingS,

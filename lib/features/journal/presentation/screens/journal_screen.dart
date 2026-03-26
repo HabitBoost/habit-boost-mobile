@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:habit_boost/app/router/routes.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/extensions/l10n_extension.dart';
 import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:habit_boost/features/journal/presentation/bloc/journal_bloc.dart';
@@ -42,6 +43,7 @@ class _JournalScreenState extends State<JournalScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Scaffold(
       body: SafeArea(
         child: BlocBuilder<JournalBloc, JournalState>(
@@ -60,7 +62,7 @@ class _JournalScreenState extends State<JournalScreen> {
                         MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Дневник',
+                        l10n.journalTitle,
                         style: Theme.of(context)
                             .textTheme
                             .headlineSmall
@@ -80,18 +82,18 @@ class _JournalScreenState extends State<JournalScreen> {
                             borderRadius:
                                 BorderRadius.circular(20),
                           ),
-                          child: const Row(
+                          child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.add,
                                 size: 16,
                                 color: Colors.white,
                               ),
-                              SizedBox(width: 6),
+                              const SizedBox(width: 6),
                               Text(
-                                'Запись',
-                                style: TextStyle(
+                                l10n.journalNewEntry,
+                                style: const TextStyle(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.white,
@@ -117,6 +119,7 @@ class _JournalScreenState extends State<JournalScreen> {
 
   Widget _buildBody(JournalState state) {
     final colors = AppColorsTheme.of(context);
+    final l10n = context.l10n;
     if (state.status == JournalStatus.loading) {
       return const Center(
         child: CircularProgressIndicator(),
@@ -135,12 +138,12 @@ class _JournalScreenState extends State<JournalScreen> {
             ),
             const SizedBox(height: 16),
             Text(
-              'Пока нет записей',
+              l10n.emptyJournal,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
             Text(
-              'Напишите первую запись в дневнике!',
+              l10n.emptyJournalSubtitle,
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
-import 'package:habit_boost/core/constants/app_strings.dart';
+import 'package:habit_boost/core/extensions/l10n_extension.dart';
 
 class AppErrorWidget extends StatelessWidget {
   const AppErrorWidget({
@@ -35,7 +35,7 @@ class AppErrorWidget extends StatelessWidget {
               const SizedBox(height: AppDimensions.paddingM),
               FilledButton(
                 onPressed: onRetry,
-                child: const Text(AppStrings.tryAgain),
+                child: Text(context.l10n.errorTryAgain),
               ),
             ],
           ],

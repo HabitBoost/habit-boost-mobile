@@ -14,6 +14,7 @@ Future<void> bootstrap() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await initializeDateFormatting('ru');
+  await initializeDateFormatting('en');
   await configureDependencies(environment: Environment.prod);
   sl<ConnectivityListener>().start();
   try {

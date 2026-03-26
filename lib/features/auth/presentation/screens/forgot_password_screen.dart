@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/extensions/l10n_extension.dart';
 import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/core/utils/validators.dart';
 import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
@@ -40,6 +41,7 @@ class _ForgotPasswordScreenState
   @override
   Widget build(BuildContext context) {
     final colors = AppColorsTheme.of(context);
+    final l10n = context.l10n;
     return Scaffold(
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
@@ -53,10 +55,8 @@ class _ForgotPasswordScreenState
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(
-                const SnackBar(
-                  content: Text(
-                    'Ссылка для сброса отправлена на email',
-                  ),
+                SnackBar(
+                  content: Text(l10n.authResetLinkSent),
                 ),
               );
             context.pop();
@@ -90,7 +90,7 @@ class _ForgotPasswordScreenState
                     height: AppDimensions.paddingL,
                   ),
                   Text(
-                    'Сброс пароля',
+                    l10n.authResetPasswordTitle,
                     style: Theme.of(context)
                         .textTheme
                         .headlineLarge
@@ -102,9 +102,7 @@ class _ForgotPasswordScreenState
                     height: AppDimensions.paddingL,
                   ),
                   Text(
-                    'Введите email, привязанный к вашему '
-                    'аккаунту. '
-                    'Мы отправим ссылку для сброса пароля.',
+                    l10n.authResetPasswordDesc,
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge
@@ -117,10 +115,11 @@ class _ForgotPasswordScreenState
                     height: AppDimensions.paddingL,
                   ),
                   AuthField(
-                    label: 'Email',
-                    hint: 'example@email.com',
+                    label: l10n.authEmail,
+                    hint: l10n.authEmailHint,
                     controller: _emailController,
-                    validator: Validators.email,
+                    validator: (v) =>
+                        Validators.email(v, l10n),
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.done,
                     onFieldSubmitted: (_) => _onSend(),
@@ -155,9 +154,9 @@ class _ForgotPasswordScreenState
                                     color: Colors.white,
                                   ),
                                 )
-                              : const Text(
-                                  'Отправить ссылку',
-                                  style: TextStyle(
+                              : Text(
+                                  l10n.authSendLink,
+                                  style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight:
                                         FontWeight.w600,

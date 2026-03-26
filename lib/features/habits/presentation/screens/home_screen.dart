@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:habit_boost/app/router/routes.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
-import 'package:habit_boost/core/constants/app_strings.dart';
+import 'package:habit_boost/core/extensions/l10n_extension.dart';
 import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:habit_boost/features/habits/presentation/bloc/habits_bloc.dart';
@@ -39,8 +39,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final colors = AppColorsTheme.of(context);
+    final l10n = context.l10n;
     final today = DateTime.now();
-    final dateFormat = DateFormat('d MMMM, EEEE', 'ru');
+    final locale = Localizations.localeOf(context).languageCode;
+    final dateFormat = DateFormat('d MMMM, EEEE', locale);
 
     return Scaffold(
       body: SafeArea(
@@ -64,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                AppStrings.home,
+                                l10n.navHome,
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineMedium
@@ -154,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       horizontal: AppDimensions.paddingM,
                     ),
                     child: Text(
-                      'Привычки на сегодня',
+                      l10n.habitTodayTitle,
                       style:
                           Theme.of(context).textTheme.titleMedium?.copyWith(
                                 fontWeight: FontWeight.w600,
@@ -191,13 +193,14 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
         icon: const Icon(Icons.add),
-        label: const Text(AppStrings.addHabit),
+        label: Text(l10n.habitAdd),
       ),
     );
   }
 
   Widget _buildContent(BuildContext context, HabitsState state) {
     final colors = AppColorsTheme.of(context);
+    final l10n = context.l10n;
     if (state.status == HabitsStatus.loading) {
       return const SliverFillRemaining(
         child: Center(child: CircularProgressIndicator()),
@@ -217,7 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 16),
               Text(
-                state.errorMessage ?? AppStrings.somethingWentWrong,
+                state.errorMessage ?? l10n.errorSomethingWrong,
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
               const SizedBox(height: 16),
@@ -225,7 +228,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: () => context.read<HabitsBloc>().add(
                       HabitsLoadRequested(userId: _userId),
                     ),
-                child: const Text(AppStrings.tryAgain),
+                child: Text(l10n.errorTryAgain),
               ),
             ],
           ),
@@ -246,12 +249,12 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 16),
               Text(
-                AppStrings.noHabitsYet,
+                l10n.emptyHabits,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               const SizedBox(height: 8),
               Text(
-                AppStrings.noHabitsYetSubtitle,
+                l10n.emptyHabitsSubtitle,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: colors.textSecondary,
                     ),

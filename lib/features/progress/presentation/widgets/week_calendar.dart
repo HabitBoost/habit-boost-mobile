@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/constants/app_dimensions.dart';
+import 'package:habit_boost/core/extensions/l10n_extension.dart';
 import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/progress/domain/entities/progress_stats.dart';
 
@@ -12,19 +13,19 @@ class WeekCalendar extends StatelessWidget {
 
   final List<DayCompletion> dayCompletions;
 
-  static const _dayLabels = [
-    'ПН',
-    'ВТ',
-    'СР',
-    'ЧТ',
-    'ПТ',
-    'СБ',
-    'ВС',
-  ];
-
   @override
   Widget build(BuildContext context) {
     final colors = AppColorsTheme.of(context);
+    final l10n = context.l10n;
+    final dayLabels = [
+      l10n.dayMonShort,
+      l10n.dayTueShort,
+      l10n.dayWedShort,
+      l10n.dayThuShort,
+      l10n.dayFriShort,
+      l10n.daySatShort,
+      l10n.daySunShort,
+    ];
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     final monday =
@@ -77,7 +78,7 @@ class WeekCalendar extends StatelessWidget {
           return Column(
             children: [
               Text(
-                _dayLabels[i],
+                dayLabels[i],
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
