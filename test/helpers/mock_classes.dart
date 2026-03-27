@@ -15,7 +15,9 @@ import 'package:habit_boost/features/habits/domain/usecases/get_completions_for_
 import 'package:habit_boost/features/habits/domain/usecases/get_today_habits.dart';
 import 'package:habit_boost/features/habits/domain/usecases/toggle_completion.dart';
 import 'package:habit_boost/features/habits/domain/usecases/update_habit.dart';
+import 'package:habit_boost/features/journal/domain/repositories/journal_repository.dart';
 import 'package:habit_boost/features/onboarding/domain/repositories/onboarding_repository.dart';
+import 'package:habit_boost/features/progress/domain/repositories/progress_repository.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockConnectivity extends Mock implements Connectivity {}
@@ -57,3 +59,7 @@ class MockToggleCompletion extends Mock implements ToggleCompletion {}
 
 class MockGetCompletionsForDate extends Mock
     implements GetCompletionsForDate {}
+
+class MockJournalRepository extends Mock implements JournalRepository {}
+
+class MockProgressRepository extends Mock implements ProgressRepository {}

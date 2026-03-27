@@ -7,7 +7,6 @@ import 'package:habit_boost/core/constants/app_colors.dart';
 import 'package:habit_boost/core/sync/sync_service.dart';
 import 'package:habit_boost/core/theme/app_colors_theme.dart';
 import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:habit_boost/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -21,24 +20,12 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     context.read<AuthBloc>().add(const AuthCheckRequested());
-    context
-        .read<OnboardingBloc>()
-        .add(const OnboardingCheckRequested());
   }
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocListener(
-      listeners: [
-        BlocListener<AuthBloc, AuthState>(
-          listener: _handleNavigation,
-        ),
-        BlocListener<OnboardingBloc, OnboardingState>(
-          listenWhen: (prev, curr) =>
-              prev.isLoading && !curr.isLoading,
-          listener: _handleNavigation,
-        ),
-      ],
+    return BlocListener<AuthBloc, AuthState>(
+      listener: _handleNavigation,
       child: const Scaffold(
         body: Center(
           child: Column(
@@ -59,9 +46,8 @@ class _SplashScreenState extends State<SplashScreen> {
     dynamic state,
   ) async {
     final authState = context.read<AuthBloc>().state;
-    final onboardingState = context.read<OnboardingBloc>().state;
 
-    if (authState is AuthLoading || onboardingState.isLoading) return;
+    if (authState is AuthLoading) return;
 
     if (authState is Unauthenticated || authState is AuthError) {
       context.go(Routes.login);
@@ -71,11 +57,9 @@ class _SplashScreenState extends State<SplashScreen> {
           .pullAndMerge(authState.user.id)
           .timeout(const Duration(seconds: 10), onTimeout: () {});
       if (!context.mounted) return;
-      if (!onboardingState.isCompleted) {
-        context.go(Routes.onboarding);
-      } else {
-        context.go(Routes.home);
-      }
+      // Already-authenticated users go straight to home.
+      // Onboarding is shown only after login/register, not on cold start.
+      context.go(Routes.home);
     }
   }
 }

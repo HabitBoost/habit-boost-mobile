@@ -12,6 +12,7 @@ import 'package:habit_boost/core/utils/validators.dart';
 import 'package:habit_boost/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:habit_boost/features/auth/presentation/widgets/auth_field.dart';
 import 'package:habit_boost/features/auth/presentation/widgets/logo_header.dart';
+import 'package:habit_boost/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -61,7 +62,13 @@ class _LoginScreenState extends State<LoginScreen> {
             await sl<SyncService>()
                 .pullAndMerge(state.user.id);
             if (!context.mounted) return;
-            context.go(Routes.home);
+            final onboarding =
+                context.read<OnboardingBloc>().state;
+            if (!onboarding.isCompleted) {
+              context.go(Routes.onboarding);
+            } else {
+              context.go(Routes.home);
+            }
           }
         },
         child: SafeArea(
